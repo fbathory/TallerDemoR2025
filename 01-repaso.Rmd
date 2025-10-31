@@ -444,7 +444,7 @@ dist_ned_muj
 ```
         
 Probablemente querramos varones y mujeres. Volvamos a poner el sexo como una variable, esta vez con `pivot_longer`
-```{r, message=F, warning=FALSE}
+```{r, message=F, warning=FALSE, results='hold'}
 eder_ned_sexo_long <- eder_ned_sexo |> 
   pivot_longer(cols = c("Mujer", "Varon"), names_to = "Sexo",values_to ="n")
 

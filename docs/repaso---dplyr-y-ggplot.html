@@ -512,6 +512,27 @@ pero no que…\
 <span id="cb27-2"><a href="repaso---dplyr-y-ggplot.html#cb27-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Mujer&quot;</span>, <span class="st">&quot;Varon&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;Sexo&quot;</span>,<span class="at">values_to =</span><span class="st">&quot;n&quot;</span>)</span>
 <span id="cb27-3"><a href="repaso---dplyr-y-ggplot.html#cb27-3" tabindex="-1"></a></span>
 <span id="cb27-4"><a href="repaso---dplyr-y-ggplot.html#cb27-4" tabindex="-1"></a>eder_ned_sexo_long</span></code></pre></div>
+<pre><code>## # A tibble: 18 × 3
+##    e_nivel_desc                            Sexo      n
+##    &lt;fct&gt;                                   &lt;chr&gt; &lt;int&gt;
+##  1 No corresponde/escuelas especiales      Mujer    12
+##  2 No corresponde/escuelas especiales      Varon     6
+##  3 Inicial                                 Mujer    88
+##  4 Inicial                                 Varon    85
+##  5 Primario incompleto                     Mujer   193
+##  6 Primario incompleto                     Varon   240
+##  7 Primario completo                       Mujer   119
+##  8 Primario completo                       Varon   101
+##  9 Secundario incompleto                   Mujer   300
+## 10 Secundario incompleto                   Varon   361
+## 11 Secundario completo                     Mujer   265
+## 12 Secundario completo                     Varon   230
+## 13 Superior / Universitario incompleto     Mujer   259
+## 14 Superior / Universitario incompleto     Varon   297
+## 15 Superior / Universitario completo y mas Mujer   487
+## 16 Superior / Universitario completo y mas Varon   406
+## 17 Sin instruccion                         Mujer    33
+## 18 Sin instruccion                         Varon    30</code></pre>
 
 </div>
 </div>
