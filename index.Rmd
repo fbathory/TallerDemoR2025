@@ -30,7 +30,7 @@ Sys.setlocale("LC_ALL", "Spanish_Spain.UTF-8")
 
 ¡Bienvenidxs! `r fa("face-smile")`
 
-Este sitio web contiene los materiales para las primeras clases de Análisis Demográfico III y a las del Taller de R aplicado al Análisis Demográfico del programa de maestría y especialización en Demografía Social ofrecido en la Universidad Nacional de Luján. **No** es una guía autoexplicada, sino un acompañamiento y soporte para la cursada.
+Este sitio web contiene los materiales para las clases del Taller de R aplicado al Análisis Demográfico del programa de maestría y especialización en Demografía Social ofrecido en la Universidad Nacional de Luján. **No** es una guía autoexplicada, sino un acompañamiento y soporte para la cursada.
 
 Algunas cosas útiles:
 
@@ -38,6 +38,8 @@ Algunas cosas útiles:
 -   Los encuentros virtuales los haremos vía zoom en este [link](https://us06web.zoom.us/j/85692957947).
 
 Tengan en cuenta que esta página puede *cambiar* durante el curso, así que no te preocupes si notás algunos cambios. Podemos adaptar el contenido en función de la interacción que vayamos teniendo o corregir/agregar código a lo largo del camino.
+
+Todos los materiales de las iniciales de Análisis Demográfico III se encuentran en este [link]()
 
 Esperamos que disfrutes estos encuentros y que te sean útiles.
 
