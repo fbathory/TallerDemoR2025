@@ -148,9 +148,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
 <li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
-<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#contactos"><i class="fa fa-check"></i><b>1.2.3</b> Contactos</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#materiales-anteriores-y-otras-cosas-a-tener-a-mano"><i class="fa fa-check"></i><b>1.2.3</b> Materiales anteriores y otras cosas a tener a mano</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#contactos"><i class="fa fa-check"></i><b>1.2.4</b> Contactos</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#presentaci%C3%B3n-inicial"><i class="fa fa-check"></i><b>1.3</b> Presentación inicial</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html"><i class="fa fa-check"></i><b>2</b> Repaso - dplyr y ggplot</a>
 <ul>
@@ -410,7 +410,7 @@ Pero su utilidad se potencia cuando queremos <em>segmentar por grupos</em>. Esta
 <span id="cb20-7"><a href="repaso---dplyr-y-ggplot.html#cb20-7" tabindex="-1"></a>eder_dist <span class="sc">|&gt;</span>                      <span class="co"># data</span></span>
 <span id="cb20-8"><a href="repaso---dplyr-y-ggplot.html#cb20-8" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p3b, <span class="at">y =</span> n)) <span class="sc">+</span>    <span class="co"># estética</span></span>
 <span id="cb20-9"><a href="repaso---dplyr-y-ggplot.html#cb20-9" tabindex="-1"></a>  <span class="fu">geom_line</span>()                    <span class="co"># geometría</span></span></code></pre></div>
-<p><img src="talleR_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<p><img src="talleR_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 Podemos separar mujeres y varones, distinguiéndolas por color y forma (en <code>aes()</code>). Y vamos a sacar a la gente sin información de sexo.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="repaso---dplyr-y-ggplot.html#cb21-1" tabindex="-1"></a>eder_dist_s <span class="ot">&lt;-</span> eder_personas <span class="sc">%&gt;%</span> </span>
 <span id="cb21-2"><a href="repaso---dplyr-y-ggplot.html#cb21-2" tabindex="-1"></a>  <span class="fu">filter</span>(p3b <span class="sc">&lt;=</span> <span class="dv">103</span>,</span>
@@ -419,11 +419,12 @@ Podemos separar mujeres y varones, distinguiéndolas por color y forma (en <code
 <span id="cb21-5"><a href="repaso---dplyr-y-ggplot.html#cb21-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
 <span id="cb21-6"><a href="repaso---dplyr-y-ggplot.html#cb21-6" tabindex="-1"></a></span>
 <span id="cb21-7"><a href="repaso---dplyr-y-ggplot.html#cb21-7" tabindex="-1"></a><span class="co"># genero un primer gráfico con los tres elementos básicos:</span></span>
-<span id="cb21-8"><a href="repaso---dplyr-y-ggplot.html#cb21-8" tabindex="-1"></a>eder_dist_s <span class="sc">|&gt;</span> </span>
+<span id="cb21-8"><a href="repaso---dplyr-y-ggplot.html#cb21-8" tabindex="-1"></a>g_eder_sexo <span class="ot">&lt;-</span> eder_dist_s <span class="sc">|&gt;</span> </span>
 <span id="cb21-9"><a href="repaso---dplyr-y-ggplot.html#cb21-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p3b, <span class="at">y =</span> n, <span class="at">color =</span> <span class="fu">factor</span>(p2), <span class="at">shape =</span> <span class="fu">factor</span>(p2))) <span class="sc">+</span>    <span class="co"># estética</span></span>
 <span id="cb21-10"><a href="repaso---dplyr-y-ggplot.html#cb21-10" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb21-11"><a href="repaso---dplyr-y-ggplot.html#cb21-11" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="talleR_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<span id="cb21-11"><a href="repaso---dplyr-y-ggplot.html#cb21-11" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb21-12"><a href="repaso---dplyr-y-ggplot.html#cb21-12" tabindex="-1"></a>g_eder_sexo</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="take_note_box take_note">
 <p>Lo que se encuentra dentro de <code>ggplot()</code> vale para todas las capas, excepto se “pise”. Por ejemplo, da el mismo plot las siguientes dos sentencias:
 <code>data %&gt;% ggplot(aes(x= EDAD, y = MUJER) + geom_line()</code>
@@ -432,6 +433,85 @@ que…
 pero no que…
 <code>data %&gt;% ggplot(aes(x= EDAD, y = MUJER) + geom_line(aes(y = VARON))</code></p>
 </div>
+<p>Agreguemos <a href="https://ggplot2.tidyverse.org/reference/labs.html">un título, un subtítulo</a>, modifiquemos el tamaño del punto, la posición y título de la leyenda, y especifiquemos las marcas en el eje x:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="repaso---dplyr-y-ggplot.html#cb22-1" tabindex="-1"></a>g_eder_sexo <span class="ot">&lt;-</span> g_eder_sexo <span class="sc">+</span>  <span class="co"># partimos del objeto anterior</span></span>
+<span id="cb22-2"><a href="repaso---dplyr-y-ggplot.html#cb22-2" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Población por edad y sexo. EDER 2019&quot;</span>,</span>
+<span id="cb22-3"><a href="repaso---dplyr-y-ggplot.html#cb22-3" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;CABA&quot;</span>,</span>
+<span id="cb22-4"><a href="repaso---dplyr-y-ggplot.html#cb22-4" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Fuente: IDECBA&quot;</span>,</span>
+<span id="cb22-5"><a href="repaso---dplyr-y-ggplot.html#cb22-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Edad&quot;</span>, <span class="at">y =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="repaso---dplyr-y-ggplot.html#cb22-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>, </span>
+<span id="cb22-7"><a href="repaso---dplyr-y-ggplot.html#cb22-7" tabindex="-1"></a>        <span class="at">legend.direction =</span> <span class="st">&quot;horizontal&quot;</span>,</span>
+<span id="cb22-8"><a href="repaso---dplyr-y-ggplot.html#cb22-8" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="repaso---dplyr-y-ggplot.html#cb22-9" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">10</span>)) <span class="co"># ups!</span></span>
+<span id="cb22-10"><a href="repaso---dplyr-y-ggplot.html#cb22-10" tabindex="-1"></a>g_eder_sexo</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>Podemos definir una paleta de colores, cambiar la <a href="https://ggplot2.tidyverse.org/reference/theme.html">temática</a> de fondo por una más simple y suavizar las series con algún modelo. Adicionalmente mediante <a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a> podemos guardar el objeto como imágen en la extensión que se desee.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="repaso---dplyr-y-ggplot.html#cb23-1" tabindex="-1"></a>mi_paleta <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;#000000&quot;</span>, <span class="st">&quot;#E69F00&quot;</span>, <span class="st">&quot;#56B4E9&quot;</span>) <span class="co"># sistema Hexadecimal de colores</span></span>
+<span id="cb23-2"><a href="repaso---dplyr-y-ggplot.html#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="repaso---dplyr-y-ggplot.html#cb23-3" tabindex="-1"></a>g_eder_sexo <span class="ot">&lt;-</span> g_eder_sexo <span class="sc">+</span></span>
+<span id="cb23-4"><a href="repaso---dplyr-y-ggplot.html#cb23-4" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> mi_paleta) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="repaso---dplyr-y-ggplot.html#cb23-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb23-6"><a href="repaso---dplyr-y-ggplot.html#cb23-6" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;loess&#39;</span>, <span class="at">span=</span>.<span class="dv">5</span>) <span class="co"># podés jugar con span (0,1)</span></span>
+<span id="cb23-7"><a href="repaso---dplyr-y-ggplot.html#cb23-7" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="repaso---dplyr-y-ggplot.html#cb23-8" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;g_eder_sexo.pdf&quot;</span>, <span class="at">plot =</span> g_eder_sexo, <span class="at">dpi =</span> <span class="dv">150</span>)</span>
+<span id="cb23-9"><a href="repaso---dplyr-y-ggplot.html#cb23-9" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="repaso---dplyr-y-ggplot.html#cb23-10" tabindex="-1"></a>g_eder_sexo</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Lo que vamos a hacer ahora, y solo a fines de entender cómo se puede armar, es llegar a un data frame donde tengamos el sexo en las columnas, y el nivel educativo en las filas.</p>
+<p>Para esto utlizaremos las funciones <code>pivot</code> (antiguamaente llamadas <em>gather</em> y <em>spread</em>, por si lo ves en la web).</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="repaso---dplyr-y-ggplot.html#cb24-1" tabindex="-1"></a>eder_ned_sexo <span class="ot">&lt;-</span> eder_personas <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="repaso---dplyr-y-ggplot.html#cb24-2" tabindex="-1"></a>  <span class="fu">filter</span>(p2 <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="co"># Elimino los que no tienen asignado el sexo y el nivel educativo</span></span>
+<span id="cb24-3"><a href="repaso---dplyr-y-ggplot.html#cb24-3" tabindex="-1"></a>         e_nivel <span class="sc">!=</span> <span class="dv">9</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb24-4"><a href="repaso---dplyr-y-ggplot.html#cb24-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sexo =</span> <span class="fu">case_when</span>(p2 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Varon&quot;</span>, <span class="co"># Recodifico</span></span>
+<span id="cb24-5"><a href="repaso---dplyr-y-ggplot.html#cb24-5" tabindex="-1"></a>                          p2 <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Mujer&quot;</span>),</span>
+<span id="cb24-6"><a href="repaso---dplyr-y-ggplot.html#cb24-6" tabindex="-1"></a>         <span class="at">e_nivel_desc =</span> <span class="fu">case_when</span>(e_nivel <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">&quot;No corresponde/escuelas especiales&quot;</span>,</span>
+<span id="cb24-7"><a href="repaso---dplyr-y-ggplot.html#cb24-7" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">&quot;Inicial&quot;</span>,</span>
+<span id="cb24-8"><a href="repaso---dplyr-y-ggplot.html#cb24-8" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">&quot;Primario incompleto&quot;</span>,</span>
+<span id="cb24-9"><a href="repaso---dplyr-y-ggplot.html#cb24-9" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Primario completo&quot;</span>,</span>
+<span id="cb24-10"><a href="repaso---dplyr-y-ggplot.html#cb24-10" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">&quot;Secundario incompleto&quot;</span>,</span>
+<span id="cb24-11"><a href="repaso---dplyr-y-ggplot.html#cb24-11" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">&quot;Secundario completo&quot;</span>,</span>
+<span id="cb24-12"><a href="repaso---dplyr-y-ggplot.html#cb24-12" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">6</span> <span class="sc">~</span> <span class="st">&quot;Superior / Universitario incompleto&quot;</span>,</span>
+<span id="cb24-13"><a href="repaso---dplyr-y-ggplot.html#cb24-13" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">7</span> <span class="sc">~</span> <span class="st">&quot;Superior / Universitario completo y mas&quot;</span>,</span>
+<span id="cb24-14"><a href="repaso---dplyr-y-ggplot.html#cb24-14" tabindex="-1"></a>                                  e_nivel <span class="sc">==</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">&quot;Sin instruccion&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-15"><a href="repaso---dplyr-y-ggplot.html#cb24-15" tabindex="-1"></a>  <span class="fu">select</span>(sexo, e_nivel_desc) <span class="sc">|&gt;</span> </span>
+<span id="cb24-16"><a href="repaso---dplyr-y-ggplot.html#cb24-16" tabindex="-1"></a>  <span class="fu">group_by</span>(sexo, e_nivel_desc) <span class="sc">|&gt;</span> </span>
+<span id="cb24-17"><a href="repaso---dplyr-y-ggplot.html#cb24-17" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb24-18"><a href="repaso---dplyr-y-ggplot.html#cb24-18" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sexo, <span class="at">values_from =</span> n)<span class="sc">%&gt;%</span> </span>
+<span id="cb24-19"><a href="repaso---dplyr-y-ggplot.html#cb24-19" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">e_nivel_desc =</span> <span class="fu">factor</span>(e_nivel_desc,</span>
+<span id="cb24-20"><a href="repaso---dplyr-y-ggplot.html#cb24-20" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;No corresponde/escuelas especiales&quot;</span>,</span>
+<span id="cb24-21"><a href="repaso---dplyr-y-ggplot.html#cb24-21" tabindex="-1"></a>                                          <span class="st">&quot;Inicial&quot;</span>,</span>
+<span id="cb24-22"><a href="repaso---dplyr-y-ggplot.html#cb24-22" tabindex="-1"></a>                                          <span class="st">&quot;Primario incompleto&quot;</span>,</span>
+<span id="cb24-23"><a href="repaso---dplyr-y-ggplot.html#cb24-23" tabindex="-1"></a>                                          <span class="st">&quot;Primario completo&quot;</span>,</span>
+<span id="cb24-24"><a href="repaso---dplyr-y-ggplot.html#cb24-24" tabindex="-1"></a>                                          <span class="st">&quot;Secundario incompleto&quot;</span>,</span>
+<span id="cb24-25"><a href="repaso---dplyr-y-ggplot.html#cb24-25" tabindex="-1"></a>                                          <span class="st">&quot;Secundario completo&quot;</span>,</span>
+<span id="cb24-26"><a href="repaso---dplyr-y-ggplot.html#cb24-26" tabindex="-1"></a>                                          <span class="st">&quot;Superior / Universitario incompleto&quot;</span>,</span>
+<span id="cb24-27"><a href="repaso---dplyr-y-ggplot.html#cb24-27" tabindex="-1"></a>                                          <span class="st">&quot;Superior / Universitario completo y mas&quot;</span>,</span>
+<span id="cb24-28"><a href="repaso---dplyr-y-ggplot.html#cb24-28" tabindex="-1"></a>                                          <span class="st">&quot;Sin instruccion&quot;</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb24-29"><a href="repaso---dplyr-y-ggplot.html#cb24-29" tabindex="-1"></a>  <span class="fu">arrange</span>(e_nivel_desc)</span></code></pre></div>
+<p>Vamos a trabajar con <em>barras</em>. Recordemos que la estética <code>fill</code> equivale al atributo <code>color</code> de líneas o puntos. Como regla general, <code>fill</code> es como “relleno” y <code>color</code> para líneas o bordes.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="repaso---dplyr-y-ggplot.html#cb25-1" tabindex="-1"></a>dist_ned_muj <span class="ot">&lt;-</span> eder_ned_sexo <span class="sc">|&gt;</span> </span>
+<span id="cb25-2"><a href="repaso---dplyr-y-ggplot.html#cb25-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> e_nivel_desc, <span class="at">y =</span> Mujer, <span class="at">fill =</span> e_nivel_desc))<span class="sc">+</span></span>
+<span id="cb25-3"><a href="repaso---dplyr-y-ggplot.html#cb25-3" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb25-4"><a href="repaso---dplyr-y-ggplot.html#cb25-4" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="repaso---dplyr-y-ggplot.html#cb25-5" tabindex="-1"></a>dist_ned_muj</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Vamos a darlo vuelta (<em>flip</em>) para que se vea mejor. Podemos hacerle unos cambios adicionales de paso: incluir titulo, subtítulo y fuente, cambiar las etiquetas de ambos ejes, incluir un <em>tema</em> distinto y cambiar el color de las barras.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="repaso---dplyr-y-ggplot.html#cb26-1" tabindex="-1"></a>dist_ned_muj <span class="ot">&lt;-</span> dist_ned_muj <span class="sc">+</span></span>
+<span id="cb26-2"><a href="repaso---dplyr-y-ggplot.html#cb26-2" tabindex="-1"></a>            <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="repaso---dplyr-y-ggplot.html#cb26-3" tabindex="-1"></a>            <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="repaso---dplyr-y-ggplot.html#cb26-4" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb26-5"><a href="repaso---dplyr-y-ggplot.html#cb26-5" tabindex="-1"></a>                 <span class="at">x =</span> <span class="st">&quot;Nivel educativo&quot;</span>,</span>
+<span id="cb26-6"><a href="repaso---dplyr-y-ggplot.html#cb26-6" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Mujeres por nivel educativo&quot;</span>,</span>
+<span id="cb26-7"><a href="repaso---dplyr-y-ggplot.html#cb26-7" tabindex="-1"></a>                 <span class="at">subtitle =</span> <span class="st">&quot;EDER CABA&quot;</span>,</span>
+<span id="cb26-8"><a href="repaso---dplyr-y-ggplot.html#cb26-8" tabindex="-1"></a>                 <span class="at">caption =</span> <span class="st">&quot;Fuente: en base a IDECBA&quot;</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="repaso---dplyr-y-ggplot.html#cb26-9" tabindex="-1"></a>            <span class="fu">theme_bw</span>()</span>
+<span id="cb26-10"><a href="repaso---dplyr-y-ggplot.html#cb26-10" tabindex="-1"></a>dist_ned_muj  </span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>Probablemente querramos varones y mujeres. Volvamos a poner el sexo como una variable, esta vez con <code>pivot_longer</code></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="repaso---dplyr-y-ggplot.html#cb27-1" tabindex="-1"></a>eder_ned_sexo_long <span class="ot">&lt;-</span> eder_ned_sexo <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="repaso---dplyr-y-ggplot.html#cb27-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;Mujer&quot;</span>, <span class="st">&quot;Varon&quot;</span>), <span class="at">names_to =</span> <span class="st">&quot;Sexo&quot;</span>,<span class="at">values_to =</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb27-3"><a href="repaso---dplyr-y-ggplot.html#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="repaso---dplyr-y-ggplot.html#cb27-4" tabindex="-1"></a>eder_ned_sexo_long</span></code></pre></div>
 
 </div>
 </div>

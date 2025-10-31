@@ -28,7 +28,7 @@ Sys.setlocale("LC_ALL", "Spanish_Spain.UTF-8")
 
 ## Información general
 
-¡Bienvenidxs! `r fa("face-smile")`
+¡Bienvenidxs de nuevo! `r fa("face-smile")`
 
 Este sitio web contiene los materiales para las clases del Taller de R aplicado al Análisis Demográfico del programa de maestría y especialización en Demografía Social ofrecido en la Universidad Nacional de Luján. **No** es una guía autoexplicada, sino un acompañamiento y soporte para la cursada.
 
@@ -39,8 +39,6 @@ Algunas cosas útiles:
 
 Tengan en cuenta que esta página puede *cambiar* durante el curso, así que no te preocupes si notás algunos cambios. Podemos adaptar el contenido en función de la interacción que vayamos teniendo o corregir/agregar código a lo largo del camino.
 
-Todos los materiales de las iniciales de Análisis Demográfico III se encuentran en este [link]()
-
 Esperamos que disfrutes estos encuentros y que te sean útiles.
 
 Ayelén y Florencia
@@ -49,20 +47,21 @@ Ayelén y Florencia
 
 ## PrepaRándonos
 
-El objetivo de las primeras clases es que puedas dar tus primeros pasos en la herramienta y puedas aplicar allí las principales técnicas de la demografía. Luego, [Olinca Páez](https://www.researchgate.net/profile/Olinca-Paez) [`r fa("linkedin")`](https://www.linkedin.com/in/olinca-p%C3%A1ez/) tomará la posta con los contenidos específicos de Análisis Demográfico. 
-
 Las clases serán 100% virtuales y utilizaremos el zoom provisto anteriormente. Para nuestro primer día sería bueno tener lista tu compu en lo que atañe a la instalación del programa, de los paquetes y otras cuestiones mínimas, que si bien vamos a poder ayudarte online, nos ahorraría tiempo para comenzar con los materiales.
 
 Te proponemos tomarte unos minutos para que podamos arrancar sin problemas la primera clase. No te frustres si algo no funciona, podés contactárnos para ir solucionándolo, o en última instancia lo vemos en el primer encuentro.
 
 ### Instalación de y RStudio
 
-Si estuviéramos en un auto, *R* es el motor, el sistema de dirección y frenos, y **RStudio** es nuestra interfaz: volante, pedales y los botoncitos que tocamos en los paneles (por ejemplo para poner ASPEN en la radio y disfrutar del viaje). Necesitamos instalar ambos y en su última versión disponible.
+Les dejamos los enlaces de descarga, en caso de que necesiten volver a descargar:
 
-Para esto debés ingresar a la página de descarga de [R](http://mirror.fcaglp.unlp.edu.ar/CRAN/) `r fa("r-project")`, e ir al instalador según el sistema operativo que utilices, la versión escritorio (*desktop*). Ejecuta el *.exe* y sigue los pasos. Como chequeo, la última versión es la **`r installr::get_latest_r_version()`**. Luego debes ir a la web de [RStudio](https://www.rstudio.com/products/rstudio/download/) `r fa("registered")` y repetir el proceso previo. Un video muy ilustrativo del proceso de instalación es [este](https://www.youtube.com/watch?v=Nmu4WPdJBRo)[^1][^2].
+-    [R](http://mirror.fcaglp.unlp.edu.ar/CRAN/) `r fa("r-project")`. Como chequeo, la última versión es la **`r installr::get_latest_r_version()`**.
 
-[^1]: A lo largo de este taller nos valdremos de contenido realizado por muuuchas personas. Una práctica que nos gustaría contagiarte: si nos aporta, démosle *like* y/o compartamos y/o dejémos algún feedback si es posible.
-[^2]: Créditos: los materiales de estas clases (incluyendo memes) fueron inicialmente mentados y desarrollados por [Iván Williams](https://github.com/IvanWilli).
+-   [RStudio](https://www.rstudio.com/products/rstudio/download/) `r fa("registered")`. Un video muy ilustrativo del proceso de instalación es [este](https://www.youtube.com/watch?v=Nmu4WPdJBRo)[^index-1][^index-2].
+
+[^index-1]: A lo largo de este taller nos valdremos de contenido realizado por muuuchas personas. Una práctica que nos gustaría contagiarte: si nos aporta, démosle *like* y/o compartamos y/o dejémos algún feedback si es posible.
+
+[^index-2]: Créditos: los materiales de estas clases (incluyendo memes) fueron inicialmente mentados y desarrollados por [Iván Williams](https://github.com/IvanWilli).
 
 Para aquellos que ya tienen *R* instalado pero de una versión previa, pueden volver a instalarlo siguiendo los pasos previos, que RStudio tomará de inmediato la más reciente cuando inicie una nueva sesión. O también pueden utilizar el paquete `installr` para los que ya vienen más habitué (sí, [existe](https://www.asale.org/damer/habitu%C3%A9)).
 
@@ -76,9 +75,17 @@ install.packages(c("tidyverse", "devtools", "foreign", "eph", "plotly", "gapmind
                    "psych", "tidyr", "broom"))
 ```
 
-### Contactos
+### Materiales anteriores y otras cosas a tener a mano
 
-Si estás sin tiempo, lo **prioritario** es la instalación previa de *R* y *RStudio*. 
+Todos los materiales de las iniciales de Análisis Demográfico III se encuentran en este [link](https://fbathory.github.io/TallerDemoR/)
+
+Cheat sheet de [tidyr](https://tidyr.tidyverse.org/). 
+
+Cheat sheet de [dplyr](https://dplyr.tidyverse.org/).
+
+Cheat sheet de [ggplot2](https://ggplot2.tidyverse.org/).
+
+### Contactos
 
 Para comunicarnos durante la semana, utilizaremos el *Aula Virtual*. De todos modos, dejamos nuestros correos electrónicos a disposición para cualquier duda o consulta:
 
@@ -93,12 +100,3 @@ include_graphics("figs/programming.gif")
 ```
 
 <!-- --------------------------------------------------------------------- -->
-
-## Presentación inicial
-
-Como introducción, charlaremos en base a los slides de [aquí](https://github.com/fbathory/TallerDemoR/blob/master/ppt/Introduccion.html).
-
-```{js, echo = FALSE}
-title=document.getElementById('header');
-title.innerHTML = '<img src="figs/logoUNLU.png" alt="Test Image">' + title.innerHTML
-```

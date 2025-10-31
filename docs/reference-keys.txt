@@ -59,3 +59,4 @@ recursos-adicionales-1
 repaso---dplyr-y-ggplot
 medidas-resumen-y-exploratorias
 ggplot-2
+materiales-anteriores-y-otras-cosas-a-tener-a-mano

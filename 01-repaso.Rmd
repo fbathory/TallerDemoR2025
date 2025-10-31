@@ -6,14 +6,6 @@ editor_options:
 
 # Repaso - dplyr y ggplot
 
-```{r include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, results = "hide", message=FALSE)
-library(fontawesome)
-library(knitr)
-library(googledrive)
-#caba2010_br <- read.csv("Data/C2010_CABA_muestra.csv", header = T, sep=",")
-```
-
 ## Bienvenidxs!
 
 Antes que nada, felicitaciones por llegar hasta este momento!
@@ -71,8 +63,7 @@ knitr::opts_chunk$set(echo = TRUE, results = "hide", message=FALSE)
 library(fontawesome)
 library(knitr)
 library(googledrive)
-library("tidyverse")
-library(fontawesome)
+library(tidyverse)
 library(knitr)
 eder_personas_br <- read.csv("data/eder2019_personas.csv")
 #caba2010_br <- read.csv("Data/C2010_CABA_muestra.csv", header = T, sep=",")
@@ -343,10 +334,11 @@ eder_dist_s <- eder_personas %>%
   summarise(n = n())
 
 # genero un primer gráfico con los tres elementos básicos:
-eder_dist_s |> 
+g_eder_sexo <- eder_dist_s |> 
   ggplot(aes(x = p3b, y = n, color = factor(p2), shape = factor(p2))) +    # estética
   geom_line() +
   geom_point()
+g_eder_sexo
 ```
 
 ::: {.take_note_box  .take_note data-latex="{take_note}"}
@@ -357,3 +349,104 @@ que...
 pero no que...
 `data %>% ggplot(aes(x= EDAD, y = MUJER) + geom_line(aes(y = VARON))`
 :::
+
+Agreguemos [un título, un subtítulo](https://ggplot2.tidyverse.org/reference/labs.html), modifiquemos el tamaño del punto, la posición y título de la leyenda, y  especifiquemos las marcas en el eje x:
+
+```{r, message=F, warning=FALSE}
+g_eder_sexo <- g_eder_sexo +  # partimos del objeto anterior
+  labs(title = "Población por edad y sexo. EDER 2019",
+       subtitle = "CABA",
+       caption = "Fuente: IDECBA",
+       x = "Edad", y = "n") +
+  theme(legend.position = "bottom", 
+        legend.direction = "horizontal",
+        legend.title = element_blank()) +
+  scale_x_continuous(breaks = seq(0,100,10)) # ups!
+g_eder_sexo
+```
+
+Podemos definir una paleta de colores, cambiar la [temática](https://ggplot2.tidyverse.org/reference/theme.html) de fondo por una más simple y suavizar las series con algún modelo. Adicionalmente mediante [ggsave](https://ggplot2.tidyverse.org/reference/ggsave.html) podemos guardar el objeto como imágen en la extensión que se desee.
+
+```{r, warning=FALSE}
+mi_paleta <- c("#000000", "#E69F00", "#56B4E9") # sistema Hexadecimal de colores
+
+g_eder_sexo <- g_eder_sexo +
+  scale_colour_manual(values = mi_paleta) +
+  theme_bw() + 
+  geom_smooth(method = 'loess', span=.5) # podés jugar con span (0,1)
+
+ggsave(filename = "g_eder_sexo.pdf", plot = g_eder_sexo, dpi = 150)
+
+g_eder_sexo
+```
+
+Lo que vamos a hacer ahora, y solo a fines de entender cómo se puede armar, es llegar a un data frame donde tengamos el sexo en las columnas, y el nivel educativo en las filas.
+
+Para esto utlizaremos las funciones `pivot` (antiguamaente llamadas *gather* y *spread*, por si lo ves en la web). 
+
+```{r, message=F, warning=FALSE}
+eder_ned_sexo <- eder_personas %>% 
+  filter(p2 %in% 1:2, # Elimino los que no tienen asignado el sexo y el nivel educativo
+         e_nivel != 9) |> 
+  mutate(sexo = case_when(p2 == 1 ~ "Varon", # Recodifico
+                          p2 == 2 ~ "Mujer"),
+         e_nivel_desc = case_when(e_nivel == 0 ~ "No corresponde/escuelas especiales",
+                                  e_nivel == 1 ~ "Inicial",
+                                  e_nivel == 2 ~ "Primario incompleto",
+                                  e_nivel == 3 ~ "Primario completo",
+                                  e_nivel == 4 ~ "Secundario incompleto",
+                                  e_nivel == 5 ~ "Secundario completo",
+                                  e_nivel == 6 ~ "Superior / Universitario incompleto",
+                                  e_nivel == 7 ~ "Superior / Universitario completo y mas",
+                                  e_nivel == 8 ~ "Sin instruccion")) |> 
+  select(sexo, e_nivel_desc) |> 
+  group_by(sexo, e_nivel_desc) |> 
+  summarise(n = n()) |> 
+  pivot_wider(names_from = sexo, values_from = n)%>% 
+  mutate(e_nivel_desc = factor(e_nivel_desc,
+                               levels = c("No corresponde/escuelas especiales",
+                                          "Inicial",
+                                          "Primario incompleto",
+                                          "Primario completo",
+                                          "Secundario incompleto",
+                                          "Secundario completo",
+                                          "Superior / Universitario incompleto",
+                                          "Superior / Universitario completo y mas",
+                                          "Sin instruccion"))) |> 
+  arrange(e_nivel_desc)
+
+```
+
+Vamos a trabajar con *barras*. Recordemos que la estética `fill` equivale al atributo `color` de líneas o puntos. Como regla general, `fill` es como "relleno" y `color` para líneas o bordes.
+
+```{r, message=F, warning=FALSE}
+
+dist_ned_muj <- eder_ned_sexo |> 
+  ggplot(aes(x = e_nivel_desc, y = Mujer, fill = e_nivel_desc))+
+  geom_col()
+
+dist_ned_muj
+```
+
+Vamos a darlo vuelta (*flip*) para que se vea mejor. Podemos hacerle unos cambios adicionales de paso: incluir titulo, subtítulo y fuente, cambiar las etiquetas de ambos ejes, incluir un *tema* distinto y cambiar el color de las barras.      
+
+```{r, message=F}
+dist_ned_muj <- dist_ned_muj +
+            coord_flip() +
+            scale_y_continuous(labels = abs) +
+            labs(y = "n", 
+                 x = "Nivel educativo",
+                 title = "Mujeres por nivel educativo",
+                 subtitle = "EDER CABA",
+                 caption = "Fuente: en base a IDECBA") +
+            theme_bw()
+dist_ned_muj  
+```
+        
+Probablemente querramos varones y mujeres. Volvamos a poner el sexo como una variable, esta vez con `pivot_longer`
+```{r, message=F, warning=FALSE}
+eder_ned_sexo_long <- eder_ned_sexo |> 
+  pivot_longer(cols = c("Mujer", "Varon"), names_to = "Sexo",values_to ="n")
+
+eder_ned_sexo_long
+```
