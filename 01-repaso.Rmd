@@ -10,7 +10,7 @@ editor_options:
 
 Antes que nada, felicitaciones por llegar hasta este momento!
 
-![](figs/aplausos.gif)
+![](figs/cat_tired.gif)
 
 Hoja de ruta para estos días:
 

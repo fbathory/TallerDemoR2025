@@ -96,7 +96,7 @@ Para comunicarnos durante la semana, utilizaremos el *Aula Virtual*. De todos mo
 Nos vemos pronto!
 
 ```{r, fig.asp="50%", echo=FALSE}
-include_graphics("figs/programming.gif")
+include_graphics("figs/cat_coding.gif")
 ```
 
 <!-- --------------------------------------------------------------------- -->
