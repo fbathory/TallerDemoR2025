@@ -426,11 +426,11 @@ Podemos separar mujeres y varones, distinguiéndolas por color y forma (en <code
 <span id="cb21-12"><a href="repaso---dplyr-y-ggplot.html#cb21-12" tabindex="-1"></a>g_eder_sexo</span></code></pre></div>
 <p><img src="talleR_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="take_note_box take_note">
-<p>Lo que se encuentra dentro de <code>ggplot()</code> vale para todas las capas, excepto se “pise”. Por ejemplo, da el mismo plot las siguientes dos sentencias:
-<code>data %&gt;% ggplot(aes(x= EDAD, y = MUJER) + geom_line()</code>
-que…
-<code>data %&gt;% ggplot() + geom_line(aes(x= EDAD, y = MUJER))</code>
-pero no que…
+<p>Lo que se encuentra dentro de <code>ggplot()</code> vale para todas las capas, excepto se “pise”. Por ejemplo, da el mismo plot las siguientes dos sentencias:\
+<code>data %&gt;% ggplot(aes(x= EDAD, y = MUJER) + geom_line()</code>\
+que…\
+<code>data %&gt;% ggplot() + geom_line(aes(x= EDAD, y = MUJER))</code>\
+pero no que…\
 <code>data %&gt;% ggplot(aes(x= EDAD, y = MUJER) + geom_line(aes(y = VARON))</code></p>
 </div>
 <p>Agreguemos <a href="https://ggplot2.tidyverse.org/reference/labs.html">un título, un subtítulo</a>, modifiquemos el tamaño del punto, la posición y título de la leyenda, y especifiquemos las marcas en el eje x:</p>

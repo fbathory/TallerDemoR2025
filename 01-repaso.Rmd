@@ -342,11 +342,11 @@ g_eder_sexo
 ```
 
 ::: {.take_note_box  .take_note data-latex="{take_note}"}
-Lo que se encuentra dentro de `ggplot()` vale para todas las capas, excepto se "pise". Por ejemplo, da el mismo plot las siguientes dos sentencias:
-`data %>% ggplot(aes(x= EDAD, y = MUJER) + geom_line()`
-que...
-`data %>% ggplot() + geom_line(aes(x= EDAD, y = MUJER))`
-pero no que...
+Lo que se encuentra dentro de `ggplot()` vale para todas las capas, excepto se "pise". Por ejemplo, da el mismo plot las siguientes dos sentencias:\\
+`data %>% ggplot(aes(x= EDAD, y = MUJER) + geom_line()`\\
+que...\\
+`data %>% ggplot() + geom_line(aes(x= EDAD, y = MUJER))`\\
+pero no que...\\
 `data %>% ggplot(aes(x= EDAD, y = MUJER) + geom_line(aes(y = VARON))`
 :::
 
