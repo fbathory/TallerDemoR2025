@@ -60,3 +60,4 @@ repaso---dplyr-y-ggplot
 medidas-resumen-y-exploratorias
 ggplot-2
 materiales-anteriores-y-otras-cosas-a-tener-a-mano
+a-tibble-18-3
