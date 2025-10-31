@@ -1,0 +1,359 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+# Repaso - dplyr y ggplot
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "hide", message=FALSE)
+library(fontawesome)
+library(knitr)
+library(googledrive)
+#caba2010_br <- read.csv("Data/C2010_CABA_muestra.csv", header = T, sep=",")
+```
+
+## Bienvenidxs!
+
+Antes que nada, felicitaciones por llegar hasta este momento!
+
+![](figs/aplausos.gif)
+
+Hoja de ruta para estos días:
+
+1.  Introducción (y repaso):
+
+    -   dplyr y tidyr
+
+    -   ggplot. Características básicas
+
+2.  Visualizando la demografía:
+
+    -   Pirámides de población
+
+    -   Mapas temáticos
+
+    -   Diagramas de Lexis: líneas de vida y superficies
+
+    -   Curvas Kaplan-Meier
+
+3.  Funciones I - Divide y reina**R**ás
+
+    -   Modelos de crecimiento poblacional
+
+    -   Estandarización
+
+    -   Otras técnicas básicas
+
+    -   Fuentes de datos accesibles desde R
+
+4.  Funciones II - Nace**R**, Migra**R**, Mori**R** y otros eventos
+
+    -   Tablas de mortalidad
+
+    -   Indicadores de fecundidad
+
+    -   Indicadores de migración
+
+    -   Paquetes disponibles para el análisis demográfico
+
+5.  Reportes dinámicos
+
+    -   Documentación y contenido reproducible
+
+    -   R Markdown/Quarto: reportes y presentaciones reproducibles
+
+## Medidas resumen y exploratorias
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = "hide", message=FALSE)
+library(fontawesome)
+library(knitr)
+library(googledrive)
+library("tidyverse")
+library(fontawesome)
+library(knitr)
+eder_personas_br <- read.csv("data/eder2019_personas.csv")
+#caba2010_br <- read.csv("Data/C2010_CABA_muestra.csv", header = T, sep=",")
+```
+
+Vamos a hacer un breve repaso de las funciones que más usamos (hasta ahora) , y para eso usamos nuestra ya conocida base de la EDER. ¿Qué hace cada una de estas funciones?
+
+```{r, eval=F}
+eder_personas_br <- read.csv("data/eder2019_personas.csv")
+```
+
+```{r, eval=F}
+dim(eder_personas_br)       
+class(eder_personas_br)     
+str(eder_personas_br)       
+summary(eder_personas_br)   
+colnames(eder_personas_br)  
+ncol(eder_personas_br)      
+nrow(eder_personas_br)      
+```
+
+Ahora vamos con una variable numérica como edad `eder_personas_br$p3b`, ¿qué hacen estas funciones?
+
+```{r, eval=F}
+mean(eder_personas_br$p3b)
+min(eder_personas_br$p3b)
+max(eder_personas_br$p3b)
+range(eder_personas_br$p3b)
+```
+
+## dplyr
+Empapémonos en cómo trabajar nuestras bases de datos
+
+### %>%, seleccionar (**select**), renombrar (**rename**)
+
+¿Se acuerdan del pipe (`%>%` o `|>`)? Este operador concatena operaciones sobre el mismo objeto, verbalizando el proceso, generando fluidez en nuestro razonamiento y mejor entendimiento para un tercero. En vez de `f(x)` (aplicar una función `f()` a un objeto `x`) se tiene `x %>% f()` (tengo un objeto `x` y le aplico la función `f()`). Vamos a utilizarlo con las ya conocidas `select()` y `rename``
+
+```{r,eval=F}
+eder_personas <- eder_personas_br %>% 
+  select(id, nhogar, p2, p3b, p4) %>% 
+  # toma el objeto *** y selecciona las columnas ***  
+  
+  rename(id_viv = id, nhog=nhogar, sexo=p2, edad=p3b, rel_par=p4)
+  # NuevoNombre = ViejoNombre
+```
+
+
+### resumir (**summarise**) por grupos (**group_by**)
+
+Como nos interesa calcular medidas resumen para poder obtener conclusiones, plantear hipótesis o simplemente conocer más el fenómeno relevado/registrado en los datos, podemos usar `summarise` (resumen) y `n()` (contar filas) para contar, por ejemplo, cuántos casos hay en nuestra base:
+
+```{r, eval=F}
+n_personas <- eder_personas_br %>% summarise(casos = n()) 
+```
+Esto crea un objeto `n_personas` con la cantidad de casos.
+
+Si queremos considerar el total de personas expandido (con su ponderador), tenemos que utilizar la función `sum(factor expansión)`:
+
+```{r, eval=F}
+n_personas_exp <- eder_personas_br %>% summarise(casos = sum(fexp))
+```
+
+Otro ejemplo: para contar cuántas viviendas fueron relevadas en la base debemos considerar casos con valor *distinto* en la variable de código de vivienda `id`:
+
+```{r, eval=F}
+n_viviendas <- eder_personas_br %>% summarise(casos = n_distinct(id))
+```
+
+
+¿Cuál es el promedio de personas por vivienda dentro de la encuesta?
+```{r, include=F, eval=F}
+n_personas / n_viviendas
+```
+
+
+Con `summarise()` podemos aplicar cualquier función resumen sobre los datos. Por ejemplo: ¿Cuál es la edad promedio de las personas? ¿Cual es la edad mínima reportada? 
+
+```{r, eval=F}
+eder_personas_br %>% summarise(edad_media = mean(p3b))
+eder_personas_br %>% summarise(edad_min = min(p3b))
+eder_personas_br %>% summarise(edad_max = max(p3b))
+```
+
+Y recuerden que podemos incluir todo lo anterior en una sola sentencia gracias al pipe `%>%`
+
+```{r, eval=F}
+eder_resumen<- eder_personas_br %>% 
+  summarise(n_personas = n(), 
+            n_viviendas = n_distinct(id), 
+            pers_x_viv = n_personas/n_viviendas,
+            edad_media = mean(p3b),
+            edad_min = min(p3b)
+            )
+```
+
+Las operaciones principales que podemos realizar mediante `summarise()` las podés ver [acá](https://dplyr.tidyverse.org/reference/summarise.html).
+Pero su utilidad se potencia cuando queremos *segmentar por grupos*. Esta agrupación antecede a `summarise()`, y requiere ser indicada con `group_by()` incluyendo como argumento las variables para agrupar. Por ejemplo, para conocer la cantidad de personas relevadas por sexo:
+
+```{r}
+pers_sexo <- eder_personas_br %>% 
+                    group_by(p2) %>% 
+                    summarise(n_personas = n())
+```
+
+Seguro estas cantidades difieren según código de *relación de parentesco con lx jefx de hogar*. Pero primero podemos agregar la variable que describe los códigos. Carguemos como objeto el *diccionario* e incorporémoslo:
+
+```{r}
+cod_rel_par <- data.frame(p4 = 1:14, 
+                           p4_descripc = c("Jefe/a",
+                                        "Cónyuge/pareja",
+                                        "Hijo/a",
+                                        "Hijastro/a",
+                                        "Yerno o nuera",
+                                        "Nieto/a",
+                                        "Padre/madre/suegro/a",
+                                        "Hermano/a",
+                                        "Cuñado/a",
+                                        "Sobrino/a",
+                                        "Abuelo/a",
+                                        "Otro familiar",
+                                        NA,              # Recuerden que el valor 13 era vacío
+                                        "Otro no familiar"))
+
+eder_personas <- eder_personas_br %>% left_join(cod_rel_par, by = "p4")
+eder_personas %>% count(p4, p4_descripc)
+```
+
+::: {.take_note_box  .take_note data-latex="{take_note}"}
+<strong>Joins!!!</strong><br>
+**dplyr** tiene las funciones típicas de *join* para el pareo de data.frames dependiendo la relación que deseemos. Ver más [aquí](https://dplyr.tidyverse.org/reference/mutate-joins.html).<br>
+![Tipos de join](figs/dplyr_joins.png){width=250px}
+:::
+
+Y ahora podemos obtener la edad promedio de las personas encuestadas según relación de parentesco:
+```{r}
+edad_relpar <- eder_personas %>% 
+                    group_by(p4_descripc) %>% 
+                    summarise(edad_media = mean(p3b))
+
+```
+
+### transformar (**mutate**), filtrar (**filter**), ordenar (**arrange**)
+
+Mediante `mutate()` podemos crear variables nuevas o reemplazar las existentes (si les ponemos el mismo nombre). Por ejemplo, hacemos una variable que nos diga si la persona es mayor de edad `es_mayor`, utilizando la función [ifelse](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/ifelse), la opción base de R.
+
+```{r, eval=T, results = "hide"}
+
+# creo una variable (sin resumir)
+eder_mayores <- eder_personas %>% mutate(es_mayor = ifelse(p3b >= 18, 1, 0))
+```
+
+Podemos ordenar la tabla para ordenar de mayor a menor con `arrange`:
+
+```{r, eval=F}
+eder_mayores <- eder_mayores %>% arrange(edad)
+eder_mayores
+# mejor al revés: descendente
+eder_mayores <- eder_mayores %>% arrange(desc(edad))
+```
+
+Recuerden que `p3b = 9999` corresponde a `No sabe o no responde`. Entonces, nos conviene filtrarlos, utilizando `filter()`. Aunque primero chequeemos el rango de edades, ¿no? Y nos aseguramos de que el filtro se haya hecho bien
+
+
+```{r, eval=F}
+table(eder_mayores$p3b) # La edad coherente más alta es 103
+eder_mayores <- eder_mayores %>% filter(p3b <= 103) # Operador lógico! ¿se acuerdan?
+range(eder_mayores$p3b)
+```
+
+Vamos a unir todo lo que vimos hasta ahora: quiero obtener edad promedio de las personas que hicieron la encuesta retrospectiva por máximo nivel educativo alcanzado, pero solo si fueron lxs jefxs o cónyuges, por sexo. 
+
+```{r}
+selec_jefcony_sex <- eder_mayores %>%
+                  filter(retro == 1,  # Seleccionados para la encuesta retrospectiva
+                         p4 %in% 1:2, # p4 sea Jefx o cónyuge
+                         p3b <= 103) %>%  # Edad conocida
+                  group_by(p2,            # Sexo 
+                           e_nivel) %>%   # Nivel educativo
+                  summarise(edad_media = mean(p3b)) |> 
+  select(p2, e_nivel, edad_media)
+
+```
+
+> Si tuviéramos que relatar lo que estamos haciendo, sería algo del tipo: "tomá la eder, filtrame para traer solo jefxs y cónyuges, con edades conocidas que hayan contestado la retrospectiva, agrupámelos por estas variables y calculá el indicador para cada grupo; finalmente selecciona qué quieres mostrar". Es una *¡composición de funciones!*.
+
+Otra operación común es la de calcular distribuciones en una variable, segmentando con determinada agrupación. Podemos ver el porcentaje de mujeres que contestó el cuestionario retrospectivo por año de nacimiento. Considerar que cualquier operación resumen (media, suma, contar) en un data.frame agrupado resumirá por grupos. Aprovechemos eso:
+
+```{r, eval=T}
+Porc_mujeres <- eder_mayores |> 
+  filter(retro == 1) |> 
+  group_by(p3, p2) |> 
+  summarise(N = n()) |> 
+  mutate(porc = N/sum(N) *100) |> 
+  filter(p2 == 2) |> 
+  select(p3, porc)
+```
+
+Pero esto no es tan útil. Entonces podemos hacer esa distribución por cohorte de nacimiento agrupada, *recodificando* el año de nacimiento con la función `case_when` en una nueva variable.
+
+```{r, eval=T}
+unique(Porc_mujeres$p3)
+distr_coh <- eder_mayores %>% 
+  filter(retro == 1) |> 
+  mutate(coh = case_when(
+    p3 %in% 1948:1952 ~ "1948-1952",
+    p3 %in% 1968:1972 ~ "1968-1972",
+    TRUE              ~ "1978-1982"
+  )) %>% 
+  group_by(coh, p2) |> 
+  summarise(N = n()) |> 
+  mutate(porc = N/sum(N) *100) |> 
+  filter(p2 == 2) |> 
+  select(coh, porc)
+```
+
+### exportar
+¿Y cómo exporto esto? Puede ser a csv o a Excel:
+```{r, eval=F}
+getwd()
+
+# creo una carpeta de cosas exportadas dentro de data
+dir.create("data/export")
+
+write.csv(x = distr_coh, file = "data/export/Distribución_cohortes.csv")
+# install.packages("openxlsx")
+library(openxlsx)
+write.xlsx(x = distr_coh, file = "data/export/Distribución_cohortes.xlsx")
+```
+
+## ggplot
+
+Todo gráfico esta compuesto, jearárquicamente, por:
+
+  - **Datos**: lo que contiene (en un formato determinado) aquello que queremos visualizar. Se utilza el argumento `data`.
+    - *Capas*
+      - **Estética** determinada: ¿quién es "x"?, ¿quién es "y"?, tamaño (`size`), color (`color`) y forma (`shape`), entre otros. Para esto se utiliza la función `aes` (de *aestethics* en ingles), y permite *mapear* las columnas de la data a cada argumento.
+      - Expresión **geométrica** de los datos. Las más comunes son:
+        - Puntos (`geom_point`)  
+        - Líneas (`geom_line`)  
+        - Barras (`geom_bar`) 
+    - *Transformación* estadística (ajustar una regresión lineal, segmentar por percentiles, frecuencia de barra, etc.) 
+  - **Sistema de coordenas** y **Escalas**: las medidas relativas con las cuales interpretar los datos y su transformación visual. Personalización de ejes y leyenda, cambiar a escala logarítmica, asignar una escala de colores, etc.
+  
+Vamos a ver la distribución por edad de la EDER con **ggplot**. Para eso, primero vamos a calcular cuántas personas hay por edad. Recordemos que hay un código 9999 para valores desconocidos de edad. Aquí `%>%` también funciona aunque 
+
+::: {.take_note_box  .take_note data-latex="{take_note}"}
+*recuerden* que `ggplot` utiliza `+` en vez de ` %>% `. 
+:::
+
+```{r, message=F, warning=FALSE}
+eder_dist <- eder_personas %>% 
+  filter(p3b <= 103)|> 
+  group_by(p3b) |> 
+  summarise(n = n())
+
+# genero un primer gráfico con los tres elementos básicos:
+eder_dist |>                      # data
+  ggplot(aes(x = p3b, y = n)) +    # estética
+  geom_line()                    # geometría
+```
+Podemos separar mujeres y varones, distinguiéndolas por color y forma (en `aes()`). Y vamos a sacar a la gente sin información de sexo.
+
+```{r, message=F, warning=FALSE}
+eder_dist_s <- eder_personas %>% 
+  filter(p3b <= 103,
+         p2 %in% 1:2)|>
+  group_by(p2, p3b) |> # Agrupo también por sexo 
+  summarise(n = n())
+
+# genero un primer gráfico con los tres elementos básicos:
+eder_dist_s |> 
+  ggplot(aes(x = p3b, y = n, color = factor(p2), shape = factor(p2))) +    # estética
+  geom_line() +
+  geom_point()
+```
+
+::: {.take_note_box  .take_note data-latex="{take_note}"}
+Lo que se encuentra dentro de `ggplot()` vale para todas las capas, excepto se "pise". Por ejemplo, da el mismo plot las siguientes dos sentencias:
+`data %>% ggplot(aes(x= EDAD, y = MUJER) + geom_line()`
+que...
+`data %>% ggplot() + geom_line(aes(x= EDAD, y = MUJER))`
+pero no que...
+`data %>% ggplot(aes(x= EDAD, y = MUJER) + geom_line(aes(y = VARON))`
+:::
