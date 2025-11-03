@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Repaso - dplyr y ggplot | Taller de R aplicado al Análisis Demográfico</title>
   <meta name="description" content="2 Repaso - dplyr y ggplot | Taller de R aplicado al Análisis Demográfico" />
-  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Repaso - dplyr y ggplot | Taller de R aplicado al Análisis Demográfico" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Ayelén Martinez, Florencia Bathory" />
 
 
-<meta name="date" content="2025-10-31" />
+<meta name="date" content="2025-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,9 +55,8 @@
 
 
 <style type="text/css">
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -67,7 +66,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -143,11 +142,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#informaci%C3%B3n-general"><i class="fa fa-check"></i><b>1.1</b> Información general</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prepar%C3%A1ndonos"><i class="fa fa-check"></i><b>1.2</b> PrepaRándonos</a>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#información-general"><i class="fa fa-check"></i><b>1.1</b> Información general</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#preparándonos"><i class="fa fa-check"></i><b>1.2</b> PrepaRándonos</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
-<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalación-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalación-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
 <li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#materiales-anteriores-y-otras-cosas-a-tener-a-mano"><i class="fa fa-check"></i><b>1.2.3</b> Materiales anteriores y otras cosas a tener a mano</a></li>
 <li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#contactos"><i class="fa fa-check"></i><b>1.2.4</b> Contactos</a></li>
 </ul></li>
@@ -159,9 +158,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#dplyr"><i class="fa fa-check"></i><b>2.3</b> dplyr</a>
 <ul>
 <li class="chapter" data-level="2.3.1" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#seleccionar-select-renombrar-rename"><i class="fa fa-check"></i><b>2.3.1</b> %&gt;%, seleccionar (<strong>select</strong>), renombrar (<strong>rename</strong>)</a></li>
-<li class="chapter" data-level="2.3.2" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#resumir-summarise-por-grupos-group_by"><i class="fa fa-check"></i><b>2.3.2</b> resumir (<strong>summarise</strong>) por grupos (<strong>group_by</strong>)</a></li>
-<li class="chapter" data-level="2.3.3" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#transformar-mutate-filtrar-filter-ordenar-arrange"><i class="fa fa-check"></i><b>2.3.3</b> transformar (<strong>mutate</strong>), filtrar (<strong>filter</strong>), ordenar (<strong>arrange</strong>)</a></li>
-<li class="chapter" data-level="2.3.4" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#exportar"><i class="fa fa-check"></i><b>2.3.4</b> exportar</a></li>
+<li class="chapter" data-level="2.3.2" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#resumir-summarise-por-grupos-group_by"><i class="fa fa-check"></i><b>2.3.2</b> Resumir (<strong>summarise</strong>) por grupos (<strong>group_by</strong>)</a></li>
+<li class="chapter" data-level="2.3.3" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#transformar-mutate-filtrar-filter-ordenar-arrange"><i class="fa fa-check"></i><b>2.3.3</b> Transformar (<strong>mutate</strong>), filtrar (<strong>filter</strong>), ordenar (<strong>arrange</strong>)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#exportar"><i class="fa fa-check"></i><b>2.3.4</b> Exportar</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#ggplot"><i class="fa fa-check"></i><b>2.4</b> ggplot</a></li>
 </ul></li>
@@ -257,7 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-6"><a href="repaso---dplyr-y-ggplot.html#cb4-6" tabindex="-1"></a>  <span class="co"># NuevoNombre = ViejoNombre</span></span></code></pre></div>
 </div>
 <div id="resumir-summarise-por-grupos-group_by" class="section level3 hasAnchor" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> resumir (<strong>summarise</strong>) por grupos (<strong>group_by</strong>)<a href="repaso---dplyr-y-ggplot.html#resumir-summarise-por-grupos-group_by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">2.3.2</span> Resumir (<strong>summarise</strong>) por grupos (<strong>group_by</strong>)<a href="repaso---dplyr-y-ggplot.html#resumir-summarise-por-grupos-group_by" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Como nos interesa calcular medidas resumen para poder obtener conclusiones, plantear hipótesis o simplemente conocer más el fenómeno relevado/registrado en los datos, podemos usar <code>summarise</code> (resumen) y <code>n()</code> (contar filas) para contar, por ejemplo, cuántos casos hay en nuestra base:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="repaso---dplyr-y-ggplot.html#cb5-1" tabindex="-1"></a>n_personas <span class="ot">&lt;-</span> eder_personas_br <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">casos =</span> <span class="fu">n</span>()) </span></code></pre></div>
 <p>Esto crea un objeto <code>n_personas</code> con la cantidad de casos.</p>
@@ -302,18 +301,18 @@ Pero su utilidad se potencia cuando queremos <em>segmentar por grupos</em>. Esta
 <span id="cb11-16"><a href="repaso---dplyr-y-ggplot.html#cb11-16" tabindex="-1"></a></span>
 <span id="cb11-17"><a href="repaso---dplyr-y-ggplot.html#cb11-17" tabindex="-1"></a>eder_personas <span class="ot">&lt;-</span> eder_personas_br <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(cod_rel_par, <span class="at">by =</span> <span class="st">&quot;p4&quot;</span>)</span>
 <span id="cb11-18"><a href="repaso---dplyr-y-ggplot.html#cb11-18" tabindex="-1"></a>eder_personas <span class="sc">%&gt;%</span> <span class="fu">count</span>(p4, p4_descripc)</span></code></pre></div>
+<p>Y ahora podemos obtener la edad promedio de las personas encuestadas según relación de parentesco:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="repaso---dplyr-y-ggplot.html#cb12-1" tabindex="-1"></a>edad_relpar <span class="ot">&lt;-</span> eder_personas <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="repaso---dplyr-y-ggplot.html#cb12-2" tabindex="-1"></a>                    <span class="fu">group_by</span>(p4_descripc) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="repaso---dplyr-y-ggplot.html#cb12-3" tabindex="-1"></a>                    <span class="fu">summarise</span>(<span class="at">edad_media =</span> <span class="fu">mean</span>(p3b))</span></code></pre></div>
 <div class="take_note_box take_note">
 <p><strong>Joins!!!</strong><br>
 <strong>dplyr</strong> tiene las funciones típicas de <em>join</em> para el pareo de data.frames dependiendo la relación que deseemos. Ver más <a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">aquí</a>.<br>
 <img src="figs/dplyr_joins.png" width="250" alt="Tipos de join" /></p>
 </div>
-<p>Y ahora podemos obtener la edad promedio de las personas encuestadas según relación de parentesco:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="repaso---dplyr-y-ggplot.html#cb12-1" tabindex="-1"></a>edad_relpar <span class="ot">&lt;-</span> eder_personas <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="repaso---dplyr-y-ggplot.html#cb12-2" tabindex="-1"></a>                    <span class="fu">group_by</span>(p4_descripc) <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="repaso---dplyr-y-ggplot.html#cb12-3" tabindex="-1"></a>                    <span class="fu">summarise</span>(<span class="at">edad_media =</span> <span class="fu">mean</span>(p3b))</span></code></pre></div>
 </div>
 <div id="transformar-mutate-filtrar-filter-ordenar-arrange" class="section level3 hasAnchor" number="2.3.3">
-<h3><span class="header-section-number">2.3.3</span> transformar (<strong>mutate</strong>), filtrar (<strong>filter</strong>), ordenar (<strong>arrange</strong>)<a href="repaso---dplyr-y-ggplot.html#transformar-mutate-filtrar-filter-ordenar-arrange" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">2.3.3</span> Transformar (<strong>mutate</strong>), filtrar (<strong>filter</strong>), ordenar (<strong>arrange</strong>)<a href="repaso---dplyr-y-ggplot.html#transformar-mutate-filtrar-filter-ordenar-arrange" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Mediante <code>mutate()</code> podemos crear variables nuevas o reemplazar las existentes (si les ponemos el mismo nombre). Por ejemplo, hacemos una variable que nos diga si la persona es mayor de edad <code>es_mayor</code>, utilizando la función <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/ifelse">ifelse</a>, la opción base de R.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="repaso---dplyr-y-ggplot.html#cb13-1" tabindex="-1"></a><span class="co"># creo una variable (sin resumir)</span></span>
 <span id="cb13-2"><a href="repaso---dplyr-y-ggplot.html#cb13-2" tabindex="-1"></a>eder_mayores <span class="ot">&lt;-</span> eder_personas <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">es_mayor =</span> <span class="fu">ifelse</span>(p3b <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
@@ -362,7 +361,7 @@ Pero su utilidad se potencia cuando queremos <em>segmentar por grupos</em>. Esta
 <span id="cb18-13"><a href="repaso---dplyr-y-ggplot.html#cb18-13" tabindex="-1"></a>  <span class="fu">select</span>(coh, porc)</span></code></pre></div>
 </div>
 <div id="exportar" class="section level3 hasAnchor" number="2.3.4">
-<h3><span class="header-section-number">2.3.4</span> exportar<a href="repaso---dplyr-y-ggplot.html#exportar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">2.3.4</span> Exportar<a href="repaso---dplyr-y-ggplot.html#exportar" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>¿Y cómo exporto esto? Puede ser a csv o a Excel:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="repaso---dplyr-y-ggplot.html#cb19-1" tabindex="-1"></a><span class="fu">getwd</span>()</span>
 <span id="cb19-2"><a href="repaso---dplyr-y-ggplot.html#cb19-2" tabindex="-1"></a></span>
