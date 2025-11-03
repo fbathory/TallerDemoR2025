@@ -1,6 +1,6 @@
 ---
-editor_options: 
-  markdown: 
+editor_options:
+  markdown:
     wrap: 72
 ---
 
@@ -111,7 +111,7 @@ eder_personas <- eder_personas_br %>%
 ```
 
 
-### resumir (**summarise**) por grupos (**group_by**)
+### Resumir (**summarise**) por grupos (**group_by**)
 
 Como nos interesa calcular medidas resumen para poder obtener conclusiones, plantear hipótesis o simplemente conocer más el fenómeno relevado/registrado en los datos, podemos usar `summarise` (resumen) y `n()` (contar filas) para contar, por ejemplo, cuántos casos hay en nuestra base:
 
@@ -168,6 +168,7 @@ pers_sexo <- eder_personas_br %>%
                     summarise(n_personas = n())
 ```
 
+
 Seguro estas cantidades difieren según código de *relación de parentesco con lx jefx de hogar*. Pero primero podemos agregar la variable que describe los códigos. Carguemos como objeto el *diccionario* e incorporémoslo:
 
 ```{r}
@@ -191,11 +192,7 @@ eder_personas <- eder_personas_br %>% left_join(cod_rel_par, by = "p4")
 eder_personas %>% count(p4, p4_descripc)
 ```
 
-::: {.take_note_box  .take_note data-latex="{take_note}"}
-<strong>Joins!!!</strong><br>
-**dplyr** tiene las funciones típicas de *join* para el pareo de data.frames dependiendo la relación que deseemos. Ver más [aquí](https://dplyr.tidyverse.org/reference/mutate-joins.html).<br>
-![Tipos de join](figs/dplyr_joins.png){width=250px}
-:::
+
 
 Y ahora podemos obtener la edad promedio de las personas encuestadas según relación de parentesco:
 ```{r}
@@ -205,7 +202,16 @@ edad_relpar <- eder_personas %>%
 
 ```
 
-### transformar (**mutate**), filtrar (**filter**), ordenar (**arrange**)
+
+
+::: {.take_note_box  .take_note data-latex="{take_note}"}
+<strong>Joins!!!</strong><br>
+**dplyr** tiene las funciones típicas de *join* para el pareo de data.frames dependiendo la relación que deseemos. Ver más [aquí](https://dplyr.tidyverse.org/reference/mutate-joins.html).<br>
+![Tipos de join](figs/dplyr_joins.png){width=250px}
+:::
+
+
+### Transformar (**mutate**), filtrar (**filter**), ordenar (**arrange**)
 
 Mediante `mutate()` podemos crear variables nuevas o reemplazar las existentes (si les ponemos el mismo nombre). Por ejemplo, hacemos una variable que nos diga si la persona es mayor de edad `es_mayor`, utilizando la función [ifelse](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/ifelse), la opción base de R.
 
@@ -279,7 +285,9 @@ distr_coh <- eder_mayores %>%
   select(coh, porc)
 ```
 
-### exportar
+
+
+### Exportar
 ¿Y cómo exporto esto? Puede ser a csv o a Excel:
 ```{r, eval=F}
 getwd()
