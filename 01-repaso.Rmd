@@ -303,7 +303,7 @@ write.xlsx(x = distr_coh, file = "data/export/Distribución_cohortes.xlsx")
 
 ## ggplot
 
-Todo gráfico esta compuesto, jearárquicamente, por:
+Todo gráfico esta compuesto, jerárquicamente, por:
 
   - **Datos**: lo que contiene (en un formato determinado) aquello que queremos visualizar. Se utilza el argumento `data`.
     - *Capas*
