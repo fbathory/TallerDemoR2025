@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Repaso - dplyr y ggplot | Taller de R aplicado al Análisis Demográfico</title>
   <meta name="description" content="2 Repaso - dplyr y ggplot | Taller de R aplicado al Análisis Demográfico" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Repaso - dplyr y ggplot | Taller de R aplicado al Análisis Demográfico" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Ayelén Martinez, Florencia Bathory" />
 
 
-<meta name="date" content="2025-11-03" />
+<meta name="date" content="2025-11-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,8 +55,9 @@
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -66,7 +67,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -142,11 +143,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#información-general"><i class="fa fa-check"></i><b>1.1</b> Información general</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#preparándonos"><i class="fa fa-check"></i><b>1.2</b> PrepaRándonos</a>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#informaci%C3%B3n-general"><i class="fa fa-check"></i><b>1.1</b> Información general</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prepar%C3%A1ndonos"><i class="fa fa-check"></i><b>1.2</b> PrepaRándonos</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalación-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
-<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalación-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
 <li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#materiales-anteriores-y-otras-cosas-a-tener-a-mano"><i class="fa fa-check"></i><b>1.2.3</b> Materiales anteriores y otras cosas a tener a mano</a></li>
 <li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#contactos"><i class="fa fa-check"></i><b>1.2.4</b> Contactos</a></li>
 </ul></li>
@@ -317,10 +318,10 @@ Pero su utilidad se potencia cuando queremos <em>segmentar por grupos</em>. Esta
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="repaso---dplyr-y-ggplot.html#cb13-1" tabindex="-1"></a><span class="co"># creo una variable (sin resumir)</span></span>
 <span id="cb13-2"><a href="repaso---dplyr-y-ggplot.html#cb13-2" tabindex="-1"></a>eder_mayores <span class="ot">&lt;-</span> eder_personas <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">es_mayor =</span> <span class="fu">ifelse</span>(p3b <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code></pre></div>
 <p>Podemos ordenar la tabla para ordenar de mayor a menor con <code>arrange</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="repaso---dplyr-y-ggplot.html#cb14-1" tabindex="-1"></a>eder_mayores <span class="ot">&lt;-</span> eder_mayores <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(edad)</span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="repaso---dplyr-y-ggplot.html#cb14-1" tabindex="-1"></a>eder_mayores <span class="ot">&lt;-</span> eder_mayores <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(p3b)</span>
 <span id="cb14-2"><a href="repaso---dplyr-y-ggplot.html#cb14-2" tabindex="-1"></a>eder_mayores</span>
 <span id="cb14-3"><a href="repaso---dplyr-y-ggplot.html#cb14-3" tabindex="-1"></a><span class="co"># mejor al revés: descendente</span></span>
-<span id="cb14-4"><a href="repaso---dplyr-y-ggplot.html#cb14-4" tabindex="-1"></a>eder_mayores <span class="ot">&lt;-</span> eder_mayores <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(edad))</span></code></pre></div>
+<span id="cb14-4"><a href="repaso---dplyr-y-ggplot.html#cb14-4" tabindex="-1"></a>eder_mayores <span class="ot">&lt;-</span> eder_mayores <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(p3b))</span></code></pre></div>
 <p>Recuerden que <code>p3b = 9999</code> corresponde a <code>No sabe o no responde</code>. Entonces, nos conviene filtrarlos, utilizando <code>filter()</code>. Aunque primero chequeemos el rango de edades, ¿no? Y nos aseguramos de que el filtro se haya hecho bien</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="repaso---dplyr-y-ggplot.html#cb15-1" tabindex="-1"></a><span class="fu">table</span>(eder_mayores<span class="sc">$</span>p3b) <span class="co"># La edad coherente más alta es 103</span></span>
 <span id="cb15-2"><a href="repaso---dplyr-y-ggplot.html#cb15-2" tabindex="-1"></a>eder_mayores <span class="ot">&lt;-</span> eder_mayores <span class="sc">%&gt;%</span> <span class="fu">filter</span>(p3b <span class="sc">&lt;=</span> <span class="dv">103</span>) <span class="co"># Operador lógico! ¿se acuerdan?</span></span>

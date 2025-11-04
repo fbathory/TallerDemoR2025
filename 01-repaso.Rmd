@@ -224,10 +224,10 @@ eder_mayores <- eder_personas %>% mutate(es_mayor = ifelse(p3b >= 18, 1, 0))
 Podemos ordenar la tabla para ordenar de mayor a menor con `arrange`:
 
 ```{r, eval=F}
-eder_mayores <- eder_mayores %>% arrange(edad)
+eder_mayores <- eder_mayores %>% arrange(p3b)
 eder_mayores
 # mejor al revés: descendente
-eder_mayores <- eder_mayores %>% arrange(desc(edad))
+eder_mayores <- eder_mayores %>% arrange(desc(p3b))
 ```
 
 Recuerden que `p3b = 9999` corresponde a `No sabe o no responde`. Entonces, nos conviene filtrarlos, utilizando `filter()`. Aunque primero chequeemos el rango de edades, ¿no? Y nos aseguramos de que el filtro se haya hecho bien
