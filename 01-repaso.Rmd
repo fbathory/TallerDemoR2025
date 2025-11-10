@@ -24,9 +24,9 @@ Hoja de ruta para estos días:
 
     -   Pirámides de población
 
-    -   Mapas temáticos
-
     -   Diagramas de Lexis: líneas de vida y superficies
+    
+    -   Mapas temáticos
 
     -   Curvas Kaplan-Meier
 
