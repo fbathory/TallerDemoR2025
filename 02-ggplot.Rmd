@@ -180,7 +180,7 @@ Pir_ER <- Pir_ER +
                  title = "Pirámide de población. Año 2022",
                  subtitle = "Total del país",
                  caption = "Fuente: en base a INDEC") +
-            scale_fill_manual(values = c("gold", "blue")) + # Defino los colores del parámetro fill (Sexo)
+            scale_fill_manual(values = c("aquamarine4", "purple")) + # Defino los colores del parámetro fill (Sexo)
             theme_bw()
 Pir_ER  
 ```
@@ -201,8 +201,8 @@ Pirs <- N_Censo %>%
                 labs(title = "Pirámide de población.",
                   subtitle = "Años 2010 y 2022",
                   caption = "Fuente: INDEC") +
-                scale_fill_manual(values = c("gold", "blue")) +
-                theme_dark() +
+                scale_fill_manual(values = c("aquamarine4", "purple")) +
+                theme_grey() +
                 facet_grid(rows = vars(Anio)) # o cols?
 Pirs
 ```
@@ -227,7 +227,7 @@ PirsPorc <- N_Censo %>%
        subtitle = "Años 2010 y 2022",
        caption = "Fuente: INDEC") +
   theme_bw() +
-  scale_fill_manual(values =c("blue", "gold"))+
+  scale_fill_manual(values =c("aquamarine4", "purple"))+
   facet_grid(cols = vars(Anio))
 PirsPorc
 ```
@@ -264,8 +264,8 @@ N_Censo_p <- N_Censo %>%
        subtitle = "Años 2010 y 2022",
        caption = "Fuente: INDEC") +
   theme_bw() +
-  scale_fill_manual(values =c("blue", "gold"), name = "2022")+
-  scale_color_manual(values =c("lightblue", "yellow"), name = "2010")
+  scale_fill_manual(values =c("aquamarine4", "purple"), name = "2022")+
+  scale_color_manual(values =c("aquamarine", "magenta"), name = "2010")
  
  Pir_Sup
 ```
@@ -292,14 +292,10 @@ Los elementos principales de análisis son:
 
 ![](figs/LexisElements.png)
 
-Ejemplos de uso del diagrama utilizando R:
+Ejemplo de uso del diagrama utilizando R:
 
 -   Mortalidad por conflictos armados (replicable): ![Fuente: Alburez
     et. al (2019)](figs/AlburezLexis.jpg) Fuente: Alburez et. al (2019)
-
--   Sobremortalidad masculina en Inglaterra y Gales (1841-2013):
-    ![Fuente: Schöley & Willekens (2017)](figs/LexisMortalityMF.png)
-    Fuente: Schöley & Willekens (2017)
 
 Construyamos el diagrama básico del inicio. Para eso haremos uso del
 paquete [LexisPlotR](https://github.com/ottlngr/LexisPlotR) creado por
@@ -307,78 +303,103 @@ Philipp Ottolinger (gracias Otto). Construyó un set de funciones basadas
 en *ggplot* que facilita la creación de diagramas haciéndolo un
 ejercicio intuitivo.
 
-```{r, message=F, warning=FALSE}
+
+```{r}
+
+# Si el paquete no está disponible en CRAN, podemos instalarlo desde GitHub
 # install.packages("devtools")
-# devtools::install_github("ottlngr/LexisPlotR") #¿Cómo no esta en CRAN?
-library(LexisPlotR)
-library(tidyverse)
+# devtools::install_github("ottlngr/LexisPlotR")
 
-# creamos el objeto "mylexis", definiendo el rango de sus ejes: los primeros 10 años de vida durante 2010-2019. Aquí podemos especificar un "delta" si es que nos interesan los grupos quinquenales.
-mylexis <- lexis_grid(year_start = 2010, year_end = 2019, age_start = 0, age_end = 10)
+library(LexisPlotR)  # Paquete específico para construir diagramas de Lexis
+library(tidyverse)   # Para manipular datos y utilizar funciones de ggplot2
 
-# pintamos la edad 2
+
+
+# 1. Creamos el objeto "mylexis", que define el marco temporal del diagrama.
+
+# En este caso: años calendario 2010-2019 y edades 0-10 años.
+# Podríamos especificar un “delta” si quisiéramos mostrar grupos quinquenales, por ejemplo.
+mylexis <- lexis_grid(year_start = 2010, year_end = 2019, 
+                      age_start = 0, age_end = 10)
+
+
+# 2. Elementos básicos
+
+# Resaltamos una edad específica: 2 años
 mylexis <- lexis_age(lg = mylexis, age = 2)
 
-# pintamos el año 2015, de gris en este caso.
+# Resaltamos un año calendario: 2015
 mylexis <- lexis_year(lg = mylexis, year = 2015, fill = "grey")
 
-# Ahora la cohorte 2015
+# Resaltamos la cohorte de 2015 (línea diagonal)
 mylexis <- lexis_cohort(lg = mylexis, cohort = 2015)
 
 # Una línea de vida, ¡elemento fundamental del diagrama!
-mylexis <- lexis_lifeline(lg = mylexis, birth = "2001-09-23", lwd = 1, colour = "pink")
+#Representa cómo aumenta la edad con el paso de los años calendario
+mylexis <- lexis_lifeline(lg = mylexis, birth = "2001-09-23", 
+                          lwd = 1, colour = "pink")
 
-# Al ser un objeto ggplot, podemos incorporarle atributos, como el título
-mylexis <- mylexis + labs(x="Año", y = "Edad",title = "Diagrama de Lexis. Elementos de análisis")
 
-# Para crear polígonos, el autor se basa en la geometría "geom_polygon". Creamos un cuadrado. El orden de los datos es importante. Además podemos crear muchos polígonos al mismo tiempo señalando los grupos.
-square <- data.frame(group = c(1, 1, 1, 1),
-                       x = c("2012-01-01", "2012-01-01", "2013-01-01", "2013-01-01"),
-                       y = c(4,             5,            5,            4))
-mylexis <- lexis_polygon(lg = mylexis, x = square$x, y = square$y, group = square$group)
+# Al ser un objeto ggplot, podemos incorporarle atributos, como el título o etiquetas
+mylexis <- mylexis + labs(x = "Año", 
+                          y = "Edad", 
+                          title = "Diagrama de Lexis. Elementos de análisis")
+
+
+# 3. Polígonos: cuadrado y triángulo
+
+# Para crear polígonos, el autor se basa en la geometría "geom_polygon". Creamos un cuadrado. 
+#El orden de los datos es importante. Además podemos crear muchos polígonos al mismo tiempo señalando los grupos.
+# Ejemplo: creamos un cuadrado que abarca entre los años 2012 y 2013, y edades 4 a 5.
+square <- data.frame(
+  group = c(1, 1, 1, 1),
+  x = c("2012-01-01", "2012-01-01", "2013-01-01", "2013-01-01"),
+  y = c(4, 5, 5, 4)
+)
+
+# Lo agregamos al diagrama
+mylexis <- lexis_polygon(lg = mylexis, 
+                         x = square$x, y = square$y, 
+                         group = square$group)
+
+
 
 # Creamos el triángulo. ¿A qué refiere?
-triangle <- data.frame(group = c(1, 1, 1),
-                       x = c("2017-01-01", "2018-01-01", "2018-01-01"),
-                       y = c(6, 6, 7))
-mylexis <- lexis_polygon(lg = mylexis, x = triangle$x, y = triangle$y, group = triangle$group)
+triangle <- data.frame(
+  group = c(1, 1, 1),
+  x = c("2017-01-01", "2018-01-01", "2018-01-01"),
+  y = c(6, 6, 7)
+)
+
+mylexis <- lexis_polygon(lg = mylexis, 
+                         x = triangle$x, y = triangle$y, 
+                         group = triangle$group)
 
 # Imprimimos!
 mylexis
+
 ```
+
 
 Adicionalmente, si trabajamos con población donde la exposición puede
 ser truncada (por derecha o izquierda), podemos graficar líneas de vida
-que respeten ese comportamiento. Tambien podemos señalar con una cruz la
+que respeten ese comportamiento. También podemos señalar con una cruz la
 ocurrencia del evento de salida que se estudia.
 
 ```{r, message=F, warning=FALSE}
-# ingresa al estudio sobre deserción escolar en el año 2012 un niño/a nacido en el año 2005, abandonando el colegio a los 9 años de edad:
+
+# Ejemplo: trayectoria educativa en el diagrama de Lexis
+
+# ingresa al estudio sobre deserción escolar en el año 2012 un niño/a nacido en el año 2005, #abandonando el colegio a los 9 años de edad:
+
 mylexis <- lexis_lifeline(lg = mylexis, 
-                          birth = "2005-09-23", 
-                          entry = "2012-06-11", exit = "2015-02-27", lineends = T,
-                          colour = "red")
+                          birth = "2005-09-23",   # fecha de nacimiento
+                          entry = "2012-06-11",   # fecha en que entra al estudio (inicio del seguimiento)
+                          exit  = "2015-02-27",   # fecha en que deja de ser observado (abandono)
+                          lineends = TRUE,        # agrega marcas visibles en los extremos de la línea
+                          colour = "red")         # color de la línea
+
 mylexis
-```
-
-Pero atrás de esto esta `ggplot`!
-
-```{r, message=F, warning=FALSE}
-ggplot() +
-  geom_segment(aes(x = 2011, y = 5, xend = 2015, yend = 9), color = "red", size=1)+ # debería ir al final
-  geom_point(aes(x=2015, y=9),shape=4,size=2,col=4)+
-  coord_equal() +
-  scale_x_continuous(breaks=2010:2020, expand = c(0,0)) +
-  scale_y_continuous(breaks=0:10, expand = c(0,0)) +
-  geom_vline(xintercept = 2010:2020, color="grey", size=.15, alpha = 0.8) +
-  geom_hline(yintercept = 0:10, color="grey", size=.15, alpha = 0.8) +
-  geom_abline(intercept = seq(-2020, -2000, by=1), slope = 1, color="grey", size=.15, alpha = 0.8)+
-  labs(x="Año", y="Edad",title = "Dieagrama de Lexis c/ ggplot")+
-  theme_minimal()+
-  theme(panel.grid.major = element_line(colour = NA),
-        panel.grid.minor = element_line(colour = NA),
-        plot.background = element_rect(fill = "white", 
-                                       colour = "transparent"))
 ```
 
 Para incluir triángulos y cuadriláteros se utiliza
@@ -389,86 +410,71 @@ Para dar superficie, de manera similar al gráfico Scholey & Willekens
 Para esto último un gran tutorial de [Tim
 Riffe](https://timriffe.github.io/DemoTutorials/LexisSurface).
 
-## Estudio de cohorte: un ejemplo
 
-Construyamos una tabla de cohorte a partir de un grupo de estudiantes
-que iniciaron con 3 años de edad (cumplida) su trayectoria educativa el
-3/3/2000, y donde la *salida* es dejar el estudio (sea cual sea el nivel
-alcanzado) por **primera vez** antes de retomar o abandonar
-definitivamente (¿en este contexto qué sería $\omega$?). Simulemos el
-comportamiento de 1000 chicas/os con distribución *uniforme* de la edad
-y distribución *gamma* del tiempo de permanencia:
-
-```{r, message=F, warning=FALSE}
-set.seed(100) # qué es esto?
-clase <- data.frame(edad_inicio = runif(n = 1000, min = 3, max = 4),
-                    tiempo_exp = rgamma(n = 1000, shape = 40, rate = 2)) %>% 
-          mutate(edad_salida = edad_inicio + tiempo_exp)
-```
-
-¿Cómo luce?
-
-```{r}
-ggplot(clase, aes(x=edad_salida)) + 
-  geom_histogram(fill=2, alpha=.5) +
-  labs(x = "Edad de salida", y = "Densidad", 
-       title = "1000 casos simulados de edad de primer salida educativa")
-```
-
-Construyamos el diagrama de Lexis de esta cohorte utilizando
-`LexisPlotR`:
-
-```{r, message=F, warning=FALSE}
-# una forma de moverse en el tiempo: a una fecha restarle cantidad de días
-clase$nacimiento  <- as.Date("2000-03-03") - clase$edad_inicio * 365.25
-clase$salida      <- clase$nacimiento + clase$tiempo_exp * 365.25
-
-# creo Lexis
-mylexis     <- lexis_grid(year_start = 2000, year_end = 2025, age_start = 3, age_end = 30)
-mylexis     <- lexis_lifeline(lg = mylexis, 
-                          birth = clase$nacimiento, 
-                          entry = "2000-03-03", 
-                          exit = clase$salida, lineends = T,
-                          colour = 4, alpha = 1/3) + 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-mylexis
-```
-
-¿Por qué las líneas no empiezan justo en 2000? Estimemos algunos
-parámetros básicos:
-
-```{r, results='hold'}
-# la edad media de salida
-mean(clase$edad_salida)
-
-# la probablidad de "sobrevivir" a la edad 18
-clase %>% filter(edad_salida >= 18) %>% summarise(n()/nrow(clase)) 
-
-# probablidad de abandonar en los 20 años cumplidos 
-clase %>% filter(edad_salida >= 20 & edad_salida < 21) %>% summarise(n()/nrow(clase))
-```
 
 ### Actividad
 
-a)  Crear un diagrama de Lexis e incluir en rojo las líneas de vida de
+a)  Crear un diagrama de Lexis e incluir en distintos colores líneas de vida de
     las 3 personas más jóvenes que conozcas.
 
 ```{r, eval = F, include = F}
-mylexis <- lexis_grid(year_start = 2021, year_end = 2023, age_start = 0, age_end = 5)
-lexis_lifeline(lg = mylexis, birth = c("2021-10-23", "2022-01-15", "2022-09-19"), lwd = 1, colour = "red")
+lexis_act <- lexis_grid(year_start=2021, year_end=2024,
+                         age_start=0, age_end=5)
+lexis_act<-lexis_lifeline(lg = lexis_act,
+               birth = c("2021-02-15","2022-08-10","2023-03-05"),
+               lwd=1,
+               colour = c("red","green","blue"))
+lexis_act
+
 ```
 
-a)  Considerando el ejercicio de permanencia escolar:
 
-    -   Calcula la probabilidad de "salir" luego de los 30 años?
+b) Agregar 2 líneas de vida truncadas: simular la trayectoria de 2 personas que ingresan y salen de un estudio en distintos momentos.
 
     ```{r, eval = F, include = F}
-    clase %>% filter(edad_salida >= 30) %>% summarise(n()/nrow(clase))
+lexis_act<-lexis_lifeline(lg = lexis_act,
+               birth = c("2021-06-01","2022-03-15"),
+               entry = c("2022-01-01","2023-01-01"),
+               exit  = c("2023-06-01","2023-12-01"),
+               lineends = TRUE,
+               colour = c("orange","purple"))
+    
+lexis_act
+    ```
+    
+c) Resaltar un año y una cohorte (usando lexis_year y lexis_cohort)
+
+    ```{r, eval = F, include = F}
+lexis_act <- lexis_year(lexis_act, year = 2022, fill = "lightgrey")
+lexis_act <- lexis_cohort(lexis_act, cohort = 2023, fill = "orange")
+lexis_act
     ```
 
-    -   Cambia la semilla del ejercicio previo (`set.seed()`) por
-        cualquier entero que desees y repite el ejercicio. ¿Hay
-        diferencias? ¿Por qué?
+
+### BONUS
+
+Detrás de Lexis está `ggplot`!
+
+```{r, message=F, warning=FALSE}
+ggplot() +
+  geom_segment(aes(x = 2011, y = 5, xend = 2015, yend = 9), color = "red", size=1)+ 
+  geom_point(aes(x=2015, y=9),shape=4,size=2,col=4)+ # Agrega un punto al final del segmento (año 2015, edad 9)
+  coord_equal() +   # Mantiene la misma escala en ambos ejes (aspecto cuadrado)
+  scale_x_continuous(breaks=2010:2020, expand = c(0,0)) +
+  scale_y_continuous(breaks=0:10, expand = c(0,0)) +
+  geom_vline(xintercept = 2010:2020, color="grey", size=.15, alpha = 0.8) +
+  geom_hline(yintercept = 0:10, color="grey", size=.15, alpha = 0.8) +
+  geom_abline(intercept = seq(-2020, -2000, by=1), slope = 1, color="grey", size=.15, alpha = 0.8)+
+  labs(x="Año", y="Edad",title = "Dieagrama de Lexis c/ ggplot")+
+  theme_minimal()+
+  # Elimina cuadrículas del panel y define fondo blanco
+  theme(panel.grid.major = element_line(colour = NA),
+        panel.grid.minor = element_line(colour = NA),
+        plot.background = element_rect(fill = "white", 
+                                       colour = "transparent"))
+
+```
+
 
 ## Mapas temáticos
 
@@ -486,19 +492,13 @@ leer: `read_sf()`, capaz de leer varios formatos de datos geográficos
 # install.packages("sf")
 library(sf)
 
-prov_geoj<-st_read("https://wms.ign.gob.ar/geoserver/ign/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ign%3Aprovincia&outputFormat=application%2Fjson") # Se puede descargar directamente con el link
-
 ruta_completa <- normalizePath("data/capa_jurisdicciones.zip")
-prov_shp <- st_read(paste0("/vsizip/", ruta_completa, "/jurisdicciones.shp")) #O se puede descargar y leer con st_read()
+prov_shp <- st_read(paste0("/vsizip/", ruta_completa, "/jurisdicciones.shp"), quiet=T) #O se puede descargar y leer con st_read()
 
 str(prov_shp)
 summary(prov_shp)
 
 prov_shp %>%
-  ggplot()+
-  geom_sf()+
-  coord_sf()
-prov_geoj %>%
   ggplot()+
   geom_sf()+
   coord_sf()
@@ -545,7 +545,7 @@ es más probable que tengan menos diferencias que el nombre (mayúsculas,
 vamos a unirlo por código con `left_join()` aunque tengan nombre
 distinto las variables:
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 hog_cloaca_geo <- prov_shp %>% 
   left_join(hog_cloaca22,
             by = c("cpr" = "cod"))
@@ -567,7 +567,7 @@ p_cloaca <- ggplot(hog_cloaca_geo)+
   geom_sf(aes(fill = Total),
           color = "grey90")+
   coord_sf(xlim = c(-75, -52),   # longitud
-           ylim = c(-22, -55))+
+           ylim = c(-22, -55))+  #latitud
   theme_bw()
 p_cloaca
 ```
