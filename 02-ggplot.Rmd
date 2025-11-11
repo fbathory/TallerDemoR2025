@@ -53,7 +53,7 @@ Si quisiéramos ver el mismo gráfico que antes, pero separado por sexo,
 podemos usar las opciones de
 [faceting](https://ggplot2.tidyverse.org/reference/facet_grid.html) :
 
-```{r, message=F, warning=FALSE}
+```{r nivel ed facet, message=F, warning=FALSE}
 g_ned_sexo <- eder_ned_sexo_long %>% 
   ggplot(aes(x = e_nivel_desc, y = n, fill = e_nivel_desc))+
   geom_col()+
@@ -72,7 +72,7 @@ g_ned_sexo
 
 ¿Podríamos mostrar las distribuciones al interior del total? ¡Claro!
 
-```{r, message=F, warning=FALSE}
+```{r nivel ed facet2, message=F, warning=FALSE}
 g_ned_sexo_stack <- eder_ned_sexo_long %>% 
   ggplot(aes(x = Sexo, y = n, fill = e_nivel_desc))+
   geom_col(stat = "identity")+ # con este parámetro, se apilan
@@ -90,7 +90,7 @@ g_ned_sexo_stack
 Quizás si fuera un gráfico interactivo... Un bonus track utilzando
 [plotly](https://plot.ly/ggplot2/):
 
-```{r, message=F, warning=FALSE}
+```{r nivel ed interact, message=F, warning=FALSE}
 #install.packages("plotly")
 library(plotly)
 g_ned_sexo_plotly <- ggplotly(g_ned_sexo_stack + aes(text = n), tooltip= "text") 
@@ -151,7 +151,7 @@ N_Censo <- N_Censo %>%
 Quedémonos con el año 2022 y la distribución por sexo y empecemos a
 graficar
 
-```{r}
+```{r pir1}
 N_Censo22 <- N_Censo %>% 
   filter(Anio == 2022,
          Edad != "Total",
@@ -170,7 +170,7 @@ y mostrar solo absolutos, incluir titulo, subtítulo y fuente, cambiar
 las etiquetas de ambos ejes, incluir un *tema* distinto y cambiar el
 color de las barras.
 
-```{r, message=F}
+```{r pir2, message=F}
 Pir_ER <- Pir_ER +
             coord_flip() + # Volteamos la pirámide
             scale_y_continuous(labels = abs  # Que muestre absolutos (sin negativos)
@@ -188,7 +188,7 @@ Pir_ER
 Probablemente querramos comparar años. Volvamos a utilizar el
 `data.frame` de los 2 años.
 
-```{r}
+```{r pir3}
 
 Pirs <- N_Censo %>% 
   filter(Edad != "Total",
@@ -211,7 +211,7 @@ Utilicé dos veces `labs`! Es posible porque `ggplot` funciona sumando
 elementos. ¿El gráfico nos permite inferir estadíos transicionales?
 Mmm... Deberíamos verlo en porcentajes. Todo en una sentencia:
 
-```{r}
+```{r pir4}
 PirsPorc <- N_Censo %>% 
   filter(Edad != "Total",
          Sexo != "Total") %>% 
@@ -235,7 +235,7 @@ PirsPorc
 Podemos aprovechar la diferencia entre `fill` y `color` para poner una
 encima de la otra, pero tenemos que transformar los años a columnas
 
-```{r}
+```{r pir5}
 N_Censo_p <- N_Censo %>% 
   filter(Edad != "Total",
          Sexo != "Total") %>% 
@@ -303,7 +303,7 @@ Philipp Ottolinger (gracias Otto). Construyó un set de funciones basadas
 en *ggplot* que facilita la creación de diagramas haciéndolo un
 ejercicio intuitivo.
 
-```{r}
+```{r lexis1}
 
 # Si el paquete no está disponible en CRAN, podemos instalarlo desde GitHub
 # install.packages("devtools")
@@ -384,7 +384,7 @@ ser truncada (por derecha o izquierda), podemos graficar líneas de vida
 que respeten ese comportamiento. También podemos señalar con una cruz la
 ocurrencia del evento de salida que se estudia.
 
-```{r, message=F, warning=FALSE}
+```{r lexis2, message=F, warning=FALSE}
 
 # Ejemplo: trayectoria educativa en el diagrama de Lexis
 
@@ -412,7 +412,7 @@ Riffe](https://timriffe.github.io/DemoTutorials/LexisSurface).
 a)  Crear un diagrama de Lexis e incluir en distintos colores líneas de
     vida de las 3 personas más jóvenes que conozcas.
 
-```{r, eval = F, include = F}
+```{r lexis3, eval = F, include = F}
 lexis_act <- lexis_grid(year_start=2021, year_end=2024,
                          age_start=0, age_end=5)
 lexis_act<-lexis_lifeline(lg = lexis_act,
@@ -426,7 +426,7 @@ lexis_act
 b)  Agregar 2 líneas de vida truncadas: simular la trayectoria de 2
     personas que ingresan y salen de un estudio en distintos momentos.
 
-    ```{r, eval = F, include = F}
+    ```{r lexis4, eval = F, include = F}
     lexis_act<-lexis_lifeline(lg = lexis_act,
                birth = c("2021-06-01","2022-03-15"),
                entry = c("2022-01-01","2023-01-01"),
@@ -439,7 +439,7 @@ b)  Agregar 2 líneas de vida truncadas: simular la trayectoria de 2
 
 c)  Resaltar un año y una cohorte (usando lexis_year y lexis_cohort)
 
-    ```{r, eval = F, include = F}
+    ```{r lexis5, eval = F, include = F}
     lexis_act <- lexis_year(lexis_act, year = 2022, fill = "lightgrey")
     lexis_act <- lexis_cohort(lexis_act, cohort = 2023, fill = "orange")
     lexis_act
@@ -449,7 +449,7 @@ c)  Resaltar un año y una cohorte (usando lexis_year y lexis_cohort)
 
 Detrás de Lexis está `ggplot`!
 
-```{r, message=F, warning=FALSE}
+```{r lexis6, message=F, warning=FALSE}
 ggplot() +
   geom_segment(aes(x = 2011, y = 5, xend = 2015, yend = 9), color = "red", size=1)+ 
   geom_point(aes(x=2015, y=9),shape=4,size=2,col=4)+ # Agrega un punto al final del segmento (año 2015, edad 9)
@@ -481,7 +481,7 @@ de datos: [`sf`](https://r-spatial.github.io/sf/) y su función para
 leer: `read_sf()`, capaz de leer varios formatos de datos geográficos
 (GeoJSON, shape, etc.).
 
-```{r, message=FALSE, warning=FALSE}
+```{r map1, message=FALSE, warning=FALSE}
 # install.packages("sf")
 library(sf)
 
@@ -503,7 +503,7 @@ nuestras necesidades. Por ejemplo, si quisiéramos centrarnos en las
 provincias y dejar de lado la Antártida. ¿Y agregar los nombres de las
 provincias, quizás?
 
-```{r, warning=FALSE, message=FALSE}
+```{r map2, warning=FALSE, message=FALSE}
 prov_shp %>%
   ggplot()+
   geom_sf()+
@@ -520,7 +520,7 @@ particulares sin acceso a la red de servicio cloacal, del censo 2022,
 presentes en el archivo `hog_cloaca2022.xlsx`. Miremos un poco el
 archivo
 
-```{r}
+```{r map3}
 library(openxlsx)
 hog_cloaca22 <- read.xlsx("data/hog_cloaca2022.xlsx")
 head(hog_cloaca22)
@@ -538,7 +538,7 @@ es más probable que tengan menos diferencias que el nombre (mayúsculas,
 vamos a unirlo por código con `left_join()` aunque tengan nombre
 distinto las variables:
 
-```{r, warning=FALSE, message=FALSE}
+```{r map4, warning=FALSE, message=FALSE}
 hog_cloaca_geo <- prov_shp %>% 
   left_join(hog_cloaca22,
             by = c("cpr" = "cod"))
@@ -549,7 +549,7 @@ Ahora, ¿cómo poner en color las provincias según el indicador? Primero,
 quedémonos con las variables que nos interesan y luego grafiquemos:
 acordémonos de `aes()`
 
-```{r}
+```{r map5}
 hog_cloaca_geo <- hog_cloaca_geo %>% 
   select(nam, # Nombre 
          Año, # Año (aunque solo tenemos 2022)
@@ -569,7 +569,7 @@ Pero la paleta de colores está rara. Vamos a ponerle otra y cambiar la
 dirección, para que más oscuro = más alto porcentaje de hogares sin
 cloaca. Y, de paso, agreguemos título y demás:
 
-```{r}
+```{r map cloaca}
 p_cloaca +
   scale_fill_distiller("%",palette = "Reds",direction = 1)+
   labs(title = "Porcentaje de hogares particulares \nsin acceso a la red de servicio cloacal",

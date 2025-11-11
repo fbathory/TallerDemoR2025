@@ -321,7 +321,7 @@ Vamos a ver la distribución por edad de la EDER con **ggplot**. Para eso, prime
 *recuerden* que `ggplot` utiliza `+` en vez de ` %>% `. 
 :::
 
-```{r, message=F, warning=FALSE}
+```{r primer plot, message=F, warning=FALSE}
 eder_dist <- eder_personas %>% 
   filter(p3b <= 103)|> 
   group_by(p3b) |> 
@@ -334,7 +334,7 @@ eder_dist |>                      # data
 ```
 Podemos separar mujeres y varones, distinguiéndolas por color y forma (en `aes()`). Y vamos a sacar a la gente sin información de sexo.
 
-```{r, message=F, warning=FALSE}
+```{r eder por sexo 1, message=F, warning=FALSE}
 eder_dist_s <- eder_personas %>% 
   filter(p3b <= 103,
          p2 %in% 1:2)|>
@@ -360,7 +360,7 @@ pero no que...\\
 
 Agreguemos [un título, un subtítulo](https://ggplot2.tidyverse.org/reference/labs.html), modifiquemos el tamaño del punto, la posición y título de la leyenda, y  especifiquemos las marcas en el eje x:
 
-```{r, message=F, warning=FALSE}
+```{r eder por sexo, message=F, warning=FALSE}
 g_eder_sexo <- g_eder_sexo +  # partimos del objeto anterior
   labs(title = "Población por edad y sexo. EDER 2019",
        subtitle = "CABA",
@@ -375,7 +375,7 @@ g_eder_sexo
 
 Podemos definir una paleta de colores, cambiar la [temática](https://ggplot2.tidyverse.org/reference/theme.html) de fondo por una más simple y suavizar las series con algún modelo. Adicionalmente mediante [ggsave](https://ggplot2.tidyverse.org/reference/ggsave.html) podemos guardar el objeto como imágen en la extensión que se desee.
 
-```{r, warning=FALSE}
+```{r eder por sexo-colores, warning=FALSE}
 mi_paleta <- c("#000000", "#E69F00", "#56B4E9") # sistema Hexadecimal de colores
 
 g_eder_sexo <- g_eder_sexo +
@@ -392,7 +392,7 @@ Lo que vamos a hacer ahora, y solo a fines de entender cómo se puede armar, es 
 
 Para esto utlizaremos las funciones `pivot` (antiguamaente llamadas *gather* y *spread*, por si lo ves en la web). 
 
-```{r, message=F, warning=FALSE}
+```{r nivel ed1, message=F, warning=FALSE}
 eder_ned_sexo <- eder_personas %>% 
   filter(p2 %in% 1:2, # Elimino los que no tienen asignado el sexo y el nivel educativo
          e_nivel != 9) |> 
@@ -427,7 +427,7 @@ eder_ned_sexo <- eder_personas %>%
 
 Vamos a trabajar con *barras*. Recordemos que la estética `fill` equivale al atributo `color` de líneas o puntos. Como regla general, `fill` es como "relleno" y `color` para líneas o bordes.
 
-```{r, message=F, warning=FALSE}
+```{r nivel ed2, message=F, warning=FALSE}
 
 dist_ned_muj <- eder_ned_sexo |> 
   ggplot(aes(x = e_nivel_desc, y = Mujer, fill = e_nivel_desc))+
@@ -438,7 +438,7 @@ dist_ned_muj
 
 Vamos a darlo vuelta (*flip*) para que se vea mejor. Podemos hacerle unos cambios adicionales de paso: incluir titulo, subtítulo y fuente, cambiar las etiquetas de ambos ejes, incluir un *tema* distinto y cambiar el color de las barras.      
 
-```{r, message=F}
+```{r nivel ed 3, message=F}
 dist_ned_muj <- dist_ned_muj +
             coord_flip() +
             scale_y_continuous(labels = abs) +
