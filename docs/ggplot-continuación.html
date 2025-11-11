@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 ggplot (continuación) | Taller de R aplicado al Análisis Demográfico</title>
+  <meta name="description" content="3 ggplot (continuación) | Taller de R aplicado al Análisis Demográfico" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 ggplot (continuación) | Taller de R aplicado al Análisis Demográfico" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="fbathory/TallerDemoR" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 ggplot (continuación) | Taller de R aplicado al Análisis Demográfico" />
+  
+  
+  
+
+<meta name="author" content="Ayelén Martinez, Florencia Bathory" />
+
+
+<meta name="date" content="2025-11-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="repaso---dplyr-y-ggplot.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Taller de R aplicado al Análisis Demográfico</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#información-general"><i class="fa fa-check"></i><b>1.1</b> Información general</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#preparándonos"><i class="fa fa-check"></i><b>1.2</b> PrepaRándonos</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalación-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalación-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#materiales-anteriores-y-otras-cosas-a-tener-a-mano"><i class="fa fa-check"></i><b>1.2.3</b> Materiales anteriores y otras cosas a tener a mano</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#contactos"><i class="fa fa-check"></i><b>1.2.4</b> Contactos</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html"><i class="fa fa-check"></i><b>2</b> Repaso - dplyr y ggplot</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#bienvenidxs"><i class="fa fa-check"></i><b>2.1</b> Bienvenidxs!</a></li>
+<li class="chapter" data-level="2.2" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#medidas-resumen-y-exploratorias"><i class="fa fa-check"></i><b>2.2</b> Medidas resumen y exploratorias</a></li>
+<li class="chapter" data-level="2.3" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#dplyr"><i class="fa fa-check"></i><b>2.3</b> dplyr</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#seleccionar-select-renombrar-rename"><i class="fa fa-check"></i><b>2.3.1</b> %&gt;%, seleccionar (<strong>select</strong>), renombrar (<strong>rename</strong>)</a></li>
+<li class="chapter" data-level="2.3.2" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#resumir-summarise-por-grupos-group_by"><i class="fa fa-check"></i><b>2.3.2</b> Resumir (<strong>summarise</strong>) por grupos (<strong>group_by</strong>)</a></li>
+<li class="chapter" data-level="2.3.3" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#transformar-mutate-filtrar-filter-ordenar-arrange"><i class="fa fa-check"></i><b>2.3.3</b> Transformar (<strong>mutate</strong>), filtrar (<strong>filter</strong>), ordenar (<strong>arrange</strong>)</a></li>
+<li class="chapter" data-level="2.3.4" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#exportar"><i class="fa fa-check"></i><b>2.3.4</b> Exportar</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="repaso---dplyr-y-ggplot.html"><a href="repaso---dplyr-y-ggplot.html#ggplot"><i class="fa fa-check"></i><b>2.4</b> ggplot</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html"><i class="fa fa-check"></i><b>3</b> ggplot (continuación)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#de-barras-a-pirámides"><i class="fa fa-check"></i><b>3.1</b> De barras a pirámides</a></li>
+<li class="chapter" data-level="3.2" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#lexis"><i class="fa fa-check"></i><b>3.2</b> Lexis</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#actividad"><i class="fa fa-check"></i><b>3.2.1</b> Actividad</a></li>
+<li class="chapter" data-level="3.2.2" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#bonus"><i class="fa fa-check"></i><b>3.2.2</b> BONUS</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#mapas-temáticos"><i class="fa fa-check"></i><b>3.3</b> Mapas temáticos</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#actividad-1"><i class="fa fa-check"></i><b>3.3.1</b> Actividad</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p>Taller de R aplicado al Análisis Demográfico</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ggplot-continuación" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> ggplot (continuación)<a href="ggplot-continuación.html#ggplot-continuación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="de-barras-a-pirámides" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> De barras a pirámides<a href="ggplot-continuación.html#de-barras-a-pirámides" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Si quisiéramos ver el mismo gráfico que antes, pero separado por sexo,
+podemos usar las opciones de
+<a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">faceting</a> :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ggplot-continuación.html#cb1-1" tabindex="-1"></a>g_ned_sexo <span class="ot">&lt;-</span> eder_ned_sexo_long <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="ggplot-continuación.html#cb1-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> e_nivel_desc, <span class="at">y =</span> n, <span class="at">fill =</span> e_nivel_desc))<span class="sc">+</span></span>
+<span id="cb1-3"><a href="ggplot-continuación.html#cb1-3" tabindex="-1"></a>  <span class="fu">geom_col</span>()<span class="sc">+</span></span>
+<span id="cb1-4"><a href="ggplot-continuación.html#cb1-4" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb1-5"><a href="ggplot-continuación.html#cb1-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="ggplot-continuación.html#cb1-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb1-7"><a href="ggplot-continuación.html#cb1-7" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Nivel educativo&quot;</span>,</span>
+<span id="cb1-8"><a href="ggplot-continuación.html#cb1-8" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Poblacion por sexo y nivel educativo&quot;</span>,</span>
+<span id="cb1-9"><a href="ggplot-continuación.html#cb1-9" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">&quot;EDER CABA&quot;</span>,</span>
+<span id="cb1-10"><a href="ggplot-continuación.html#cb1-10" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Fuente: en base a IDECBA&quot;</span>,</span>
+<span id="cb1-11"><a href="ggplot-continuación.html#cb1-11" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">&quot;Nivel educativo&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="ggplot-continuación.html#cb1-12" tabindex="-1"></a>  <span class="fu">theme_dark</span>() <span class="sc">+</span></span>
+<span id="cb1-13"><a href="ggplot-continuación.html#cb1-13" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(Sexo)) <span class="co"># o cols?</span></span>
+<span id="cb1-14"><a href="ggplot-continuación.html#cb1-14" tabindex="-1"></a>g_ned_sexo</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>¿Podríamos mostrar las distribuciones al interior del total? ¡Claro!</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="ggplot-continuación.html#cb2-1" tabindex="-1"></a>g_ned_sexo_stack <span class="ot">&lt;-</span> eder_ned_sexo_long <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="ggplot-continuación.html#cb2-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sexo, <span class="at">y =</span> n, <span class="at">fill =</span> e_nivel_desc))<span class="sc">+</span></span>
+<span id="cb2-3"><a href="ggplot-continuación.html#cb2-3" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>)<span class="sc">+</span> <span class="co"># con este parámetro, se apilan</span></span>
+<span id="cb2-4"><a href="ggplot-continuación.html#cb2-4" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="ggplot-continuación.html#cb2-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;n&quot;</span>, </span>
+<span id="cb2-6"><a href="ggplot-continuación.html#cb2-6" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Sexo&quot;</span>,</span>
+<span id="cb2-7"><a href="ggplot-continuación.html#cb2-7" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Poblacion por sexo y nivel educativo&quot;</span>,</span>
+<span id="cb2-8"><a href="ggplot-continuación.html#cb2-8" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">&quot;EDER CABA&quot;</span>,</span>
+<span id="cb2-9"><a href="ggplot-continuación.html#cb2-9" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">&quot;Fuente: en base a IDECBA&quot;</span>,</span>
+<span id="cb2-10"><a href="ggplot-continuación.html#cb2-10" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="ggplot-continuación.html#cb2-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>()   </span>
+<span id="cb2-12"><a href="ggplot-continuación.html#cb2-12" tabindex="-1"></a>g_ned_sexo_stack</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Quizás si fuera un gráfico interactivo… Un bonus track utilzando
+<a href="https://plot.ly/ggplot2/">plotly</a>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ggplot-continuación.html#cb3-1" tabindex="-1"></a><span class="co">#install.packages(&quot;plotly&quot;)</span></span>
+<span id="cb3-2"><a href="ggplot-continuación.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb3-3"><a href="ggplot-continuación.html#cb3-3" tabindex="-1"></a>g_ned_sexo_plotly <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(g_ned_sexo_stack <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">text =</span> n), <span class="at">tooltip=</span> <span class="st">&quot;text&quot;</span>) </span>
+<span id="cb3-4"><a href="ggplot-continuación.html#cb3-4" tabindex="-1"></a>g_ned_sexo_plotly</span></code></pre></div>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-01c01f9276a757520896" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-01c01f9276a757520896">{"x":{"data":[{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1744,1750],"x":[1,2],"y":[12,6],"text":[" 12","  6"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"No corresponde/escuelas especiales","legendgroup":"No corresponde/escuelas especiales","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1656,1665],"x":[1,2],"y":[88,85],"text":[" 88"," 85"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(211,146,0,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Inicial","legendgroup":"Inicial","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1463,1425],"x":[1,2],"y":[193,240],"text":["193","240"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(147,170,0,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Primario incompleto","legendgroup":"Primario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1344,1324],"x":[1,2],"y":[119,101],"text":["119","101"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Primario completo","legendgroup":"Primario completo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1044,963],"x":[1,2],"y":[300,361],"text":["300","361"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,159,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Secundario incompleto","legendgroup":"Secundario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[779,733],"x":[1,2],"y":[265,230],"text":["265","230"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,185,227,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Secundario completo","legendgroup":"Secundario completo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[520,436],"x":[1,2],"y":[259,297],"text":["259","297"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Superior / Universitario incompleto","legendgroup":"Superior / Universitario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[33,30],"x":[1,2],"y":[487,406],"text":["487","406"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(219,114,251,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Superior / Universitario completo y mas","legendgroup":"Superior / Universitario completo y mas","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[0,0],"x":[1,2],"y":[33,30],"text":[" 33"," 30"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,97,195,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Sin instruccion","legendgroup":"Sin instruccion","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.762557077625573,"r":7.3059360730593621,"b":40.182648401826491,"l":48.949771689497723},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Poblacion por sexo y nivel educativo","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,2.6000000000000001],"tickmode":"array","ticktext":["Mujer","Varon"],"tickvals":[1,2],"categoryorder":"array","categoryarray":["Mujer","Varon"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"y","title":{"text":"Sexo","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-87.800000000000011,1843.8],"tickmode":"array","ticktext":[0,500,1000,1500],"tickvals":[0,499.99999999999994,1000,1500],"categoryorder":"array","categoryarray":[0,500,1000,1500],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.66417600664176002,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176002,"zeroline":false,"anchor":"x","title":{"text":"n","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176002,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"50e45fc61ac8":{"text":{},"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"50e45fc61ac8","visdat":{"50e45fc61ac8":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Obtengamos la población censal de los dos últimos censos a nivel
+nacional, disponible en el archivo “pob_censo2010y2022.xlsx”. Vamos a
+armar, paso a paso, la pirámide del censo 2022, empezando por factorizar
+la variable <code>Edad</code> para que quede ordenada.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ggplot-continuación.html#cb4-1" tabindex="-1"></a>N_Censo <span class="ot">&lt;-</span> N_Censo <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="ggplot-continuación.html#cb4-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Edad =</span> <span class="fu">factor</span>(Edad,</span>
+<span id="cb4-3"><a href="ggplot-continuación.html#cb4-3" tabindex="-1"></a>                       <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Total&quot;</span>,</span>
+<span id="cb4-4"><a href="ggplot-continuación.html#cb4-4" tabindex="-1"></a>                                  <span class="st">&quot;0-4&quot;</span>,</span>
+<span id="cb4-5"><a href="ggplot-continuación.html#cb4-5" tabindex="-1"></a>                                  <span class="st">&quot;5-9&quot;</span>,</span>
+<span id="cb4-6"><a href="ggplot-continuación.html#cb4-6" tabindex="-1"></a>                                  <span class="st">&quot;10-14&quot;</span>,</span>
+<span id="cb4-7"><a href="ggplot-continuación.html#cb4-7" tabindex="-1"></a>                                  <span class="st">&quot;15-19&quot;</span>,</span>
+<span id="cb4-8"><a href="ggplot-continuación.html#cb4-8" tabindex="-1"></a>                                  <span class="st">&quot;20-24&quot;</span>,</span>
+<span id="cb4-9"><a href="ggplot-continuación.html#cb4-9" tabindex="-1"></a>                                  <span class="st">&quot;25-29&quot;</span>,</span>
+<span id="cb4-10"><a href="ggplot-continuación.html#cb4-10" tabindex="-1"></a>                                  <span class="st">&quot;30-34&quot;</span>,</span>
+<span id="cb4-11"><a href="ggplot-continuación.html#cb4-11" tabindex="-1"></a>                                  <span class="st">&quot;35-39&quot;</span>,</span>
+<span id="cb4-12"><a href="ggplot-continuación.html#cb4-12" tabindex="-1"></a>                                  <span class="st">&quot;40-44&quot;</span>,</span>
+<span id="cb4-13"><a href="ggplot-continuación.html#cb4-13" tabindex="-1"></a>                                  <span class="st">&quot;45-49&quot;</span>,</span>
+<span id="cb4-14"><a href="ggplot-continuación.html#cb4-14" tabindex="-1"></a>                                  <span class="st">&quot;50-54&quot;</span>,</span>
+<span id="cb4-15"><a href="ggplot-continuación.html#cb4-15" tabindex="-1"></a>                                  <span class="st">&quot;55-59&quot;</span>,</span>
+<span id="cb4-16"><a href="ggplot-continuación.html#cb4-16" tabindex="-1"></a>                                  <span class="st">&quot;60-64&quot;</span>,</span>
+<span id="cb4-17"><a href="ggplot-continuación.html#cb4-17" tabindex="-1"></a>                                  <span class="st">&quot;65-69&quot;</span>,</span>
+<span id="cb4-18"><a href="ggplot-continuación.html#cb4-18" tabindex="-1"></a>                                  <span class="st">&quot;70-74&quot;</span>,</span>
+<span id="cb4-19"><a href="ggplot-continuación.html#cb4-19" tabindex="-1"></a>                                  <span class="st">&quot;75-79&quot;</span>,</span>
+<span id="cb4-20"><a href="ggplot-continuación.html#cb4-20" tabindex="-1"></a>                                  <span class="st">&quot;80-84&quot;</span>,</span>
+<span id="cb4-21"><a href="ggplot-continuación.html#cb4-21" tabindex="-1"></a>                                  <span class="st">&quot;85-89&quot;</span>,</span>
+<span id="cb4-22"><a href="ggplot-continuación.html#cb4-22" tabindex="-1"></a>                                  <span class="st">&quot;90-94&quot;</span>,</span>
+<span id="cb4-23"><a href="ggplot-continuación.html#cb4-23" tabindex="-1"></a>                                  <span class="st">&quot;95-99&quot;</span>,</span>
+<span id="cb4-24"><a href="ggplot-continuación.html#cb4-24" tabindex="-1"></a>                                  <span class="st">&quot;100 y más&quot;</span>)))</span></code></pre></div>
+<p>Quedémonos con el año 2022 y la distribución por sexo y empecemos a
+graficar</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ggplot-continuación.html#cb5-1" tabindex="-1"></a>N_Censo22 <span class="ot">&lt;-</span> N_Censo <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="ggplot-continuación.html#cb5-2" tabindex="-1"></a>  <span class="fu">filter</span>(Anio <span class="sc">==</span> <span class="dv">2022</span>,</span>
+<span id="cb5-3"><a href="ggplot-continuación.html#cb5-3" tabindex="-1"></a>         Edad <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>,</span>
+<span id="cb5-4"><a href="ggplot-continuación.html#cb5-4" tabindex="-1"></a>         Sexo <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb5-5"><a href="ggplot-continuación.html#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="ggplot-continuación.html#cb5-6" tabindex="-1"></a>Pir_ER <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> N_Censo22, </span>
+<span id="cb5-7"><a href="ggplot-continuación.html#cb5-7" tabindex="-1"></a>                <span class="fu">aes</span>(<span class="at">x =</span> Edad, <span class="at">y =</span> <span class="fu">ifelse</span>(Sexo <span class="sc">==</span> <span class="st">&quot;Varon&quot;</span>, <span class="sc">-</span>n, n), </span>
+<span id="cb5-8"><a href="ggplot-continuación.html#cb5-8" tabindex="-1"></a>                    <span class="at">fill =</span> Sexo)) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="ggplot-continuación.html#cb5-9" tabindex="-1"></a>                <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="co"># que ggplot no trate de contar cual histograma</span></span>
+<span id="cb5-10"><a href="ggplot-continuación.html#cb5-10" tabindex="-1"></a>Pir_ER</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Hay que dar vuelta (<em>flip</em>) la pirámide. ¿Se acuerdan cómo? Podemos
+hacerle unos cambios adicionales de paso: fijar los límites horizontales
+y mostrar solo absolutos, incluir titulo, subtítulo y fuente, cambiar
+las etiquetas de ambos ejes, incluir un <em>tema</em> distinto y cambiar el
+color de las barras.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="ggplot-continuación.html#cb6-1" tabindex="-1"></a>Pir_ER <span class="ot">&lt;-</span> Pir_ER <span class="sc">+</span></span>
+<span id="cb6-2"><a href="ggplot-continuación.html#cb6-2" tabindex="-1"></a>            <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># Volteamos la pirámide</span></span>
+<span id="cb6-3"><a href="ggplot-continuación.html#cb6-3" tabindex="-1"></a>            <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs  <span class="co"># Que muestre absolutos (sin negativos)</span></span>
+<span id="cb6-4"><a href="ggplot-continuación.html#cb6-4" tabindex="-1"></a>                               ) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="ggplot-continuación.html#cb6-5" tabindex="-1"></a>            <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Población&quot;</span>, </span>
+<span id="cb6-6"><a href="ggplot-continuación.html#cb6-6" tabindex="-1"></a>                 <span class="at">x =</span> <span class="st">&quot;Edad&quot;</span>,</span>
+<span id="cb6-7"><a href="ggplot-continuación.html#cb6-7" tabindex="-1"></a>                 <span class="at">title =</span> <span class="st">&quot;Pirámide de población. Año 2022&quot;</span>,</span>
+<span id="cb6-8"><a href="ggplot-continuación.html#cb6-8" tabindex="-1"></a>                 <span class="at">subtitle =</span> <span class="st">&quot;Total del país&quot;</span>,</span>
+<span id="cb6-9"><a href="ggplot-continuación.html#cb6-9" tabindex="-1"></a>                 <span class="at">caption =</span> <span class="st">&quot;Fuente: en base a INDEC&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="ggplot-continuación.html#cb6-10" tabindex="-1"></a>            <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;aquamarine4&quot;</span>, <span class="st">&quot;purple&quot;</span>)) <span class="sc">+</span> <span class="co"># Defino los colores del parámetro fill (Sexo)</span></span>
+<span id="cb6-11"><a href="ggplot-continuación.html#cb6-11" tabindex="-1"></a>            <span class="fu">theme_bw</span>()</span>
+<span id="cb6-12"><a href="ggplot-continuación.html#cb6-12" tabindex="-1"></a>Pir_ER  </span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Probablemente querramos comparar años. Volvamos a utilizar el
+<code>data.frame</code> de los 2 años.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ggplot-continuación.html#cb7-1" tabindex="-1"></a>Pirs <span class="ot">&lt;-</span> N_Censo <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="ggplot-continuación.html#cb7-2" tabindex="-1"></a>  <span class="fu">filter</span>(Edad <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>,</span>
+<span id="cb7-3"><a href="ggplot-continuación.html#cb7-3" tabindex="-1"></a>         Sexo <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="ggplot-continuación.html#cb7-4" tabindex="-1"></a>                <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Edad, <span class="at">y =</span> <span class="fu">ifelse</span>(Sexo <span class="sc">==</span> <span class="st">&quot;Varon&quot;</span>, <span class="sc">-</span>n, n), <span class="at">fill =</span> Sexo)) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="ggplot-continuación.html#cb7-5" tabindex="-1"></a>                <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="ggplot-continuación.html#cb7-6" tabindex="-1"></a>                <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb7-7"><a href="ggplot-continuación.html#cb7-7" tabindex="-1"></a>                <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="ggplot-continuación.html#cb7-8" tabindex="-1"></a>                <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Población&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Edad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="ggplot-continuación.html#cb7-9" tabindex="-1"></a>                <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Pirámide de población.&quot;</span>,</span>
+<span id="cb7-10"><a href="ggplot-continuación.html#cb7-10" tabindex="-1"></a>                  <span class="at">subtitle =</span> <span class="st">&quot;Años 2010 y 2022&quot;</span>,</span>
+<span id="cb7-11"><a href="ggplot-continuación.html#cb7-11" tabindex="-1"></a>                  <span class="at">caption =</span> <span class="st">&quot;Fuente: INDEC&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="ggplot-continuación.html#cb7-12" tabindex="-1"></a>                <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;aquamarine4&quot;</span>, <span class="st">&quot;purple&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="ggplot-continuación.html#cb7-13" tabindex="-1"></a>                <span class="fu">theme_grey</span>() <span class="sc">+</span></span>
+<span id="cb7-14"><a href="ggplot-continuación.html#cb7-14" tabindex="-1"></a>                <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(Anio)) <span class="co"># o cols?</span></span>
+<span id="cb7-15"><a href="ggplot-continuación.html#cb7-15" tabindex="-1"></a>Pirs</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Utilicé dos veces <code>labs</code>! Es posible porque <code>ggplot</code> funciona sumando
+elementos. ¿El gráfico nos permite inferir estadíos transicionales?
+Mmm… Deberíamos verlo en porcentajes. Todo en una sentencia:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="ggplot-continuación.html#cb8-1" tabindex="-1"></a>PirsPorc <span class="ot">&lt;-</span> N_Censo <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="ggplot-continuación.html#cb8-2" tabindex="-1"></a>  <span class="fu">filter</span>(Edad <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>,</span>
+<span id="cb8-3"><a href="ggplot-continuación.html#cb8-3" tabindex="-1"></a>         Sexo <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="ggplot-continuación.html#cb8-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Anio, Sexo) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="ggplot-continuación.html#cb8-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">np =</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="fu">sum</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>))<span class="sc">%&gt;%</span> </span>
+<span id="cb8-6"><a href="ggplot-continuación.html#cb8-6" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="ggplot-continuación.html#cb8-7" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Edad, <span class="at">y =</span> <span class="fu">ifelse</span>(Sexo <span class="sc">==</span> <span class="st">&quot;Varon&quot;</span>, <span class="sc">-</span>np, np), <span class="at">fill =</span> Sexo) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="ggplot-continuación.html#cb8-8" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="ggplot-continuación.html#cb8-9" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb8-10"><a href="ggplot-continuación.html#cb8-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="ggplot-continuación.html#cb8-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Porcentaje de población&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Edad&quot;</span>,</span>
+<span id="cb8-12"><a href="ggplot-continuación.html#cb8-12" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Pirámide de población.&quot;</span>,</span>
+<span id="cb8-13"><a href="ggplot-continuación.html#cb8-13" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Años 2010 y 2022&quot;</span>,</span>
+<span id="cb8-14"><a href="ggplot-continuación.html#cb8-14" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Fuente: INDEC&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="ggplot-continuación.html#cb8-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb8-16"><a href="ggplot-continuación.html#cb8-16" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span><span class="fu">c</span>(<span class="st">&quot;aquamarine4&quot;</span>, <span class="st">&quot;purple&quot;</span>))<span class="sc">+</span></span>
+<span id="cb8-17"><a href="ggplot-continuación.html#cb8-17" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">cols =</span> <span class="fu">vars</span>(Anio))</span>
+<span id="cb8-18"><a href="ggplot-continuación.html#cb8-18" tabindex="-1"></a>PirsPorc</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Podemos aprovechar la diferencia entre <code>fill</code> y <code>color</code> para poner una
+encima de la otra, pero tenemos que transformar los años a columnas</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ggplot-continuación.html#cb9-1" tabindex="-1"></a>N_Censo_p <span class="ot">&lt;-</span> N_Censo <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="ggplot-continuación.html#cb9-2" tabindex="-1"></a>  <span class="fu">filter</span>(Edad <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>,</span>
+<span id="cb9-3"><a href="ggplot-continuación.html#cb9-3" tabindex="-1"></a>         Sexo <span class="sc">!=</span> <span class="st">&quot;Total&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="ggplot-continuación.html#cb9-4" tabindex="-1"></a>  <span class="fu">group_by</span>(Anio, Sexo) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-5"><a href="ggplot-continuación.html#cb9-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">np =</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="fu">sum</span>(n)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>))<span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="ggplot-continuación.html#cb9-6" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="ggplot-continuación.html#cb9-7" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Anio,</span>
+<span id="cb9-8"><a href="ggplot-continuación.html#cb9-8" tabindex="-1"></a>              <span class="at">values_from =</span> np)</span>
+<span id="cb9-9"><a href="ggplot-continuación.html#cb9-9" tabindex="-1"></a>  </span>
+<span id="cb9-10"><a href="ggplot-continuación.html#cb9-10" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="ggplot-continuación.html#cb9-11" tabindex="-1"></a> Pir_Sup <span class="ot">&lt;-</span> N_Censo_p <span class="sc">%&gt;%</span>  </span>
+<span id="cb9-12"><a href="ggplot-continuación.html#cb9-12" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb9-13"><a href="ggplot-continuación.html#cb9-13" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> Edad, <span class="at">y =</span> <span class="fu">ifelse</span>(Sexo <span class="sc">==</span> <span class="st">&quot;Varon&quot;</span>, <span class="sc">-</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>, <span class="st">`</span><span class="at">2022</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="ggplot-continuación.html#cb9-14" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Sexo),</span>
+<span id="cb9-15"><a href="ggplot-continuación.html#cb9-15" tabindex="-1"></a>           <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>,</span>
+<span id="cb9-16"><a href="ggplot-continuación.html#cb9-16" tabindex="-1"></a>           <span class="at">alpha =</span> .<span class="dv">7</span>) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="ggplot-continuación.html#cb9-17" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">ifelse</span>(Sexo <span class="sc">==</span> <span class="st">&quot;Varon&quot;</span>, <span class="sc">-</span><span class="st">`</span><span class="at">2010</span><span class="st">`</span>, <span class="st">`</span><span class="at">2010</span><span class="st">`</span>),</span>
+<span id="cb9-18"><a href="ggplot-continuación.html#cb9-18" tabindex="-1"></a>               <span class="at">color =</span> Sexo),</span>
+<span id="cb9-19"><a href="ggplot-continuación.html#cb9-19" tabindex="-1"></a>           <span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>,</span>
+<span id="cb9-20"><a href="ggplot-continuación.html#cb9-20" tabindex="-1"></a>           <span class="at">linewidth =</span> <span class="dv">1</span>,</span>
+<span id="cb9-21"><a href="ggplot-continuación.html#cb9-21" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">&quot;transparent&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-22"><a href="ggplot-continuación.html#cb9-22" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb9-23"><a href="ggplot-continuación.html#cb9-23" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb9-24"><a href="ggplot-continuación.html#cb9-24" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Porcentaje de población&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Edad&quot;</span>,</span>
+<span id="cb9-25"><a href="ggplot-continuación.html#cb9-25" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Pirámide de población.&quot;</span>,</span>
+<span id="cb9-26"><a href="ggplot-continuación.html#cb9-26" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Años 2010 y 2022&quot;</span>,</span>
+<span id="cb9-27"><a href="ggplot-continuación.html#cb9-27" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Fuente: INDEC&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-28"><a href="ggplot-continuación.html#cb9-28" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb9-29"><a href="ggplot-continuación.html#cb9-29" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span><span class="fu">c</span>(<span class="st">&quot;aquamarine4&quot;</span>, <span class="st">&quot;purple&quot;</span>), <span class="at">name =</span> <span class="st">&quot;2022&quot;</span>)<span class="sc">+</span></span>
+<span id="cb9-30"><a href="ggplot-continuación.html#cb9-30" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span><span class="fu">c</span>(<span class="st">&quot;aquamarine&quot;</span>, <span class="st">&quot;magenta&quot;</span>), <span class="at">name =</span> <span class="st">&quot;2010&quot;</span>)</span>
+<span id="cb9-31"><a href="ggplot-continuación.html#cb9-31" tabindex="-1"></a> </span>
+<span id="cb9-32"><a href="ggplot-continuación.html#cb9-32" tabindex="-1"></a> Pir_Sup</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>¡Ahora sí! Estamos en condiciones de percibir visualmente qué nos dice
+el stock por edad y sexo: envejecimiento, efecto migratorio, patrones de
+declaración censal de edad. ¿Qué más?</p>
+</div>
+<div id="lexis" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Lexis<a href="ggplot-continuación.html#lexis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Gráfico útil para representar la dinámica poblacional de <em>ingreso</em> y
+<em>permanencia</em> en un estadío demográfico según edad, tiempo calendario (o
+período) y año de nacimiento (o cohorte). Su aplicación más común es en
+mortalidad, pero es generalizable a la relación exposición~evento con
+múltiples
+<a href="https://apuntesdedemografia.com/curso-de-demografia/temario/tema-2-generalidades/el-diagrama-de-lexis/">usos</a>.<br />
+<img src="figs/LexisPreston.png" width="500" alt="Fuente: Preston et. al (2001)" /></p>
+<p>Los elementos principales de análisis son:</p>
+<ul>
+<li>Líneas de vida (45°)<br />
+</li>
+<li>Segmentos horizontales y verticales<br />
+</li>
+<li>Superficies</li>
+</ul>
+<p><img src="figs/LexisElements.png" /></p>
+<p>Ejemplo de uso del diagrama utilizando R:</p>
+<ul>
+<li>Mortalidad por conflictos armados (replicable): <img src="figs/AlburezLexis.jpg" alt="Fuente: Alburez et. al (2019)" /> Fuente: Alburez et. al (2019)</li>
+</ul>
+<p>Construyamos el diagrama básico del inicio. Para eso haremos uso del
+paquete <a href="https://github.com/ottlngr/LexisPlotR">LexisPlotR</a> creado por
+Philipp Ottolinger (gracias Otto). Construyó un set de funciones basadas
+en <em>ggplot</em> que facilita la creación de diagramas haciéndolo un
+ejercicio intuitivo.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="ggplot-continuación.html#cb10-1" tabindex="-1"></a><span class="co"># Si el paquete no está disponible en CRAN, podemos instalarlo desde GitHub</span></span>
+<span id="cb10-2"><a href="ggplot-continuación.html#cb10-2" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb10-3"><a href="ggplot-continuación.html#cb10-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;ottlngr/LexisPlotR&quot;)</span></span>
+<span id="cb10-4"><a href="ggplot-continuación.html#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="ggplot-continuación.html#cb10-5" tabindex="-1"></a><span class="fu">library</span>(LexisPlotR)  <span class="co"># Paquete específico para construir diagramas de Lexis</span></span>
+<span id="cb10-6"><a href="ggplot-continuación.html#cb10-6" tabindex="-1"></a><span class="fu">library</span>(tidyverse)   <span class="co"># Para manipular datos y utilizar funciones de ggplot2</span></span>
+<span id="cb10-7"><a href="ggplot-continuación.html#cb10-7" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="ggplot-continuación.html#cb10-8" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="ggplot-continuación.html#cb10-9" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="ggplot-continuación.html#cb10-10" tabindex="-1"></a><span class="co"># 1. Creamos el objeto &quot;mylexis&quot;, que define el marco temporal del diagrama.</span></span>
+<span id="cb10-11"><a href="ggplot-continuación.html#cb10-11" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="ggplot-continuación.html#cb10-12" tabindex="-1"></a><span class="co"># En este caso: años calendario 2010-2019 y edades 0-10 años.</span></span>
+<span id="cb10-13"><a href="ggplot-continuación.html#cb10-13" tabindex="-1"></a><span class="co"># Podríamos especificar un “delta” si quisiéramos mostrar grupos quinquenales, por ejemplo.</span></span>
+<span id="cb10-14"><a href="ggplot-continuación.html#cb10-14" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_grid</span>(<span class="at">year_start =</span> <span class="dv">2010</span>, <span class="at">year_end =</span> <span class="dv">2019</span>, </span>
+<span id="cb10-15"><a href="ggplot-continuación.html#cb10-15" tabindex="-1"></a>                      <span class="at">age_start =</span> <span class="dv">0</span>, <span class="at">age_end =</span> <span class="dv">10</span>)</span>
+<span id="cb10-16"><a href="ggplot-continuación.html#cb10-16" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="ggplot-continuación.html#cb10-17" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="ggplot-continuación.html#cb10-18" tabindex="-1"></a><span class="co"># 2. Elementos básicos</span></span>
+<span id="cb10-19"><a href="ggplot-continuación.html#cb10-19" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="ggplot-continuación.html#cb10-20" tabindex="-1"></a><span class="co"># Resaltamos una edad específica: 2 años</span></span>
+<span id="cb10-21"><a href="ggplot-continuación.html#cb10-21" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_age</span>(<span class="at">lg =</span> mylexis, <span class="at">age =</span> <span class="dv">2</span>)</span>
+<span id="cb10-22"><a href="ggplot-continuación.html#cb10-22" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="ggplot-continuación.html#cb10-23" tabindex="-1"></a><span class="co"># Resaltamos un año calendario: 2015</span></span>
+<span id="cb10-24"><a href="ggplot-continuación.html#cb10-24" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_year</span>(<span class="at">lg =</span> mylexis, <span class="at">year =</span> <span class="dv">2015</span>, <span class="at">fill =</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb10-25"><a href="ggplot-continuación.html#cb10-25" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="ggplot-continuación.html#cb10-26" tabindex="-1"></a><span class="co"># Resaltamos la cohorte de 2015 (línea diagonal)</span></span>
+<span id="cb10-27"><a href="ggplot-continuación.html#cb10-27" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_cohort</span>(<span class="at">lg =</span> mylexis, <span class="at">cohort =</span> <span class="dv">2015</span>)</span>
+<span id="cb10-28"><a href="ggplot-continuación.html#cb10-28" tabindex="-1"></a></span>
+<span id="cb10-29"><a href="ggplot-continuación.html#cb10-29" tabindex="-1"></a><span class="co"># Una línea de vida, ¡elemento fundamental del diagrama!</span></span>
+<span id="cb10-30"><a href="ggplot-continuación.html#cb10-30" tabindex="-1"></a><span class="co">#Representa cómo aumenta la edad con el paso de los años calendario</span></span>
+<span id="cb10-31"><a href="ggplot-continuación.html#cb10-31" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_lifeline</span>(<span class="at">lg =</span> mylexis, <span class="at">birth =</span> <span class="st">&quot;2001-09-23&quot;</span>, </span>
+<span id="cb10-32"><a href="ggplot-continuación.html#cb10-32" tabindex="-1"></a>                          <span class="at">lwd =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">&quot;pink&quot;</span>)</span>
+<span id="cb10-33"><a href="ggplot-continuación.html#cb10-33" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="ggplot-continuación.html#cb10-34" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="ggplot-continuación.html#cb10-35" tabindex="-1"></a><span class="co"># Al ser un objeto ggplot, podemos incorporarle atributos, como el título o etiquetas</span></span>
+<span id="cb10-36"><a href="ggplot-continuación.html#cb10-36" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> mylexis <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Año&quot;</span>, </span>
+<span id="cb10-37"><a href="ggplot-continuación.html#cb10-37" tabindex="-1"></a>                          <span class="at">y =</span> <span class="st">&quot;Edad&quot;</span>, </span>
+<span id="cb10-38"><a href="ggplot-continuación.html#cb10-38" tabindex="-1"></a>                          <span class="at">title =</span> <span class="st">&quot;Diagrama de Lexis. Elementos de análisis&quot;</span>)</span>
+<span id="cb10-39"><a href="ggplot-continuación.html#cb10-39" tabindex="-1"></a></span>
+<span id="cb10-40"><a href="ggplot-continuación.html#cb10-40" tabindex="-1"></a></span>
+<span id="cb10-41"><a href="ggplot-continuación.html#cb10-41" tabindex="-1"></a><span class="co"># 3. Polígonos: cuadrado y triángulo</span></span>
+<span id="cb10-42"><a href="ggplot-continuación.html#cb10-42" tabindex="-1"></a></span>
+<span id="cb10-43"><a href="ggplot-continuación.html#cb10-43" tabindex="-1"></a><span class="co"># Para crear polígonos, el autor se basa en la geometría &quot;geom_polygon&quot;. Creamos un cuadrado. </span></span>
+<span id="cb10-44"><a href="ggplot-continuación.html#cb10-44" tabindex="-1"></a><span class="co">#El orden de los datos es importante. Además podemos crear muchos polígonos al mismo tiempo señalando los grupos.</span></span>
+<span id="cb10-45"><a href="ggplot-continuación.html#cb10-45" tabindex="-1"></a><span class="co"># Ejemplo: creamos un cuadrado que abarca entre los años 2012 y 2013, y edades 4 a 5.</span></span>
+<span id="cb10-46"><a href="ggplot-continuación.html#cb10-46" tabindex="-1"></a>square <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-47"><a href="ggplot-continuación.html#cb10-47" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb10-48"><a href="ggplot-continuación.html#cb10-48" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;2012-01-01&quot;</span>, <span class="st">&quot;2012-01-01&quot;</span>, <span class="st">&quot;2013-01-01&quot;</span>, <span class="st">&quot;2013-01-01&quot;</span>),</span>
+<span id="cb10-49"><a href="ggplot-continuación.html#cb10-49" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>)</span>
+<span id="cb10-50"><a href="ggplot-continuación.html#cb10-50" tabindex="-1"></a>)</span>
+<span id="cb10-51"><a href="ggplot-continuación.html#cb10-51" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="ggplot-continuación.html#cb10-52" tabindex="-1"></a><span class="co"># Lo agregamos al diagrama</span></span>
+<span id="cb10-53"><a href="ggplot-continuación.html#cb10-53" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_polygon</span>(<span class="at">lg =</span> mylexis, </span>
+<span id="cb10-54"><a href="ggplot-continuación.html#cb10-54" tabindex="-1"></a>                         <span class="at">x =</span> square<span class="sc">$</span>x, <span class="at">y =</span> square<span class="sc">$</span>y, </span>
+<span id="cb10-55"><a href="ggplot-continuación.html#cb10-55" tabindex="-1"></a>                         <span class="at">group =</span> square<span class="sc">$</span>group)</span>
+<span id="cb10-56"><a href="ggplot-continuación.html#cb10-56" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="ggplot-continuación.html#cb10-57" tabindex="-1"></a></span>
+<span id="cb10-58"><a href="ggplot-continuación.html#cb10-58" tabindex="-1"></a></span>
+<span id="cb10-59"><a href="ggplot-continuación.html#cb10-59" tabindex="-1"></a><span class="co"># Creamos el triángulo. ¿A qué refiere?</span></span>
+<span id="cb10-60"><a href="ggplot-continuación.html#cb10-60" tabindex="-1"></a>triangle <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb10-61"><a href="ggplot-continuación.html#cb10-61" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb10-62"><a href="ggplot-continuación.html#cb10-62" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;2017-01-01&quot;</span>, <span class="st">&quot;2018-01-01&quot;</span>, <span class="st">&quot;2018-01-01&quot;</span>),</span>
+<span id="cb10-63"><a href="ggplot-continuación.html#cb10-63" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">7</span>)</span>
+<span id="cb10-64"><a href="ggplot-continuación.html#cb10-64" tabindex="-1"></a>)</span>
+<span id="cb10-65"><a href="ggplot-continuación.html#cb10-65" tabindex="-1"></a></span>
+<span id="cb10-66"><a href="ggplot-continuación.html#cb10-66" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_polygon</span>(<span class="at">lg =</span> mylexis, </span>
+<span id="cb10-67"><a href="ggplot-continuación.html#cb10-67" tabindex="-1"></a>                         <span class="at">x =</span> triangle<span class="sc">$</span>x, <span class="at">y =</span> triangle<span class="sc">$</span>y, </span>
+<span id="cb10-68"><a href="ggplot-continuación.html#cb10-68" tabindex="-1"></a>                         <span class="at">group =</span> triangle<span class="sc">$</span>group)</span>
+<span id="cb10-69"><a href="ggplot-continuación.html#cb10-69" tabindex="-1"></a></span>
+<span id="cb10-70"><a href="ggplot-continuación.html#cb10-70" tabindex="-1"></a><span class="co"># Imprimimos!</span></span>
+<span id="cb10-71"><a href="ggplot-continuación.html#cb10-71" tabindex="-1"></a>mylexis</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Adicionalmente, si trabajamos con población donde la exposición puede
+ser truncada (por derecha o izquierda), podemos graficar líneas de vida
+que respeten ese comportamiento. También podemos señalar con una cruz la
+ocurrencia del evento de salida que se estudia.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="ggplot-continuación.html#cb11-1" tabindex="-1"></a><span class="co"># Ejemplo: trayectoria educativa en el diagrama de Lexis</span></span>
+<span id="cb11-2"><a href="ggplot-continuación.html#cb11-2" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="ggplot-continuación.html#cb11-3" tabindex="-1"></a><span class="co"># ingresa al estudio sobre deserción escolar en el año 2012 un niño/a nacido en el año 2005, #abandonando el colegio a los 9 años de edad:</span></span>
+<span id="cb11-4"><a href="ggplot-continuación.html#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="ggplot-continuación.html#cb11-5" tabindex="-1"></a>mylexis <span class="ot">&lt;-</span> <span class="fu">lexis_lifeline</span>(<span class="at">lg =</span> mylexis, </span>
+<span id="cb11-6"><a href="ggplot-continuación.html#cb11-6" tabindex="-1"></a>                          <span class="at">birth =</span> <span class="st">&quot;2005-09-23&quot;</span>,   <span class="co"># fecha de nacimiento</span></span>
+<span id="cb11-7"><a href="ggplot-continuación.html#cb11-7" tabindex="-1"></a>                          <span class="at">entry =</span> <span class="st">&quot;2012-06-11&quot;</span>,   <span class="co"># fecha en que entra al estudio (inicio del seguimiento)</span></span>
+<span id="cb11-8"><a href="ggplot-continuación.html#cb11-8" tabindex="-1"></a>                          <span class="at">exit  =</span> <span class="st">&quot;2015-02-27&quot;</span>,   <span class="co"># fecha en que deja de ser observado (abandono)</span></span>
+<span id="cb11-9"><a href="ggplot-continuación.html#cb11-9" tabindex="-1"></a>                          <span class="at">lineends =</span> <span class="cn">TRUE</span>,        <span class="co"># agrega marcas visibles en los extremos de la línea</span></span>
+<span id="cb11-10"><a href="ggplot-continuación.html#cb11-10" tabindex="-1"></a>                          <span class="at">colour =</span> <span class="st">&quot;red&quot;</span>)         <span class="co"># color de la línea</span></span>
+<span id="cb11-11"><a href="ggplot-continuación.html#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="ggplot-continuación.html#cb11-12" tabindex="-1"></a>mylexis</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Para incluir triángulos y cuadriláteros se utiliza
+<a href="https://ggplot2.tidyverse.org/reference/geom_polygon.html">geom_polygon</a>.
+Para dar superficie se utiliza
+<a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a>.
+Para esto último un gran tutorial de <a href="https://timriffe.github.io/DemoTutorials/LexisSurface">Tim
+Riffe</a>.</p>
+<div id="actividad" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Actividad<a href="ggplot-continuación.html#actividad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li><p>Crear un diagrama de Lexis e incluir en distintos colores líneas de vida de
+las 3 personas más jóvenes que conozcas.</p></li>
+<li><p>Agregar 2 líneas de vida truncadas: simular la trayectoria de 2 personas que ingresan y salen de un estudio en distintos momentos.</p></li>
+<li><p>Resaltar un año y una cohorte (usando lexis_year y lexis_cohort)</p></li>
+</ol>
+</div>
+<div id="bonus" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> BONUS<a href="ggplot-continuación.html#bonus" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Detrás de Lexis está <code>ggplot</code>!</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="ggplot-continuación.html#cb12-1" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-2"><a href="ggplot-continuación.html#cb12-2" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">2011</span>, <span class="at">y =</span> <span class="dv">5</span>, <span class="at">xend =</span> <span class="dv">2015</span>, <span class="at">yend =</span> <span class="dv">9</span>), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">1</span>)<span class="sc">+</span> </span>
+<span id="cb12-3"><a href="ggplot-continuación.html#cb12-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="dv">2015</span>, <span class="at">y=</span><span class="dv">9</span>),<span class="at">shape=</span><span class="dv">4</span>,<span class="at">size=</span><span class="dv">2</span>,<span class="at">col=</span><span class="dv">4</span>)<span class="sc">+</span> <span class="co"># Agrega un punto al final del segmento (año 2015, edad 9)</span></span>
+<span id="cb12-4"><a href="ggplot-continuación.html#cb12-4" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span>   <span class="co"># Mantiene la misma escala en ambos ejes (aspecto cuadrado)</span></span>
+<span id="cb12-5"><a href="ggplot-continuación.html#cb12-5" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="ggplot-continuación.html#cb12-6" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="ggplot-continuación.html#cb12-7" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span>, <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, <span class="at">size=</span>.<span class="dv">15</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb12-8"><a href="ggplot-continuación.html#cb12-8" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, <span class="at">size=</span>.<span class="dv">15</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="ggplot-continuación.html#cb12-9" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2020</span>, <span class="sc">-</span><span class="dv">2000</span>, <span class="at">by=</span><span class="dv">1</span>), <span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color=</span><span class="st">&quot;grey&quot;</span>, <span class="at">size=</span>.<span class="dv">15</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>)<span class="sc">+</span></span>
+<span id="cb12-10"><a href="ggplot-continuación.html#cb12-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Año&quot;</span>, <span class="at">y=</span><span class="st">&quot;Edad&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Dieagrama de Lexis c/ ggplot&quot;</span>)<span class="sc">+</span></span>
+<span id="cb12-11"><a href="ggplot-continuación.html#cb12-11" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb12-12"><a href="ggplot-continuación.html#cb12-12" tabindex="-1"></a>  <span class="co"># Elimina cuadrículas del panel y define fondo blanco</span></span>
+<span id="cb12-13"><a href="ggplot-continuación.html#cb12-13" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb12-14"><a href="ggplot-continuación.html#cb12-14" tabindex="-1"></a>        <span class="at">panel.grid.minor =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="cn">NA</span>),</span>
+<span id="cb12-15"><a href="ggplot-continuación.html#cb12-15" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb12-16"><a href="ggplot-continuación.html#cb12-16" tabindex="-1"></a>                                       <span class="at">colour =</span> <span class="st">&quot;transparent&quot;</span>))</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+</div>
+<div id="mapas-temáticos" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Mapas temáticos<a href="ggplot-continuación.html#mapas-temáticos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Antes que nada, necesitamos descargar datos geográficos. Como fuente se
+puede recurrir al <a href="https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/CapasSIG">Instituto Geográfico Nacional
+(IGN)</a>
+y al <a href="https://www.indec.gob.ar/indec/web/Nivel3-Tema-1-17">INDEC</a>, desde
+donde se pueden descargar distinta info oficial y que están consistidas
+entre sí. También necesitamos un paquete que pueda “manejar” este tipo
+de datos: <a href="https://r-spatial.github.io/sf/"><code>sf</code></a> y su función para
+leer: <code>read_sf()</code>, capaz de leer varios formatos de datos geográficos
+(GeoJSON, shape, etc.).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="ggplot-continuación.html#cb13-1" tabindex="-1"></a><span class="co"># install.packages(&quot;sf&quot;)</span></span>
+<span id="cb13-2"><a href="ggplot-continuación.html#cb13-2" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb13-3"><a href="ggplot-continuación.html#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="ggplot-continuación.html#cb13-4" tabindex="-1"></a>ruta_completa <span class="ot">&lt;-</span> <span class="fu">normalizePath</span>(<span class="st">&quot;data/capa_jurisdicciones.zip&quot;</span>)</span>
+<span id="cb13-5"><a href="ggplot-continuación.html#cb13-5" tabindex="-1"></a>prov_shp <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="fu">paste0</span>(<span class="st">&quot;/vsizip/&quot;</span>, ruta_completa, <span class="st">&quot;/jurisdicciones.shp&quot;</span>), <span class="at">quiet=</span>T) <span class="co">#O se puede descargar y leer con st_read()</span></span>
+<span id="cb13-6"><a href="ggplot-continuación.html#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="ggplot-continuación.html#cb13-7" tabindex="-1"></a><span class="fu">str</span>(prov_shp)</span></code></pre></div>
+<pre><code>## Classes &#39;sf&#39; and &#39;data.frame&#39;:   24 obs. of  8 variables:
+##  $ fid     : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ id      : num  3 17 21 23 14 5 26 6 11 22 ...
+##  $ cpr     : chr  &quot;02&quot; &quot;58&quot; &quot;74&quot; &quot;82&quot; ...
+##  $ fna     : chr  &quot;Ciudad Autónoma de Buenos Aires&quot; &quot;Provincia del Neuquén&quot; &quot;Provincia de San Luis&quot; &quot;Provincia de Santa Fe&quot; ...
+##  $ gna     : chr  &quot;Ciudad Autónoma&quot; &quot;Provincia&quot; &quot;Provincia&quot; &quot;Provincia&quot; ...
+##  $ nam     : chr  &quot;Ciudad Autónoma de Buenos Aires&quot; &quot;Neuquén&quot; &quot;San Luis&quot; &quot;Santa Fe&quot; ...
+##  $ sag     : chr  &quot;IGN&quot; &quot;IGN&quot; &quot;IGN&quot; &quot;IGN&quot; ...
+##  $ geometry:sfc_MULTIPOLYGON of length 24; first list element: List of 1
+##   ..$ :List of 1
+##   .. ..$ : num [1:1024, 1:2] -58.5 -58.5 -58.5 -58.5 -58.5 ...
+##   ..- attr(*, &quot;class&quot;)= chr [1:3] &quot;XY&quot; &quot;MULTIPOLYGON&quot; &quot;sfg&quot;
+##  - attr(*, &quot;sf_column&quot;)= chr &quot;geometry&quot;
+##  - attr(*, &quot;agr&quot;)= Factor w/ 3 levels &quot;constant&quot;,&quot;aggregate&quot;,..: NA NA NA NA NA NA NA
+##   ..- attr(*, &quot;names&quot;)= chr [1:7] &quot;fid&quot; &quot;id&quot; &quot;cpr&quot; &quot;fna&quot; ...</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="ggplot-continuación.html#cb15-1" tabindex="-1"></a><span class="fu">summary</span>(prov_shp)</span></code></pre></div>
+<pre><code>##       fid              id            cpr                fna           
+##  Min.   : 1.00   Min.   : 3.00   Length:24          Length:24         
+##  1st Qu.: 6.75   1st Qu.: 8.75   Class :character   Class :character  
+##  Median :12.50   Median :14.50   Mode  :character   Mode  :character  
+##  Mean   :12.50   Mean   :14.50                                        
+##  3rd Qu.:18.25   3rd Qu.:20.25                                        
+##  Max.   :24.00   Max.   :26.00                                        
+##      gna                nam                sag                     geometry 
+##  Length:24          Length:24          Length:24          MULTIPOLYGON :24  
+##  Class :character   Class :character   Class :character   epsg:4326    : 0  
+##  Mode  :character   Mode  :character   Mode  :character   +proj=long...: 0  
+##                                                                             
+##                                                                             
+## </code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="ggplot-continuación.html#cb17-1" tabindex="-1"></a>prov_shp <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="ggplot-continuación.html#cb17-2" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb17-3"><a href="ggplot-continuación.html#cb17-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()<span class="sc">+</span></span>
+<span id="cb17-4"><a href="ggplot-continuación.html#cb17-4" tabindex="-1"></a>  <span class="fu">coord_sf</span>()</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Podemos modificar cuánto vemos del mapa (los límites) para ajustarlo a
+nuestras necesidades. Por ejemplo, si quisiéramos centrarnos en las
+provincias y dejar de lado la Antártida. ¿Y agregar los nombres de las
+provincias, quizás?</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="ggplot-continuación.html#cb18-1" tabindex="-1"></a>prov_shp <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="ggplot-continuación.html#cb18-2" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb18-3"><a href="ggplot-continuación.html#cb18-3" tabindex="-1"></a>  <span class="fu">geom_sf</span>()<span class="sc">+</span></span>
+<span id="cb18-4"><a href="ggplot-continuación.html#cb18-4" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> nam),</span>
+<span id="cb18-5"><a href="ggplot-continuación.html#cb18-5" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="ggplot-continuación.html#cb18-6" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">75</span>, <span class="sc">-</span><span class="dv">52</span>),   <span class="co"># longitud</span></span>
+<span id="cb18-7"><a href="ggplot-continuación.html#cb18-7" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>, <span class="sc">-</span><span class="dv">55</span>)) <span class="sc">+</span> <span class="co"># latitud</span></span>
+<span id="cb18-8"><a href="ggplot-continuación.html#cb18-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>¿Y cómo hacemos para darle vida a este mapa? Primero, necesitamos datos
+por provincia. Vamos a usar los datos de porcentaje de hogares
+particulares sin acceso a la red de servicio cloacal, del censo 2022,
+presentes en el archivo <code>hog_cloaca2022.xlsx</code>. Miremos un poco el
+archivo</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="ggplot-continuación.html#cb19-1" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
+<span id="cb19-2"><a href="ggplot-continuación.html#cb19-2" tabindex="-1"></a>hog_cloaca22 <span class="ot">&lt;-</span> <span class="fu">read.xlsx</span>(<span class="st">&quot;data/hog_cloaca2022.xlsx&quot;</span>)</span>
+<span id="cb19-3"><a href="ggplot-continuación.html#cb19-3" tabindex="-1"></a><span class="fu">head</span>(hog_cloaca22)</span></code></pre></div>
+<pre><code>##   cod  Año              Dominio.geográfico
+## 1  02 2022 Ciudad Autónoma de Buenos Aires
+## 2  06 2022                    Buenos Aires
+## 3  10 2022                       Catamarca
+## 4  14 2022                         Córdoba
+## 5  18 2022                      Corrientes
+## 6  22 2022                           Chaco
+##                                                                  Indicadores
+## 1 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 2 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 3 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 4 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 5 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 6 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+##   Total
+## 1   1.2
+## 2  40.6
+## 3  48.4
+## 4  55.0
+## 5  39.4
+## 6  67.6</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="ggplot-continuación.html#cb21-1" tabindex="-1"></a><span class="fu">class</span>(hog_cloaca22)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="ggplot-continuación.html#cb23-1" tabindex="-1"></a><span class="fu">summary</span>(hog_cloaca22)</span></code></pre></div>
+<pre><code>##      cod                Año            Dominio.geográfico Indicadores       
+##  Length:24          Length:24          Length:24          Length:24         
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##      Total      
+##  Min.   : 1.20  
+##  1st Qu.:25.82  
+##  Median :36.45  
+##  Mean   :38.49  
+##  3rd Qu.:49.52  
+##  Max.   :74.60</code></pre>
+<p>¿Qué cosas tenemos en común entre este data frame y el de datos
+geográficos? Dos cosas: el nombre de la provincia y su código (pueden
+ver los oficiales
+<a href="https://www.indec.gob.ar/ftp/cuadros/geoestadistica/c2022_codigos_jurisdicciones.xlsx">acá</a>).
+Los códigos son muy útiles porque muchas instituciones los utilizan, y
+es más probable que tengan menos diferencias que el nombre (mayúsculas,
+“CABA” en vez de “Ciudad Autónoma de Buenos Aires”, etc). Entonces,
+vamos a unirlo por código con <code>left_join()</code> aunque tengan nombre
+distinto las variables:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="ggplot-continuación.html#cb25-1" tabindex="-1"></a>hog_cloaca_geo <span class="ot">&lt;-</span> prov_shp <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="ggplot-continuación.html#cb25-2" tabindex="-1"></a>  <span class="fu">left_join</span>(hog_cloaca22,</span>
+<span id="cb25-3"><a href="ggplot-continuación.html#cb25-3" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;cpr&quot;</span> <span class="ot">=</span> <span class="st">&quot;cod&quot;</span>))</span>
+<span id="cb25-4"><a href="ggplot-continuación.html#cb25-4" tabindex="-1"></a><span class="fu">head</span>(hog_cloaca_geo) </span></code></pre></div>
+<pre><code>## Simple feature collection with 6 features and 11 fields
+## Geometry type: MULTIPOLYGON
+## Dimension:     XY
+## Bounding box:  xmin: -71.96569 ymin: -41.10059 xmax: -58.33515 ymax: -25.16831
+## Geodetic CRS:  WGS 84
+##   fid id cpr                             fna             gna
+## 1   1  3  02 Ciudad Autónoma de Buenos Aires Ciudad Autónoma
+## 2   2 17  58           Provincia del Neuquén       Provincia
+## 3   3 21  74           Provincia de San Luis       Provincia
+## 4   4 23  82           Provincia de Santa Fe       Provincia
+## 5   5 14  46           Provincia de La Rioja       Provincia
+## 6   6  5  10          Provincia de Catamarca       Provincia
+##                               nam sag  Año              Dominio.geográfico
+## 1 Ciudad Autónoma de Buenos Aires IGN 2022 Ciudad Autónoma de Buenos Aires
+## 2                         Neuquén IGN 2022                         Neuquén
+## 3                        San Luis IGN 2022                        San Luis
+## 4                        Santa Fe IGN 2022                        Santa Fe
+## 5                        La Rioja IGN 2022                        La Rioja
+## 6                       Catamarca IGN 2022                       Catamarca
+##                                                                  Indicadores
+## 1 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 2 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 3 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 4 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 5 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+## 6 Porcentaje de hogares particulares sin acceso a la red de servicio cloacal
+##   Total                       geometry
+## 1   1.2 MULTIPOLYGON (((-58.45535 -...
+## 2  24.4 MULTIPOLYGON (((-70.39341 -...
+## 3  26.3 MULTIPOLYGON (((-67.05547 -...
+## 4  40.5 MULTIPOLYGON (((-61.04639 -...
+## 5  40.9 MULTIPOLYGON (((-68.52136 -...
+## 6  48.4 MULTIPOLYGON (((-68.50537 -...</code></pre>
+<p>Ahora, ¿cómo poner en color las provincias según el indicador? Primero,
+quedémonos con las variables que nos interesan y luego grafiquemos:
+acordémonos de <code>aes()</code></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="ggplot-continuación.html#cb27-1" tabindex="-1"></a>hog_cloaca_geo <span class="ot">&lt;-</span> hog_cloaca_geo <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="ggplot-continuación.html#cb27-2" tabindex="-1"></a>  <span class="fu">select</span>(nam, <span class="co"># Nombre </span></span>
+<span id="cb27-3"><a href="ggplot-continuación.html#cb27-3" tabindex="-1"></a>         Año, <span class="co"># Año (aunque solo tenemos 2022)</span></span>
+<span id="cb27-4"><a href="ggplot-continuación.html#cb27-4" tabindex="-1"></a>         Total, <span class="co"># Valor del indicador</span></span>
+<span id="cb27-5"><a href="ggplot-continuación.html#cb27-5" tabindex="-1"></a>         geometry) <span class="co"># geometría</span></span>
+<span id="cb27-6"><a href="ggplot-continuación.html#cb27-6" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="ggplot-continuación.html#cb27-7" tabindex="-1"></a>p_cloaca <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hog_cloaca_geo)<span class="sc">+</span></span>
+<span id="cb27-8"><a href="ggplot-continuación.html#cb27-8" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Total),</span>
+<span id="cb27-9"><a href="ggplot-continuación.html#cb27-9" tabindex="-1"></a>          <span class="at">color =</span> <span class="st">&quot;grey90&quot;</span>)<span class="sc">+</span></span>
+<span id="cb27-10"><a href="ggplot-continuación.html#cb27-10" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">75</span>, <span class="sc">-</span><span class="dv">52</span>),   <span class="co"># longitud</span></span>
+<span id="cb27-11"><a href="ggplot-continuación.html#cb27-11" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>, <span class="sc">-</span><span class="dv">55</span>))<span class="sc">+</span>  <span class="co">#latitud</span></span>
+<span id="cb27-12"><a href="ggplot-continuación.html#cb27-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb27-13"><a href="ggplot-continuación.html#cb27-13" tabindex="-1"></a>p_cloaca</span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Pero la paleta de colores está rara. Vamos a ponerle otra y cambiar la
+dirección, para que más oscuro = más alto porcentaje de hogares sin
+cloaca. Y, de paso, agreguemos título y demás:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="ggplot-continuación.html#cb28-1" tabindex="-1"></a>p_cloaca <span class="sc">+</span></span>
+<span id="cb28-2"><a href="ggplot-continuación.html#cb28-2" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="st">&quot;%&quot;</span>,<span class="at">palette =</span> <span class="st">&quot;Reds&quot;</span>,<span class="at">direction =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb28-3"><a href="ggplot-continuación.html#cb28-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de hogares particulares </span><span class="sc">\n</span><span class="st">sin acceso a la red de servicio cloacal&quot;</span>,</span>
+<span id="cb28-4"><a href="ggplot-continuación.html#cb28-4" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Por provincia. Año 2022&quot;</span>,</span>
+<span id="cb28-5"><a href="ggplot-continuación.html#cb28-5" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Fuente: INDEC&quot;</span>) </span></code></pre></div>
+<p><img src="talleR_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div id="actividad-1" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Actividad<a href="ggplot-continuación.html#actividad-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Mapear un indicador a elección, puede ser a nivel de departamentos o de
+provincias, realizando la unión de data frames de la geometría y el
+indicador, e incluir título, subtítulo y fuente. Fuentes posibles de
+indicadores (no limitado):</p>
+<ol style="list-style-type: decimal">
+<li>INDEC:</li>
+</ol>
+<ul>
+<li><p><a href="https://www.indec.gob.ar/indec/web/Nivel3-Tema-2-41">Cuadros de
+censos</a></p></li>
+<li><p><a href="https://redatam.indec.gob.ar/">Redatam</a></p></li>
+<li><p><a href="https://www.indec.gob.ar/indec/web/Institucional-Indec-IndicadoresDemograficos">Indicadores
+demográficos</a></p></li>
+<li><p><a href="https://shiny.indec.gob.ar/sies/">Sistema Integrado de Estadísticas Sociales
+(SIES)</a></p></li>
+<li><p>y muchos otros más</p></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Salud - <a href="https://www.argentina.gob.ar/salud/deis/reporte-interactivo">Reporte interactivo de Estadísticas
+Vitales</a></p></li>
+<li><p><a href="https://catalogo.datos.gba.gob.ar/">PBA - Portal de datos abiertos</a></p></li>
+<li><p><a href="https://buenosaires.gob.ar/bienvenidos-al-portal-de-datos-abiertos-de-la-ciudad">CABA - Portal de datos
+abiertos</a></p></li>
+</ol>
+<p>Y las fuentes de geometrías:</p>
+<ul>
+<li><p><a href="https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/CapasSIG">IGN</a></p></li>
+<li><p><a href="https://www.indec.gob.ar/indec/web/Nivel3-Tema-1-17">INDEC</a></p></li>
+<li><p><a href="https://data.buenosaires.gob.ar/dataset/comunas">CABA - Comunas</a>
+(descargar .zip con el shapefile o GeoJSON)</p></li>
+<li><p><a href="https://catalogo.datos.gba.gob.ar/dataset/partidos">PBA - Partidos</a></p></li>
+</ul>
+<!-- ## Reproduciendo -->
+<!-- El covid19 puso en primera plana el análisis demográfico, especialmente en el impacto que tuvo en $e_0$ ¿No te parece genial la figura 1 del paper [Quantifying impacts of the COVID-19 pandemic through life-expectancy losses: a population-level study of 29 countries](https://academic.oup.com/ije/advance-article/doi/10.1093/ije/dyab207/6375510) de Aburto y Otros (2021)? Podemos recrearlo gracias a que los autores lo permiten [aquí](https://github.com/OxfordDemSci/ex2020/blob/master/src/08-plots.R), haciendo su paper reproducible. De paso vamos viendo funciones nuevas. Iremos comentando los pasos: -->
+<!-- ```{r} -->
+<!-- # necesitamos algunas librerías que no tenemos aún. Si no las tenés debes instalarlas primero -->
+<!-- #install.packages("hrbrthemes") -->
+<!-- library(hrbrthemes) -->
+<!-- # cargar la data -->
+<!-- df_ex_ci <- readRDS("Data/df_ex_ci.rds") -->
+<!-- head(df_ex_ci) -->
+<!-- # crear el gráfico -->
+<!-- fig_1 <- df_ex_ci %>% -->
+<!--   # primero factorizar según el número actual de la variable -->
+<!--   mutate(name = name %>% fct_reorder(rank_e0f19)) %>% -->
+<!--   # me interesa ciertas edades -->
+<!--   filter(age %in% c(0, 60)) %>% -->
+<!--   # si hay alguna NA sacar la fila -->
+<!--   drop_na(name) %>% -->
+<!--   # una forma de seleccionar -->
+<!--   transmute(name, sex, age,ex_2015, ex_2019, ex_2020 = ex) %>% -->
+<!--   # hete aquí un pivot... -->
+<!--   pivot_longer(cols = ex_2015:ex_2020, -->
+<!--                names_to = "year", values_to = "ex", names_prefix = "ex_") %>% -->
+<!--   mutate(age = age %>% as_factor()) %>%  -->
+<!--   # ggplot -->
+<!--   ggplot()+ -->
+<!--   # un color por sexo, una forma por año -->
+<!--   geom_point(aes(x = ex, y = name, color = sex, shape = year))+ -->
+<!--   # separar un poco con líneas grises -->
+<!--   geom_hline(yintercept = seq(2, 28, 2), size = 5, color = "#eaeaea")+ -->
+<!--   # personalizar qué formas, tamaños y colores usar -->
+<!--   scale_shape_manual(values = c(124, 43, 16))+ -->
+<!--   scale_size_manual(values = c(4, 4, 1.5))+ -->
+<!--   scale_color_manual(values = c("#B5223BFF", "#64B6EEFF"))+ -->
+<!--   # donde colocar los nombres de los ejes -->
+<!--   scale_y_discrete(position = "right")+ -->
+<!--   scale_x_continuous(position = "top")+ -->
+<!--   # facet por edad, sin respetar escala -->
+<!--   facet_grid(~age, scales = "free_x")+ -->
+<!--   # sin leyenda, líneas horizonatales y demases -->
+<!--   theme( -->
+<!--     legend.position = "none", -->
+<!--     panel.grid.major.y = element_blank(), -->
+<!--     panel.grid.minor.y = element_blank(), -->
+<!--     strip.text = element_blank(), -->
+<!--     panel.spacing.x = unit(2, "lines"), -->
+<!--     axis.text.y = element_text(face = 2))+ -->
+<!--   # etiquetas de ejes -->
+<!--   labs(x = "Life expectancy, years",y = NULL) -->
+<!-- # guardar -->
+<!-- ggsave(fig_1, filename = "fig-1.pdf", -->
+<!--        width = 6, height = 4.5, device = cairo_pdf) -->
+<!-- ``` -->
+<!-- Las etiquetas en referencia a la edad y la formas de los puntos las realizaron posteriormente con [annotate](https://ggplot2.tidyverse.org/reference/annotate.html), una función que permite incluir (encima) texto u otras figuras geométricas en el plano. -->
+<!-- ## Otras visualizaciones -->
+<!-- Samuel Preston (1975) encontró una relación matemática (al menos) a nivel de país entre la esperanza de vida al nacer y el producto per cápita. Veamos que ocurre específicamente en el Continente Americano utilizando el paquete de datos `gapminder`. -->
+<!-- ```{r} -->
+<!-- library(gapminder) -->
+<!-- p <- ggplot(filter(gapminder, continent == "Americas"), -->
+<!--             aes(x = gdpPercap, y = lifeExp)) -->
+<!-- p + geom_point() # dispersión -->
+<!-- p + geom_point(aes(color = country), alpha = (1/3), size = 3, show.legend = F)  -->
+<!-- p1 <- p + geom_point(aes(color = country, size = pop), alpha = 1/3) # fijate el lugar de size  -->
+<!-- p1 <- p1 + geom_smooth(lwd = 1, lty = 2, color = 2, se = FALSE) -->
+<!-- p1 -->
+<!-- p + geom_point(alpha = 1/3, size = 3) + facet_wrap(~ country) + -->
+<!--     geom_smooth(lwd = 1.5, se = FALSE) + -->
+<!--     theme_void() -->
+<!-- ``` -->
+<!-- ¿Componer gráficos en una sola hoja? (tomado de [Jenny Bryan](https://stat545.com/)) -->
+<!-- ```{r} -->
+<!-- #install.packages("gridExtra") -->
+<!-- library(gridExtra) -->
+<!-- p2 <- ggplot(filter(gapminder, year==1952 & continent!="Oceania"), aes(x = lifeExp, color = continent))       + geom_density() -->
+<!-- p3 <- ggplot(filter(gapminder, year==2007 & continent!="Oceania"), aes(x = lifeExp, color = continent))       + geom_density() -->
+<!-- grid.arrange(p2, p3, nrow = 2, heights = c(0.5, 0.5)) -->
+<!-- ``` -->
+<!-- ¿Qué problemas encuentras en este arreglo? -->
+<!-- ## Material adicional (y no tanto) -->
+<!-- * Sí, hay un [libro](https://ggplot2-book.org/index.html). -->
+<!-- * Estas notas fueron hechas siguiendo principalmente [The Hitchhiker's Guide to Ggplot2](https://leanpub.com/hitchhikers_ggplot2) y el curso de [Jenny Bryan](https://stat545.com/).   -->
+<!-- * [Hoja de Ayuda](https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf).   -->
+<!-- * Hulíková Tesárková & Kurtinová. Application of “Lexis” Diagram: Contemporary Approach to Demographic Visualization and Selected Examples of Software Applications. -->
+<!-- * Rau, R., Bohk-Ewald, C., Muszyńska, M. M., & Vaupel, J. W. (2018). Visualizing Mortality Dynamics in the Lexis Diagram. Springer. doi: 10.1007/978-3-319-64820-0 -->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="repaso---dplyr-y-ggplot.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": true,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": false
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
