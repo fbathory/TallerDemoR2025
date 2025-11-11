@@ -404,8 +404,7 @@ mylexis
 
 Para incluir triángulos y cuadriláteros se utiliza
 [geom_polygon](https://ggplot2.tidyverse.org/reference/geom_polygon.html).
-Para dar superficie, de manera similar al gráfico Scholey & Willekens
-(2017), se utiliza
+Para dar superficie se utiliza
 [geom_tile](https://ggplot2.tidyverse.org/reference/geom_tile.html).
 Para esto último un gran tutorial de [Tim
 Riffe](https://timriffe.github.io/DemoTutorials/LexisSurface).
