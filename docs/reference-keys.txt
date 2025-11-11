@@ -61,3 +61,7 @@ medidas-resumen-y-exploratorias
 ggplot-2
 materiales-anteriores-y-otras-cosas-a-tener-a-mano
 a-tibble-18-3
+ggplot-continuación
+de-barras-a-pirámides
+bonus
+mapas-temáticos

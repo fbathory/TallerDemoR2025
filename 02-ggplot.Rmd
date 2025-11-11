@@ -303,7 +303,6 @@ Philipp Ottolinger (gracias Otto). Construyó un set de funciones basadas
 en *ggplot* que facilita la creación de diagramas haciéndolo un
 ejercicio intuitivo.
 
-
 ```{r}
 
 # Si el paquete no está disponible en CRAN, podemos instalarlo desde GitHub
@@ -380,7 +379,6 @@ mylexis
 
 ```
 
-
 Adicionalmente, si trabajamos con población donde la exposición puede
 ser truncada (por derecha o izquierda), podemos graficar líneas de vida
 que respeten ese comportamiento. También podemos señalar con una cruz la
@@ -409,12 +407,10 @@ Para dar superficie se utiliza
 Para esto último un gran tutorial de [Tim
 Riffe](https://timriffe.github.io/DemoTutorials/LexisSurface).
 
-
-
 ### Actividad
 
-a)  Crear un diagrama de Lexis e incluir en distintos colores líneas de vida de
-    las 3 personas más jóvenes que conozcas.
+a)  Crear un diagrama de Lexis e incluir en distintos colores líneas de
+    vida de las 3 personas más jóvenes que conozcas.
 
 ```{r, eval = F, include = F}
 lexis_act <- lexis_grid(year_start=2021, year_end=2024,
@@ -427,28 +423,27 @@ lexis_act
 
 ```
 
-
-b) Agregar 2 líneas de vida truncadas: simular la trayectoria de 2 personas que ingresan y salen de un estudio en distintos momentos.
+b)  Agregar 2 líneas de vida truncadas: simular la trayectoria de 2
+    personas que ingresan y salen de un estudio en distintos momentos.
 
     ```{r, eval = F, include = F}
-lexis_act<-lexis_lifeline(lg = lexis_act,
+    lexis_act<-lexis_lifeline(lg = lexis_act,
                birth = c("2021-06-01","2022-03-15"),
                entry = c("2022-01-01","2023-01-01"),
                exit  = c("2023-06-01","2023-12-01"),
                lineends = TRUE,
                colour = c("orange","purple"))
-    
-lexis_act
+
+    lexis_act
     ```
-    
-c) Resaltar un año y una cohorte (usando lexis_year y lexis_cohort)
+
+c)  Resaltar un año y una cohorte (usando lexis_year y lexis_cohort)
 
     ```{r, eval = F, include = F}
-lexis_act <- lexis_year(lexis_act, year = 2022, fill = "lightgrey")
-lexis_act <- lexis_cohort(lexis_act, cohort = 2023, fill = "orange")
-lexis_act
+    lexis_act <- lexis_year(lexis_act, year = 2022, fill = "lightgrey")
+    lexis_act <- lexis_cohort(lexis_act, cohort = 2023, fill = "orange")
+    lexis_act
     ```
-
 
 ### BONUS
 
@@ -473,7 +468,6 @@ ggplot() +
                                        colour = "transparent"))
 
 ```
-
 
 ## Mapas temáticos
 
