@@ -622,6 +622,7 @@ Y las fuentes de geometrías:
 
 ### BONUS: otras funciones con mapas
 
+
 En un mapa podemos superponer varias capas, igual que en cualquier gráfico de ggplot2.
 Por ejemplo, podemos sumar los centroides de las provincias para mostrar ubicaciones puntuales o etiquetas basadas en puntos.
 
@@ -676,8 +677,9 @@ geom_sf(aes(fill = Total), color = "grey80") +
 scale_fill_distiller("% hogares", palette = "Reds", direction = 1) +
 coord_sf(xlim = c(-75, -52), ylim = c(-22, -55)) +
 theme_void() +
-labs(title = "Hogares sin acceso a la red cloacal (2022)",
-caption = "Fuente: INDEC")
+labs(title = "Porcentaje de hogares particulares \nsin acceso a la red de servicio cloacal",
+     subtitle = "Por provincia. Año 2022",
+     caption = "Fuente: INDEC")
 
 
 ```
@@ -694,25 +696,48 @@ breaks = seq(0, 60, 10)) +
 coord_sf(xlim = c(-75, -52), ylim = c(-22, -55)) +
 theme_bw() +
 theme(legend.position = "bottom") +
-labs(title = "Hogares sin red cloacal por provincia (2022)",
-caption = "Fuente: INDEC")
+labs(title = "Porcentaje de hogares particulares \nsin acceso a la red de servicio cloacal",
+     subtitle = "Por provincia. Año 2022",
+     caption = "Fuente: INDEC")
 
 p_cloaca
 
 ```
 
-Por último, para incluir el mapa en informes, presentaciones o enviarlo a otras
-personas, podemos exportarlo directamente desde R con *ggsave()*.
-Esta función guarda el último gráfico o el objeto gráfico que indiquemos,
-con tamaño y resolución ajustables.
+Por otro lado, en demografía se suele trabajar con indicadores agrupados por rangos, cuartiles o tipologías (variables discretas o categóricas). Para visualizar esto, podemos usar la función *cut()* y una escala de color diferente (scale_fill_brewer).
 
+¡Veamos como hacerlo!
 
-```{r save}
-ggsave("mapa_cloaca.png",
-p_cloaca,
-width = 8, height = 6, dpi = 300)
+```{r}
 
+# Categorizar la variable 'Total' en 4 grupos (cuartiles o rangos manuales)
+hog_cloaca_geo <- hog_cloaca_geo %>%
+  mutate(
+    nivel_cloaca = cut(
+      Total,
+      breaks = quantile(Total, na.rm = TRUE), # Define dónde se realizan los cortes
+      include.lowest = TRUE, #Asegura que el valor mínimo se incluya en el primer grupo
+      labels = c("Alto", "Medio", "Bajo", "Muy bajo") #Nombre de categorías
+    )
+  )
+
+# Graficar con la nueva variable categórica
+ggplot(hog_cloaca_geo) +
+ geom_sf(aes(fill = nivel_cloaca), color = "grey90") +
+ # Usamos scale_fill_brewer() para mapear la variable Categórica
+  scale_fill_brewer(
+    name = "% Hogares \ncon acceso a cloaca (Nivel)", # Nuevo título de leyenda
+    palette = "YlGnBu", # Paleta secuencial para datos discretos
+    ) +
+ coord_sf(xlim = c(-75, -52), # longitud
+          ylim = c(-22, -55)) + # latitud
+ theme_bw() +
+ labs(
+    title = "Hogares particulares según nivel de acceso a \nla red de servicio cloacal",
+    subtitle = "Por provincia. Año 2022",
+    caption = "Fuente: INDEC")
 ```
+
 
 
 <!-- ## Reproduciendo -->
