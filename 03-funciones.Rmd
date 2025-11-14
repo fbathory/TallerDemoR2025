@@ -262,7 +262,7 @@ $$
 TBM(t) = \frac{D(t)}{N(t)}= \sum_{x>=0}{M_x(t)\,C_x(t)}
 $$
 
-Poblaciones envejecidas tendrán una mayor frecuencia de muertes debido a la distribución de $C_x(t)$, pero no reflejando su nivel. El proceso de estandarización reemplaza $C_x(t)$ por otra distribución que permita la comparación entre distintas poblaciones: sería equivalente a asignarle **una misma pirámide poblacional** a ambas poblaciones. Si llamamos a esta distribución *estándar* tenemos $C^S_x(t)$ y podemos calcular para dos poblaciones cualquiera $A$ y $B$ su Tasa Estandarizada de Mortalidad:
+Las poblaciones más envejecidas registran una mayor frecuencia de muertes simplemente porque concentran más personas en edades avanzadas, según la distribución $C_x(t)$. Esto no implica necesariamente que tengan un nivel de mortalidad más alto. El proceso de estandarización reemplaza $C_x(t)$ por otra distribución que permita la comparación entre distintas poblaciones: sería equivalente a asignarle **una misma pirámide poblacional** a ambas poblaciones. Si llamamos a esta distribución *estándar* tenemos $C^S_x(t)$ y podemos calcular para dos poblaciones cualquiera $A$ y $B$ su Tasa Estandarizada de Mortalidad:
 
 $$
 TSM^A(t) = \sum_{x>=0}{M^A_x(t)\,C^S_x(t)}\\
@@ -271,13 +271,9 @@ $$
 
 Lo que permite comparar $TSM^A(t)$ con $TSM^B(t)$: $TSM^A(t) \lessgtr TSM^A(t)$. Pero vayamos al ejemplo!!!
 
-Obtengamos la población y defunciones de Chile, Japón y Polonia del año 2000 y 2010 leyendo la tabla "Chile_Japon_Polonia.csv" en la carpeta "Data". ¿Cómo obtuve esta información? Directamente desde R hacia el repositorio de la [Human Mortality Database](https://www.mortality.org/), utilizando el paquete `HMDHFDplus`. Por ejemplo en este caso las defunciones de Chile por grupos quinquenales de edad (en realidad se muestra la edad inicial de cada intervalo) cada 5 años calendario, "Deaths_5x5", se pueden obtener con la función `readHMDweb`.
 
-```{r, eval=F, include = F}
-D_CHL <- HMDHFDplus::readHMDweb(CNTRY = "CHL",item = "Deaths_5x5", 
-                                username = "ivanwilliams1985@gmail.com", # create el tuyo!
-                                password = "AD2")
-```
+Obtengamos la población y defunciones de *Chile*, *Japón* y *Polonia* del año 2000 y 2010 leyendo la tabla "Chile_Japon_Polonia.csv" en la carpeta "data". 
+
 ```{r, include=T}
 db <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx")
 ```
@@ -344,7 +340,7 @@ standarizarrr <- function(db){
 standarizarrr(readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% filter(Year==2010))
 ```
 
-a) Con los datos de la tabla "Chile_Japon_Polonia.csv": ¿qué se puede decir sobre la evolución de la mortalidad de Polonia en los años 1990, 2000 y 2010? ¿Bajó o creció?
+b) Con los datos de la tabla "Chile_Japon_Polonia.csv": ¿qué se puede decir sobre la evolución de la mortalidad de Polonia en los años 1990, 2000 y 2010? ¿Bajó o creció?
 
 ```{r, include=F}
 db_act <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% 
@@ -361,7 +357,7 @@ db_act %>%
 ```
 
 
-a) Graficar la distribución de las defunciones por edad (colocando cada punto en la edad media del intervalo, por ejemplo para el grupo 5-10, en 7.5).
+c) Graficar la distribución de las defunciones por edad (colocando cada punto en la edad media del intervalo, por ejemplo para el grupo 5-10, en 7.5).
 
 ## Funciones demográficas en paquetes demográficos
 

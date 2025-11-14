@@ -3,6 +3,7 @@ rmd_files:
 - index.Rmd
 - 01-repaso.Rmd
 - 02-ggplot.Rmd
+- 03-funciones.Rmd
 language:
   ui:
     chapter_name: ""
