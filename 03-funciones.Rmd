@@ -305,7 +305,7 @@ ggplot(db)  +
 
 Estandaricemos utilizando el promedio de la estructura por edad de los tres:
 
-```{r}
+```{r estand, warning=F, message=F}
 C_x_promedio <- db %>% 
               group_by(Age) %>% 
               summarise(c_x = sum(N)/sum(db$N))
@@ -374,16 +374,17 @@ include_graphics("figs/demotools.png")
 ```
 
 ```{r, eval=F}
+
 library(devtools)
 install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
-install_github("timriffe/DemoTools")
+devtools::install_github("timriffe/DemoTools")
 ```
 
 ### Tablas de mortalidad
 
 Construir una función que produzca una **tabla de mortalidad** a partir de un set de tasas por edad de mortalidad es un lindo ejercicio de programación en R. Pero por suerte `DemoTools` tiene una muy buena implementación. Acá para Japón 2010:
 
-```{r}
+```{r mort, message=F, warning=F}
 jpn_2010 <- db %>% filter(Country == "Japon", Year == 2010)
 
 # obtengo la tabla
@@ -425,7 +426,7 @@ pob_chaco %>%
 
 El método de **Sprague** desagrega por edad simple conteos agrupados por edad quinquenal. Veamos como funciona para los varones de Chaco en el año 2010. Primero agregando, y luego aplicando el método.
 
-```{r}
+```{r edad, warning=F, message=F}
 # me quedo con 2010
 pob_chaco_2010 <- pob_chaco %>% filter(CENSO == 2010)
 

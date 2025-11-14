@@ -577,6 +577,7 @@ p_cloaca +
        caption = "Fuente: INDEC") 
 ```
 
+
 ### Actividad
 
 Mapear un indicador a elección, puede ser a nivel de departamentos o de
@@ -617,6 +618,102 @@ Y las fuentes de geometrías:
     (descargar .zip con el shapefile o GeoJSON)
 
 -   [PBA - Partidos](https://catalogo.datos.gba.gob.ar/dataset/partidos)
+
+
+### BONUS: otras funciones con mapas
+
+En un mapa podemos superponer varias capas, igual que en cualquier gráfico de ggplot2.
+Por ejemplo, podemos sumar los centroides de las provincias para mostrar ubicaciones puntuales o etiquetas basadas en puntos.
+
+Los centroides nos permiten:
+
+- ubicar puntos de referencia dentro de cada provincia,
+
+- colocar etiquetas de texto basadas en esos puntos,
+
+- comprender que un mapa no es una sola capa sino una composición de capas.
+
+Antes de calcular centroides, es buena práctica corregir geometrías inválidas, porque algunos shapefiles contienen errores topológicos que impiden calcularlos correctamente.
+
+```{r centroide}
+
+
+# Corregimos geometrías inválidas y aseguramos que sean MULTIPOLYGON
+prov_shp_fix <- st_make_valid(prov_shp)
+prov_shp_fix <- st_cast(prov_shp_fix, "MULTIPOLYGON", warn = FALSE)
+
+# Calculamos centroides seguros
+prov_centroides <- st_centroid(prov_shp_fix)
+
+# Graficamos: polígonos + centroides + etiquetas
+ggplot() +
+  geom_sf(data = prov_shp_fix, fill = "white", color = "grey70") +
+  geom_sf(data = prov_centroides, color = "blue", size = 1) +
+  geom_sf_text(data = prov_centroides, aes(label = nam),
+               size = 2, nudge_y = 0.3) +
+  coord_sf(xlim = c(-75, -52),
+           ylim = c(-22, -55)) +
+  theme_bw() +
+  theme(
+    axis.title = element_blank()) +
+  labs(title = "Mapa con centroides de provincias",
+       subtitle= "Argentina",
+       caption = "Fuente: IGN / INDEC")
+
+
+```
+
+Este ejemplo muestra cómo combinar múltiples capas espaciales:
+polígonos + puntos + texto.
+
+Además de definir una paleta de colores, podemos mejorar la estética general del mapa ajustando el tema, la leyenda y el nivel de detalle.
+
+```{r}
+#Mapa con estilo minimalista
+
+ggplot(hog_cloaca_geo) +
+geom_sf(aes(fill = Total), color = "grey80") +
+scale_fill_distiller("% hogares", palette = "Reds", direction = 1) +
+coord_sf(xlim = c(-75, -52), ylim = c(-22, -55)) +
+theme_void() +
+labs(title = "Hogares sin acceso a la red cloacal (2022)",
+caption = "Fuente: INDEC")
+
+
+```
+
+Ajustar la posición y el formato de la leyenda:
+
+```{r}
+p_cloaca<-ggplot(hog_cloaca_geo) +
+geom_sf(aes(fill = Total), color = "grey80") +
+scale_fill_distiller("% hogares",
+palette = "Reds",
+direction = 1,
+breaks = seq(0, 60, 10)) +
+coord_sf(xlim = c(-75, -52), ylim = c(-22, -55)) +
+theme_bw() +
+theme(legend.position = "bottom") +
+labs(title = "Hogares sin red cloacal por provincia (2022)",
+caption = "Fuente: INDEC")
+
+p_cloaca
+
+```
+
+Por último, para incluir el mapa en informes, presentaciones o enviarlo a otras
+personas, podemos exportarlo directamente desde R con *ggsave()*.
+Esta función guarda el último gráfico o el objeto gráfico que indiquemos,
+con tamaño y resolución ajustables.
+
+
+```{r save}
+ggsave("mapa_cloaca.png",
+p_cloaca,
+width = 8, height = 6, dpi = 300)
+
+```
+
 
 <!-- ## Reproduciendo -->
 
