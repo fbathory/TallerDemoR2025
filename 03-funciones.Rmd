@@ -108,7 +108,7 @@ crecim_lineal <- function(N0, Nt, t, h){
 Nuestra respuesta a la pregunta inicial podría ser, siendo `h = 15`:
 
 ```{r crec lineal2}
-# ¿qué población habrá en 2025?
+# ¿qué población habrá en 2035?
 N2035 <- crecim_lineal(N0 = 50000, Nt = 60000, t = 10, h = 15)
 
 # miremos un gráfico
