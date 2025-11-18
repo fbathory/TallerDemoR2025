@@ -23,7 +23,7 @@
 <meta name="author" content="Ayelén Martinez, Florencia Bathory" />
 
 
-<meta name="date" content="2025-11-11" />
+<meta name="date" content="2025-11-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="repaso---dplyr-y-ggplot.html"/>
-
+<link rel="next" href="funciones.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -63,9 +63,8 @@
 
 
 <style type="text/css">
-html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -75,7 +74,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -151,11 +150,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#informaci%C3%B3n-general"><i class="fa fa-check"></i><b>1.1</b> Información general</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#prepar%C3%A1ndonos"><i class="fa fa-check"></i><b>1.2</b> PrepaRándonos</a>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#información-general"><i class="fa fa-check"></i><b>1.1</b> Información general</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#preparándonos"><i class="fa fa-check"></i><b>1.2</b> PrepaRándonos</a>
 <ul>
-<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
-<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalaci%C3%B3n-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#instalación-de-y-rstudio"><i class="fa fa-check"></i><b>1.2.1</b> Instalación de y RStudio</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#instalación-de-paquetes"><i class="fa fa-check"></i><b>1.2.2</b> Instalación de paquetes</a></li>
 <li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#materiales-anteriores-y-otras-cosas-a-tener-a-mano"><i class="fa fa-check"></i><b>1.2.3</b> Materiales anteriores y otras cosas a tener a mano</a></li>
 <li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#contactos"><i class="fa fa-check"></i><b>1.2.4</b> Contactos</a></li>
 </ul></li>
@@ -175,15 +174,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html"><i class="fa fa-check"></i><b>3</b> ggplot (continuación)</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#de-barras-a-pir%C3%A1mides"><i class="fa fa-check"></i><b>3.1</b> De barras a pirámides</a></li>
+<li class="chapter" data-level="3.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#de-barras-a-pirámides"><i class="fa fa-check"></i><b>3.1</b> De barras a pirámides</a></li>
 <li class="chapter" data-level="3.2" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#lexis"><i class="fa fa-check"></i><b>3.2</b> Lexis</a>
 <ul>
 <li class="chapter" data-level="3.2.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#actividad"><i class="fa fa-check"></i><b>3.2.1</b> Actividad</a></li>
 <li class="chapter" data-level="3.2.2" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#bonus"><i class="fa fa-check"></i><b>3.2.2</b> BONUS</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#mapas-tem%C3%A1ticos"><i class="fa fa-check"></i><b>3.3</b> Mapas temáticos</a>
+<li class="chapter" data-level="3.3" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#mapas-temáticos"><i class="fa fa-check"></i><b>3.3</b> Mapas temáticos</a>
 <ul>
 <li class="chapter" data-level="3.3.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#actividad-1"><i class="fa fa-check"></i><b>3.3.1</b> Actividad</a></li>
+<li class="chapter" data-level="3.3.2" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#bonus-otras-funciones-con-mapas"><i class="fa fa-check"></i><b>3.3.2</b> BONUS: otras funciones con mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#curvas-kaplan-meier"><i class="fa fa-check"></i><b>3.4</b> Curvas Kaplan-Meier</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="ggplot-continuación.html"><a href="ggplot-continuación.html#estimación-kaplanmeier"><i class="fa fa-check"></i><b>3.4.1</b> Estimación Kaplan–Meier</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="funciones.html"><a href="funciones.html"><i class="fa fa-check"></i><b>4</b> Funciones</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="funciones.html"><a href="funciones.html#demografía"><i class="fa fa-check"></i><b>4.1</b> DemogRafía</a></li>
+<li class="chapter" data-level="4.2" data-path="funciones.html"><a href="funciones.html#funciones-1"><i class="fa fa-check"></i><b>4.2</b> Funciones</a></li>
+<li class="chapter" data-level="4.3" data-path="funciones.html"><a href="funciones.html#crecimiento"><i class="fa fa-check"></i><b>4.3</b> Crecimiento</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="funciones.html"><a href="funciones.html#actividad-2"><i class="fa fa-check"></i><b>4.3.1</b> Actividad</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="funciones.html"><a href="funciones.html#estandarizando"><i class="fa fa-check"></i><b>4.4</b> Estandarizando</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="funciones.html"><a href="funciones.html#actividad-3"><i class="fa fa-check"></i><b>4.4.1</b> Actividad</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="funciones.html"><a href="funciones.html#funciones-demográficas-en-paquetes-demográficos"><i class="fa fa-check"></i><b>4.5</b> Funciones demográficas en paquetes demográficos</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="funciones.html"><a href="funciones.html#tablas-de-mortalidad"><i class="fa fa-check"></i><b>4.5.1</b> Tablas de mortalidad</a></li>
+<li class="chapter" data-level="4.5.2" data-path="funciones.html"><a href="funciones.html#evaluación-de-declaración-de-edad"><i class="fa fa-check"></i><b>4.5.2</b> Evaluación de declaración de edad</a></li>
+<li class="chapter" data-level="4.5.3" data-path="funciones.html"><a href="funciones.html#graduación-de-población-por-edad-simple"><i class="fa fa-check"></i><b>4.5.3</b> Graduación de población por edad simple</a></li>
+<li class="chapter" data-level="4.5.4" data-path="funciones.html"><a href="funciones.html#actividad-4"><i class="fa fa-check"></i><b>4.5.4</b> Actividad</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -207,9 +231,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="ggplot-continuación" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> ggplot (continuación)<a href="ggplot-continuación.html#ggplot-continuaci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">3</span> ggplot (continuación)<a href="ggplot-continuación.html#ggplot-continuación" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="de-barras-a-pirámides" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> De barras a pirámides<a href="ggplot-continuación.html#de-barras-a-pir%C3%A1mides" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">3.1</span> De barras a pirámides<a href="ggplot-continuación.html#de-barras-a-pirámides" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Si quisiéramos ver el mismo gráfico que antes, pero separado por sexo,
 podemos usar las opciones de
 <a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">faceting</a> :</p>
@@ -248,8 +272,8 @@ podemos usar las opciones de
 <span id="cb3-2"><a href="ggplot-continuación.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
 <span id="cb3-3"><a href="ggplot-continuación.html#cb3-3" tabindex="-1"></a>g_ned_sexo_plotly <span class="ot">&lt;-</span> <span class="fu">ggplotly</span>(g_ned_sexo_stack <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">text =</span> n), <span class="at">tooltip=</span> <span class="st">&quot;text&quot;</span>) </span>
 <span id="cb3-4"><a href="ggplot-continuación.html#cb3-4" tabindex="-1"></a>g_ned_sexo_plotly</span></code></pre></div>
-<div class="plotly html-widget html-fill-item" id="htmlwidget-fbab130f18d6446c0a98" style="width:672px;height:480px;"></div>
-<script type="application/json" data-for="htmlwidget-fbab130f18d6446c0a98">{"x":{"data":[{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1744,1750],"x":[1,2],"y":[12,6],"text":[" 12","  6"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"No corresponde/escuelas especiales","legendgroup":"No corresponde/escuelas especiales","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1656,1665],"x":[1,2],"y":[88,85],"text":[" 88"," 85"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(211,146,0,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Inicial","legendgroup":"Inicial","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1463,1425],"x":[1,2],"y":[193,240],"text":["193","240"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(147,170,0,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Primario incompleto","legendgroup":"Primario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1344,1324],"x":[1,2],"y":[119,101],"text":["119","101"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Primario completo","legendgroup":"Primario completo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1044,963],"x":[1,2],"y":[300,361],"text":["300","361"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,159,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Secundario incompleto","legendgroup":"Secundario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[779,733],"x":[1,2],"y":[265,230],"text":["265","230"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,185,227,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Secundario completo","legendgroup":"Secundario completo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[520,436],"x":[1,2],"y":[259,297],"text":["259","297"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Superior / Universitario incompleto","legendgroup":"Superior / Universitario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[33,30],"x":[1,2],"y":[487,406],"text":["487","406"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(219,114,251,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Superior / Universitario completo y mas","legendgroup":"Superior / Universitario completo y mas","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[0,0],"x":[1,2],"y":[33,30],"text":[" 33"," 30"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,97,195,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Sin instruccion","legendgroup":"Sin instruccion","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.840182648401829,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Poblacion por sexo y nivel educativo","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,2.6000000000000001],"tickmode":"array","ticktext":["Mujer","Varon"],"tickvals":[1,2],"categoryorder":"array","categoryarray":["Mujer","Varon"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Sexo","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-87.800000000000011,1843.8],"tickmode":"array","ticktext":["0","500","1000","1500"],"tickvals":[0,499.99999999999994,1000,1500],"categoryorder":"array","categoryarray":["0","500","1000","1500"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"n","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"rgba(255,255,255,1)","line":{"color":"rgba(51,51,51,1)","width":0,"linetype":"solid"},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"668c37ab7d4c":{"text":{},"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"668c37ab7d4c","visdat":{"668c37ab7d4c":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-1c934cdb307176150748" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-1c934cdb307176150748">{"x":{"data":[{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1744,1750],"x":[1,2],"y":[12,6],"text":[" 12","  6"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"No corresponde/escuelas especiales","legendgroup":"No corresponde/escuelas especiales","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1656,1665],"x":[1,2],"y":[88,85],"text":[" 88"," 85"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(211,146,0,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Inicial","legendgroup":"Inicial","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1463,1425],"x":[1,2],"y":[193,240],"text":["193","240"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(147,170,0,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Primario incompleto","legendgroup":"Primario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1344,1324],"x":[1,2],"y":[119,101],"text":["119","101"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Primario completo","legendgroup":"Primario completo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[1044,963],"x":[1,2],"y":[300,361],"text":["300","361"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,193,159,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Secundario incompleto","legendgroup":"Secundario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[779,733],"x":[1,2],"y":[265,230],"text":["265","230"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(0,185,227,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Secundario completo","legendgroup":"Secundario completo","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[520,436],"x":[1,2],"y":[259,297],"text":["259","297"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Superior / Universitario incompleto","legendgroup":"Superior / Universitario incompleto","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[33,30],"x":[1,2],"y":[487,406],"text":["487","406"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(219,114,251,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Superior / Universitario completo y mas","legendgroup":"Superior / Universitario completo y mas","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[0.89999999999999991,0.90000000000000013],"base":[0,0],"x":[1,2],"y":[33,30],"text":[" 33"," 30"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(255,97,195,1)","line":{"width":1.8897637795275593,"color":"transparent"}},"name":"Sin instruccion","legendgroup":"Sin instruccion","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":40.840182648401829,"r":7.3059360730593621,"b":37.260273972602747,"l":48.949771689497723},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Poblacion por sexo y nivel educativo","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.40000000000000002,2.6000000000000001],"tickmode":"array","ticktext":["Mujer","Varon"],"tickvals":[1,2],"categoryorder":"array","categoryarray":["Mujer","Varon"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Sexo","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-87.800000000000011,1843.8],"tickmode":"array","ticktext":["0","500","1000","1500"],"tickvals":[0,499.99999999999994,1000,1500],"categoryorder":"array","categoryarray":["0","500","1000","1500"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"n","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"rgba(255,255,255,1)","line":{"color":"rgba(51,51,51,1)","width":0,"linetype":"solid"},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"34905a10496f":{"text":{},"x":{},"y":{},"fill":{},"type":"bar"}},"cur_data":"34905a10496f","visdat":{"34905a10496f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p>Obtengamos la población censal de los dos últimos censos a nivel
 nacional, disponible en el archivo “pob_censo2010y2022.xlsx”. Vamos a
 armar, paso a paso, la pirámide del censo 2022, empezando por factorizar
@@ -543,7 +567,7 @@ personas que ingresan y salen de un estudio en distintos momentos.</p></li>
 </div>
 </div>
 <div id="mapas-temáticos" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Mapas temáticos<a href="ggplot-continuación.html#mapas-tem%C3%A1ticos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">3.3</span> Mapas temáticos<a href="ggplot-continuación.html#mapas-temáticos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Antes que nada, necesitamos descargar datos geográficos. Como fuente se
 puede recurrir al <a href="https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/CapasSIG">Instituto Geográfico Nacional
 (IGN)</a>
@@ -760,6 +784,443 @@ abiertos</a></p></li>
 (descargar .zip con el shapefile o GeoJSON)</p></li>
 <li><p><a href="https://catalogo.datos.gba.gob.ar/dataset/partidos">PBA - Partidos</a></p></li>
 </ul>
+</div>
+<div id="bonus-otras-funciones-con-mapas" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> BONUS: otras funciones con mapas<a href="ggplot-continuación.html#bonus-otras-funciones-con-mapas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En un mapa podemos superponer varias capas, igual que en cualquier gráfico de ggplot2.
+Por ejemplo, podemos sumar los centroides de las provincias para mostrar ubicaciones puntuales o etiquetas basadas en puntos.</p>
+<p>Los centroides nos permiten:</p>
+<ul>
+<li><p>ubicar puntos de referencia dentro de cada provincia,</p></li>
+<li><p>colocar etiquetas de texto basadas en esos puntos,</p></li>
+<li><p>comprender que un mapa no es una sola capa sino una composición de capas.</p></li>
+</ul>
+<p>Antes de calcular centroides, es buena práctica corregir geometrías inválidas, porque algunos shapefiles contienen errores topológicos que impiden calcularlos correctamente.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="ggplot-continuación.html#cb29-1" tabindex="-1"></a><span class="co"># Corregimos geometrías inválidas y aseguramos que sean MULTIPOLYGON</span></span>
+<span id="cb29-2"><a href="ggplot-continuación.html#cb29-2" tabindex="-1"></a>prov_shp_fix <span class="ot">&lt;-</span> <span class="fu">st_make_valid</span>(prov_shp)</span>
+<span id="cb29-3"><a href="ggplot-continuación.html#cb29-3" tabindex="-1"></a>prov_shp_fix <span class="ot">&lt;-</span> <span class="fu">st_cast</span>(prov_shp_fix, <span class="st">&quot;MULTIPOLYGON&quot;</span>, <span class="at">warn =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-4"><a href="ggplot-continuación.html#cb29-4" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="ggplot-continuación.html#cb29-5" tabindex="-1"></a><span class="co"># Calculamos centroides seguros</span></span>
+<span id="cb29-6"><a href="ggplot-continuación.html#cb29-6" tabindex="-1"></a>prov_centroides <span class="ot">&lt;-</span> <span class="fu">st_centroid</span>(prov_shp_fix)</span>
+<span id="cb29-7"><a href="ggplot-continuación.html#cb29-7" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="ggplot-continuación.html#cb29-8" tabindex="-1"></a><span class="co"># Graficamos: polígonos + centroides + etiquetas</span></span>
+<span id="cb29-9"><a href="ggplot-continuación.html#cb29-9" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb29-10"><a href="ggplot-continuación.html#cb29-10" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> prov_shp_fix, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">color =</span> <span class="st">&quot;grey70&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="ggplot-continuación.html#cb29-11" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> prov_centroides, <span class="at">color =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="ggplot-continuación.html#cb29-12" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="at">data =</span> prov_centroides, <span class="fu">aes</span>(<span class="at">label =</span> nam),</span>
+<span id="cb29-13"><a href="ggplot-continuación.html#cb29-13" tabindex="-1"></a>               <span class="at">size =</span> <span class="dv">2</span>, <span class="at">nudge_y =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb29-14"><a href="ggplot-continuación.html#cb29-14" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">75</span>, <span class="sc">-</span><span class="dv">52</span>),</span>
+<span id="cb29-15"><a href="ggplot-continuación.html#cb29-15" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>, <span class="sc">-</span><span class="dv">55</span>)) <span class="sc">+</span></span>
+<span id="cb29-16"><a href="ggplot-continuación.html#cb29-16" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb29-17"><a href="ggplot-continuación.html#cb29-17" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb29-18"><a href="ggplot-continuación.html#cb29-18" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb29-19"><a href="ggplot-continuación.html#cb29-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Mapa con centroides de provincias&quot;</span>,</span>
+<span id="cb29-20"><a href="ggplot-continuación.html#cb29-20" tabindex="-1"></a>       <span class="at">subtitle=</span> <span class="st">&quot;Argentina&quot;</span>,</span>
+<span id="cb29-21"><a href="ggplot-continuación.html#cb29-21" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">&quot;Fuente: IGN / INDEC&quot;</span>)</span></code></pre></div>
+<p><img src="talleR_files/figure-html/centroide-1.png" width="672" /></p>
+<p>Este ejemplo muestra cómo combinar múltiples capas espaciales:
+polígonos + puntos + texto.</p>
+<p>Además de definir una paleta de colores, podemos mejorar la estética general del mapa ajustando el tema, la leyenda y el nivel de detalle.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="ggplot-continuación.html#cb30-1" tabindex="-1"></a><span class="co">#Mapa con estilo minimalista</span></span>
+<span id="cb30-2"><a href="ggplot-continuación.html#cb30-2" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="ggplot-continuación.html#cb30-3" tabindex="-1"></a><span class="fu">ggplot</span>(hog_cloaca_geo) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="ggplot-continuación.html#cb30-4" tabindex="-1"></a><span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Total), <span class="at">color =</span> <span class="st">&quot;grey80&quot;</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="ggplot-continuación.html#cb30-5" tabindex="-1"></a><span class="fu">scale_fill_distiller</span>(<span class="st">&quot;% hogares&quot;</span>, <span class="at">palette =</span> <span class="st">&quot;Reds&quot;</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="ggplot-continuación.html#cb30-6" tabindex="-1"></a><span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">75</span>, <span class="sc">-</span><span class="dv">52</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>, <span class="sc">-</span><span class="dv">55</span>)) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="ggplot-continuación.html#cb30-7" tabindex="-1"></a><span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb30-8"><a href="ggplot-continuación.html#cb30-8" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de hogares particulares </span><span class="sc">\n</span><span class="st">sin acceso a la red de servicio cloacal&quot;</span>,</span>
+<span id="cb30-9"><a href="ggplot-continuación.html#cb30-9" tabindex="-1"></a>     <span class="at">subtitle =</span> <span class="st">&quot;Por provincia. Año 2022&quot;</span>,</span>
+<span id="cb30-10"><a href="ggplot-continuación.html#cb30-10" tabindex="-1"></a>     <span class="at">caption =</span> <span class="st">&quot;Fuente: INDEC&quot;</span>)</span></code></pre></div>
+<p><img src="talleR_files/figure-html/mapaa-1.png" width="672" /></p>
+<p>Ajustar la posición y el formato de la leyenda:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="ggplot-continuación.html#cb31-1" tabindex="-1"></a>p_cloaca<span class="ot">&lt;-</span><span class="fu">ggplot</span>(hog_cloaca_geo) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="ggplot-continuación.html#cb31-2" tabindex="-1"></a><span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Total), <span class="at">color =</span> <span class="st">&quot;grey80&quot;</span>) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="ggplot-continuación.html#cb31-3" tabindex="-1"></a><span class="fu">scale_fill_distiller</span>(<span class="st">&quot;% hogares&quot;</span>,</span>
+<span id="cb31-4"><a href="ggplot-continuación.html#cb31-4" tabindex="-1"></a><span class="at">palette =</span> <span class="st">&quot;Reds&quot;</span>,</span>
+<span id="cb31-5"><a href="ggplot-continuación.html#cb31-5" tabindex="-1"></a><span class="at">direction =</span> <span class="dv">1</span>,</span>
+<span id="cb31-6"><a href="ggplot-continuación.html#cb31-6" tabindex="-1"></a><span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="ggplot-continuación.html#cb31-7" tabindex="-1"></a><span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">75</span>, <span class="sc">-</span><span class="dv">52</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>, <span class="sc">-</span><span class="dv">55</span>)) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="ggplot-continuación.html#cb31-8" tabindex="-1"></a><span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb31-9"><a href="ggplot-continuación.html#cb31-9" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="ggplot-continuación.html#cb31-10" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Porcentaje de hogares particulares </span><span class="sc">\n</span><span class="st">sin acceso a la red de servicio cloacal&quot;</span>,</span>
+<span id="cb31-11"><a href="ggplot-continuación.html#cb31-11" tabindex="-1"></a>     <span class="at">subtitle =</span> <span class="st">&quot;Por provincia. Año 2022&quot;</span>,</span>
+<span id="cb31-12"><a href="ggplot-continuación.html#cb31-12" tabindex="-1"></a>     <span class="at">caption =</span> <span class="st">&quot;Fuente: INDEC&quot;</span>)</span>
+<span id="cb31-13"><a href="ggplot-continuación.html#cb31-13" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="ggplot-continuación.html#cb31-14" tabindex="-1"></a>p_cloaca</span></code></pre></div>
+<p><img src="talleR_files/figure-html/mapaa1-1.png" width="672" /></p>
+<p>Por otro lado, en demografía se suele trabajar con indicadores agrupados por rangos, cuartiles o tipologías (variables discretas o categóricas). Para visualizar esto, podemos usar la función <em>cut()</em> y una escala de color diferente (scale_fill_brewer).</p>
+<p>¡Veamos como hacerlo!</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="ggplot-continuación.html#cb32-1" tabindex="-1"></a><span class="co"># Categorizar la variable &#39;Total&#39; en 4 grupos (cuartiles o rangos manuales)</span></span>
+<span id="cb32-2"><a href="ggplot-continuación.html#cb32-2" tabindex="-1"></a>hog_cloaca_geo <span class="ot">&lt;-</span> hog_cloaca_geo <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="ggplot-continuación.html#cb32-3" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-4"><a href="ggplot-continuación.html#cb32-4" tabindex="-1"></a>    <span class="at">nivel_cloaca =</span> <span class="fu">cut</span>(</span>
+<span id="cb32-5"><a href="ggplot-continuación.html#cb32-5" tabindex="-1"></a>      Total,</span>
+<span id="cb32-6"><a href="ggplot-continuación.html#cb32-6" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">quantile</span>(Total, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co"># Define dónde se realizan los cortes</span></span>
+<span id="cb32-7"><a href="ggplot-continuación.html#cb32-7" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span>, <span class="co">#Asegura que el valor mínimo se incluya en el primer grupo</span></span>
+<span id="cb32-8"><a href="ggplot-continuación.html#cb32-8" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Alto&quot;</span>, <span class="st">&quot;Medio&quot;</span>, <span class="st">&quot;Bajo&quot;</span>, <span class="st">&quot;Muy bajo&quot;</span>) <span class="co">#Nombre de categorías</span></span>
+<span id="cb32-9"><a href="ggplot-continuación.html#cb32-9" tabindex="-1"></a>    )</span>
+<span id="cb32-10"><a href="ggplot-continuación.html#cb32-10" tabindex="-1"></a>  )</span>
+<span id="cb32-11"><a href="ggplot-continuación.html#cb32-11" tabindex="-1"></a></span>
+<span id="cb32-12"><a href="ggplot-continuación.html#cb32-12" tabindex="-1"></a><span class="co"># Graficar con la nueva variable categórica</span></span>
+<span id="cb32-13"><a href="ggplot-continuación.html#cb32-13" tabindex="-1"></a><span class="fu">ggplot</span>(hog_cloaca_geo) <span class="sc">+</span></span>
+<span id="cb32-14"><a href="ggplot-continuación.html#cb32-14" tabindex="-1"></a> <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> nivel_cloaca), <span class="at">color =</span> <span class="st">&quot;grey90&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-15"><a href="ggplot-continuación.html#cb32-15" tabindex="-1"></a> <span class="co"># Usamos scale_fill_brewer() para mapear la variable Categórica</span></span>
+<span id="cb32-16"><a href="ggplot-continuación.html#cb32-16" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(</span>
+<span id="cb32-17"><a href="ggplot-continuación.html#cb32-17" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">&quot;% Hogares </span><span class="sc">\n</span><span class="st">con acceso a cloaca (Nivel)&quot;</span>, <span class="co"># Nuevo título de leyenda</span></span>
+<span id="cb32-18"><a href="ggplot-continuación.html#cb32-18" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">&quot;YlGnBu&quot;</span>, <span class="co"># Paleta secuencial para datos discretos</span></span>
+<span id="cb32-19"><a href="ggplot-continuación.html#cb32-19" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb32-20"><a href="ggplot-continuación.html#cb32-20" tabindex="-1"></a> <span class="fu">coord_sf</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">75</span>, <span class="sc">-</span><span class="dv">52</span>), <span class="co"># longitud</span></span>
+<span id="cb32-21"><a href="ggplot-continuación.html#cb32-21" tabindex="-1"></a>          <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>, <span class="sc">-</span><span class="dv">55</span>)) <span class="sc">+</span> <span class="co"># latitud</span></span>
+<span id="cb32-22"><a href="ggplot-continuación.html#cb32-22" tabindex="-1"></a> <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb32-23"><a href="ggplot-continuación.html#cb32-23" tabindex="-1"></a> <span class="fu">labs</span>(</span>
+<span id="cb32-24"><a href="ggplot-continuación.html#cb32-24" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Hogares particulares según nivel de acceso a </span><span class="sc">\n</span><span class="st">la red de servicio cloacal&quot;</span>,</span>
+<span id="cb32-25"><a href="ggplot-continuación.html#cb32-25" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Por provincia. Año 2022&quot;</span>,</span>
+<span id="cb32-26"><a href="ggplot-continuación.html#cb32-26" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Fuente: INDEC&quot;</span>)</span></code></pre></div>
+<p><img src="talleR_files/figure-html/mapaa2-1.png" width="672" /></p>
+</div>
+</div>
+<div id="curvas-kaplan-meier" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Curvas Kaplan-Meier<a href="ggplot-continuación.html#curvas-kaplan-meier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En este ejemplo vamos a:</p>
+<ul>
+<li><p>Simular tiempos de supervivencia con censura aleatoria.</p></li>
+<li><p>Construir el objeto Surv() que indica tiempo observado + evento/censura.</p></li>
+<li><p>Estimar la curva de supervivencia con Kaplan–Meier usando survfit().</p></li>
+<li><p>Pasar los resultados a formato tidy para trabajar con ggplot2.</p></li>
+<li><p>Graficar Kaplan–Meier con y sin estratos (ej. sexo).</p></li>
+<li><p>Comparar curvas con el test log-rank</p></li>
+</ul>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="ggplot-continuación.html#cb33-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-2"><a href="ggplot-continuación.html#cb33-2" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb33-3"><a href="ggplot-continuación.html#cb33-3" tabindex="-1"></a><span class="co">#install.packages(&quot;survminer&quot;)</span></span>
+<span id="cb33-4"><a href="ggplot-continuación.html#cb33-4" tabindex="-1"></a><span class="fu">library</span>(survminer)   <span class="co"># opcional (gráficos bonitos)</span></span>
+<span id="cb33-5"><a href="ggplot-continuación.html#cb33-5" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="ggplot-continuación.html#cb33-6" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) <span class="co">#garantiza la reproducibilidad en simulaciones</span></span>
+<span id="cb33-7"><a href="ggplot-continuación.html#cb33-7" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="ggplot-continuación.html#cb33-8" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">300</span></span></code></pre></div>
+<p>Vamos a generar tres componentes fundamentales en un análisis de supervivencia:</p>
+<p>-<em>Tiempo “verdadero” hasta el evento</em>: se simula a partir de una distribución exponencial.</p>
+<p>-<em>Tiempo de censura independiente</em>: representa observaciones que no llegan a experimentar el evento durante el período de estudio.</p>
+<p>-<em>Tiempo observado</em>: es el mínimo entre ambos, es decir, lo que realmente se puede observar en los datos.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ggplot-continuación.html#cb34-1" tabindex="-1"></a><span class="co"># tiempo &quot;verdadero&quot;</span></span>
+<span id="cb34-2"><a href="ggplot-continuación.html#cb34-2" tabindex="-1"></a>tiempo <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, <span class="at">rate =</span> <span class="fl">0.1</span>) <span class="co">#genera números aleatorios en una distribución exponencial</span></span>
+<span id="cb34-3"><a href="ggplot-continuación.html#cb34-3" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="ggplot-continuación.html#cb34-4" tabindex="-1"></a><span class="co"># censura independiente</span></span>
+<span id="cb34-5"><a href="ggplot-continuación.html#cb34-5" tabindex="-1"></a>cens <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, <span class="at">rate =</span> <span class="fl">0.05</span>)</span>
+<span id="cb34-6"><a href="ggplot-continuación.html#cb34-6" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="ggplot-continuación.html#cb34-7" tabindex="-1"></a><span class="co"># tiempo observado</span></span>
+<span id="cb34-8"><a href="ggplot-continuación.html#cb34-8" tabindex="-1"></a>t_obs <span class="ot">&lt;-</span> <span class="fu">pmin</span>(tiempo, cens) <span class="co">#devuelve el mínimo elemento a elemento entre dos (o más) vectores</span></span></code></pre></div>
+<p>Una vez simulados los tiempos, necesitamos definir:</p>
+<p>-<em>Un indicador de evento</em>: toma valor 1 si el evento ocurrió antes que la censura, y 0 en caso contrario.</p>
+<p>-<em>Una covariable categórica</em> (en este caso, sexo) para ilustrar cómo se comparan curvas de supervivencia entre grupos.</p>
+<p>-<em>El dataset final</em>, donde reunimos toda la información necesaria para ajustar el modelo de Kaplan–Meier.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="ggplot-continuación.html#cb35-1" tabindex="-1"></a><span class="co"># indicador de evento (1 = evento, 0 = censura)</span></span>
+<span id="cb35-2"><a href="ggplot-continuación.html#cb35-2" tabindex="-1"></a>evento <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(tiempo <span class="sc">&lt;=</span> cens)</span>
+<span id="cb35-3"><a href="ggplot-continuación.html#cb35-3" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="ggplot-continuación.html#cb35-4" tabindex="-1"></a><span class="co"># covariable categórica</span></span>
+<span id="cb35-5"><a href="ggplot-continuación.html#cb35-5" tabindex="-1"></a>sexo <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;Hombre&quot;</span>,<span class="st">&quot;Mujer&quot;</span>), <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>) <span class="co">#crea una muesta aleatoria</span></span>
+<span id="cb35-6"><a href="ggplot-continuación.html#cb35-6" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="ggplot-continuación.html#cb35-7" tabindex="-1"></a><span class="co">#armamos dataset final</span></span>
+<span id="cb35-8"><a href="ggplot-continuación.html#cb35-8" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb35-9"><a href="ggplot-continuación.html#cb35-9" tabindex="-1"></a>  <span class="at">tiempo =</span> t_obs,</span>
+<span id="cb35-10"><a href="ggplot-continuación.html#cb35-10" tabindex="-1"></a>  <span class="at">evento =</span> evento,</span>
+<span id="cb35-11"><a href="ggplot-continuación.html#cb35-11" tabindex="-1"></a>  <span class="at">sexo =</span> sexo</span>
+<span id="cb35-12"><a href="ggplot-continuación.html#cb35-12" tabindex="-1"></a>)</span></code></pre></div>
+<div class="take_note_box take_note">
+<p><strong>Tibble!!!</strong><br>
+El paquete <strong>tibble</strong>, que forma parte del entorno <strong>tidyverse</strong>, permite crear, manipular y visualizar tablas de datos con comportamientos más consistentes y mejorados respecto a los data frames tradicionales.. Ver más <a href="https://tibble.tidyverse.org/">aquí</a>.<br>
+<img src="figs/tibble.svg" width="250" alt="TIBBLE" /></p>
+</div>
+<div id="estimación-kaplanmeier" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Estimación Kaplan–Meier<a href="ggplot-continuación.html#estimación-kaplanmeier" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El estimador KM se aplica con la función survfit(), pero antes hay que crear un objeto <em>Surv()</em> que contiene el tiempo observado y el estado (evento o censura).</p>
+<p>La fórmula ~ 1 indica que NO estamos estratificando por ninguna covariable.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ggplot-continuación.html#cb36-1" tabindex="-1"></a>km_fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(tiempo, evento) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> datos)</span>
+<span id="cb36-2"><a href="ggplot-continuación.html#cb36-2" tabindex="-1"></a><span class="fu">summary</span>(km_fit)</span></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(tiempo, evento) ~ 1, data = datos)
+## 
+##     time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##   0.0437    299       1   0.9967 0.00334      0.99013       1.0000
+##   0.0460    298       1   0.9933 0.00471      0.98411       1.0000
+##   0.0563    297       1   0.9900 0.00576      0.97873       1.0000
+##   0.0790    296       1   0.9866 0.00664      0.97369       0.9997
+##   0.2417    291       1   0.9832 0.00744      0.96876       0.9979
+##   0.2915    290       1   0.9798 0.00815      0.96400       0.9959
+##   0.3006    289       1   0.9765 0.00880      0.95936       0.9938
+##   0.3158    288       1   0.9731 0.00940      0.95482       0.9917
+##   0.3177    287       1   0.9697 0.00996      0.95035       0.9894
+##   0.3289    285       1   0.9663 0.01049      0.94593       0.9870
+##   0.3434    283       1   0.9629 0.01099      0.94155       0.9846
+##   0.4209    281       1   0.9594 0.01147      0.93720       0.9822
+##   0.4227    280       1   0.9560 0.01193      0.93289       0.9797
+##   0.4765    277       1   0.9525 0.01238      0.92859       0.9771
+##   0.5156    276       1   0.9491 0.01281      0.92433       0.9745
+##   0.5621    274       1   0.9456 0.01322      0.92007       0.9719
+##   0.5967    272       1   0.9422 0.01362      0.91584       0.9692
+##   0.6214    270       1   0.9387 0.01401      0.91161       0.9665
+##   0.6738    269       1   0.9352 0.01439      0.90740       0.9638
+##   0.6865    268       1   0.9317 0.01475      0.90322       0.9611
+##   0.7211    267       1   0.9282 0.01510      0.89907       0.9583
+##   0.7498    266       1   0.9247 0.01544      0.89493       0.9555
+##   0.7535    264       1   0.9212 0.01578      0.89080       0.9527
+##   0.8025    262       1   0.9177 0.01610      0.88667       0.9498
+##   0.8277    261       1   0.9142 0.01642      0.88255       0.9469
+##   0.8416    260       1   0.9107 0.01673      0.87845       0.9440
+##   0.9365    255       1   0.9071 0.01704      0.87429       0.9411
+##   0.9857    254       1   0.9035 0.01734      0.87015       0.9382
+##   0.9863    253       1   0.8999 0.01764      0.86603       0.9352
+##   1.0193    251       1   0.8964 0.01793      0.86190       0.9322
+##   1.1303    246       1   0.8927 0.01822      0.85770       0.9292
+##   1.2844    242       1   0.8890 0.01852      0.85346       0.9261
+##   1.4478    240       1   0.8853 0.01881      0.84922       0.9230
+##   1.4527    239       1   0.8816 0.01909      0.84499       0.9198
+##   1.4573    238       1   0.8779 0.01937      0.84077       0.9167
+##   1.5304    235       1   0.8742 0.01964      0.83652       0.9135
+##   1.5890    233       1   0.8704 0.01991      0.83226       0.9103
+##   1.6774    232       1   0.8667 0.02018      0.82802       0.9071
+##   1.6987    231       1   0.8629 0.02043      0.82379       0.9039
+##   1.7829    230       1   0.8592 0.02069      0.81957       0.9007
+##   1.8828    226       1   0.8554 0.02094      0.81529       0.8974
+##   1.9004    225       1   0.8516 0.02119      0.81103       0.8941
+##   1.9253    224       1   0.8478 0.02144      0.80678       0.8908
+##   1.9583    222       1   0.8439 0.02168      0.80251       0.8875
+##   1.9979    221       1   0.8401 0.02191      0.79826       0.8842
+##   2.0996    218       1   0.8363 0.02215      0.79397       0.8808
+##   2.1606    217       1   0.8324 0.02238      0.78970       0.8775
+##   2.2300    213       1   0.8285 0.02261      0.78536       0.8740
+##   2.2413    212       1   0.8246 0.02284      0.78103       0.8706
+##   2.2554    211       1   0.8207 0.02306      0.77671       0.8672
+##   2.3604    210       1   0.8168 0.02328      0.77241       0.8637
+##   2.3659    209       1   0.8129 0.02350      0.76811       0.8603
+##   2.3851    208       1   0.8090 0.02371      0.76382       0.8568
+##   2.5834    205       1   0.8050 0.02392      0.75949       0.8533
+##   2.5956    204       1   0.8011 0.02412      0.75517       0.8498
+##   2.5995    203       1   0.7971 0.02433      0.75085       0.8463
+##   2.6026    202       1   0.7932 0.02452      0.74655       0.8427
+##   2.6611    200       1   0.7892 0.02472      0.74223       0.8392
+##   2.7410    198       1   0.7852 0.02491      0.73789       0.8356
+##   2.7425    197       1   0.7812 0.02510      0.73356       0.8320
+##   2.8039    193       1   0.7772 0.02530      0.72917       0.8284
+##   2.8101    192       1   0.7732 0.02549      0.72478       0.8248
+##   2.8467    190       1   0.7691 0.02568      0.72037       0.8211
+##   2.9579    188       1   0.7650 0.02586      0.71594       0.8174
+##   2.9696    187       1   0.7609 0.02605      0.71153       0.8137
+##   2.9997    186       1   0.7568 0.02623      0.70712       0.8100
+##   3.0620    185       1   0.7527 0.02640      0.70271       0.8063
+##   3.1352    184       1   0.7486 0.02657      0.69832       0.8026
+##   3.1423    183       1   0.7445 0.02674      0.69393       0.7988
+##   3.1650    182       1   0.7404 0.02691      0.68955       0.7951
+##   3.1846    181       1   0.7364 0.02707      0.68518       0.7914
+##   3.2464    180       1   0.7323 0.02722      0.68081       0.7876
+##   3.4666    177       1   0.7281 0.02738      0.67639       0.7838
+##   3.4875    176       1   0.7240 0.02754      0.67198       0.7800
+##   3.5645    174       1   0.7198 0.02769      0.66755       0.7762
+##   3.6158    172       1   0.7156 0.02784      0.66310       0.7724
+##   3.7275    171       1   0.7115 0.02799      0.65866       0.7685
+##   3.7549    169       1   0.7073 0.02814      0.65419       0.7646
+##   3.7712    168       1   0.7030 0.02829      0.64973       0.7607
+##   3.8001    167       1   0.6988 0.02843      0.64527       0.7568
+##   3.9069    164       1   0.6946 0.02858      0.64076       0.7529
+##   4.0171    163       1   0.6903 0.02872      0.63626       0.7490
+##   4.0324    162       1   0.6860 0.02885      0.63177       0.7450
+##   4.1658    161       1   0.6818 0.02899      0.62728       0.7410
+##   4.2036    160       1   0.6775 0.02912      0.62279       0.7371
+##   4.4911    157       1   0.6732 0.02925      0.61826       0.7331
+##   4.5679    156       1   0.6689 0.02938      0.61372       0.7290
+##   4.5878    154       1   0.6646 0.02951      0.60916       0.7250
+##   4.6322    153       1   0.6602 0.02963      0.60461       0.7209
+##   4.6342    152       1   0.6559 0.02975      0.60006       0.7169
+##   4.6731    150       1   0.6515 0.02988      0.59549       0.7128
+##   4.7037    149       1   0.6471 0.02999      0.59093       0.7087
+##   4.7876    148       1   0.6427 0.03011      0.58637       0.7046
+##   4.8067    147       1   0.6384 0.03022      0.58181       0.7004
+##   4.9115    146       1   0.6340 0.03033      0.57727       0.6963
+##   5.0662    144       1   0.6296 0.03043      0.57269       0.6922
+##   5.1719    143       1   0.6252 0.03054      0.56812       0.6880
+##   5.2280    141       1   0.6208 0.03064      0.56352       0.6838
+##   5.3839    140       1   0.6163 0.03074      0.55893       0.6796
+##   5.4067    137       1   0.6118 0.03084      0.55427       0.6754
+##   5.5813    136       1   0.6073 0.03094      0.54961       0.6711
+##   5.6459    135       1   0.6028 0.03104      0.54496       0.6668
+##   5.6789    134       1   0.5983 0.03113      0.54032       0.6626
+##   5.6915    132       1   0.5938 0.03123      0.53565       0.6583
+##   5.7256    131       1   0.5893 0.03131      0.53098       0.6540
+##   5.7385    129       1   0.5847 0.03140      0.52628       0.6496
+##   5.8868    128       1   0.5801 0.03149      0.52159       0.6453
+##   5.9785    127       1   0.5756 0.03157      0.51690       0.6409
+##   6.0562    125       1   0.5710 0.03165      0.51218       0.6365
+##   6.0684    124       1   0.5664 0.03173      0.50746       0.6321
+##   6.2080    122       1   0.5617 0.03181      0.50271       0.6276
+##   6.2928    121       1   0.5571 0.03188      0.49796       0.6232
+##   6.4406    120       1   0.5524 0.03195      0.49322       0.6187
+##   6.6314    116       1   0.5477 0.03203      0.48836       0.6142
+##   6.6386    115       1   0.5429 0.03210      0.48349       0.6096
+##   6.7051    113       1   0.5381 0.03218      0.47859       0.6050
+##   6.8546    110       1   0.5332 0.03225      0.47360       0.6003
+##   6.9347    109       1   0.5283 0.03233      0.46861       0.5956
+##   7.3148    107       1   0.5234 0.03240      0.46358       0.5909
+##   7.3657    105       1   0.5184 0.03247      0.45850       0.5861
+##   7.5033    103       1   0.5134 0.03254      0.45338       0.5813
+##   7.5322    100       1   0.5082 0.03262      0.44815       0.5764
+##   7.5341     99       1   0.5031 0.03269      0.44293       0.5714
+##   7.7626     95       1   0.4978 0.03277      0.43753       0.5664
+##   8.2512     92       1   0.4924 0.03286      0.43201       0.5612
+##   8.4304     91       1   0.4870 0.03294      0.42651       0.5560
+##   8.4315     90       1   0.4816 0.03302      0.42101       0.5508
+##   8.4346     89       1   0.4762 0.03309      0.41553       0.5456
+##   8.4572     88       1   0.4707 0.03315      0.41005       0.5404
+##   8.4979     86       1   0.4653 0.03321      0.40452       0.5351
+##   8.7685     84       1   0.4597 0.03328      0.39892       0.5298
+##   8.9772     82       1   0.4541 0.03334      0.39326       0.5244
+##   9.2420     79       1   0.4484 0.03341      0.38745       0.5189
+##   9.2829     78       1   0.4426 0.03347      0.38165       0.5133
+##   9.4160     76       1   0.4368 0.03354      0.37578       0.5077
+##   9.5023     74       1   0.4309 0.03360      0.36983       0.5021
+##   9.6587     72       1   0.4249 0.03366      0.36381       0.4963
+##   9.7243     71       1   0.4189 0.03371      0.35780       0.4905
+##   9.7464     70       1   0.4129 0.03376      0.35181       0.4847
+##  10.0483     68       1   0.4069 0.03380      0.34573       0.4788
+##  10.2444     66       1   0.4007 0.03385      0.33957       0.4729
+##  10.2787     65       1   0.3945 0.03389      0.33342       0.4669
+##  10.5040     61       1   0.3881 0.03394      0.32694       0.4606
+##  10.6721     60       1   0.3816 0.03399      0.32048       0.4544
+##  10.8149     59       1   0.3751 0.03402      0.31405       0.4481
+##  11.0757     58       1   0.3687 0.03404      0.30764       0.4418
+##  11.0877     57       1   0.3622 0.03406      0.30125       0.4355
+##  11.2929     56       1   0.3557 0.03406      0.29488       0.4292
+##  11.3778     55       1   0.3493 0.03405      0.28853       0.4228
+##  11.5496     54       1   0.3428 0.03402      0.28220       0.4164
+##  11.5891     53       1   0.3363 0.03399      0.27590       0.4100
+##  11.8210     52       1   0.3299 0.03395      0.26961       0.4036
+##  11.9200     51       1   0.3234 0.03389      0.26335       0.3971
+##  12.2903     49       1   0.3168 0.03384      0.25696       0.3906
+##  12.7949     46       1   0.3099 0.03379      0.25027       0.3838
+##  12.8891     45       1   0.3030 0.03374      0.24362       0.3769
+##  12.9487     43       1   0.2960 0.03368      0.23681       0.3699
+##  13.0344     42       1   0.2889 0.03361      0.23003       0.3629
+##  13.1216     41       1   0.2819 0.03352      0.22328       0.3559
+##  13.2048     40       1   0.2748 0.03341      0.21656       0.3488
+##  13.2892     39       1   0.2678 0.03329      0.20988       0.3417
+##  14.2416     37       1   0.2606 0.03317      0.20302       0.3344
+##  14.2647     36       1   0.2533 0.03303      0.19619       0.3271
+##  14.8528     33       1   0.2456 0.03291      0.18891       0.3194
+##  15.2155     32       1   0.2380 0.03276      0.18168       0.3117
+##  15.3739     30       1   0.2300 0.03262      0.17422       0.3037
+##  15.6297     29       1   0.2221 0.03244      0.16680       0.2957
+##  15.6320     28       1   0.2142 0.03224      0.15945       0.2877
+##  15.8235     27       1   0.2062 0.03201      0.15215       0.2795
+##  16.3166     26       1   0.1983 0.03174      0.14490       0.2714
+##  16.4291     25       1   0.1904 0.03145      0.13772       0.2632
+##  16.7562     23       1   0.1821 0.03115      0.13022       0.2546
+##  16.9998     22       1   0.1738 0.03081      0.12280       0.2460
+##  17.1046     21       1   0.1655 0.03044      0.11545       0.2374
+##  17.3078     20       1   0.1573 0.03002      0.10818       0.2286
+##  17.5988     19       1   0.1490 0.02956      0.10098       0.2198
+##  18.0313     17       1   0.1402 0.02909      0.09337       0.2106
+##  18.1040     16       1   0.1315 0.02856      0.08587       0.2012
+##  19.2248     15       1   0.1227 0.02797      0.07848       0.1918
+##  19.2882     14       1   0.1139 0.02731      0.07122       0.1823
+##  19.3332     13       1   0.1052 0.02658      0.06408       0.1726
+##  19.6825     12       1   0.0964 0.02577      0.05709       0.1628
+##  21.1829     10       1   0.0868 0.02493      0.04940       0.1524
+##  22.0727      9       1   0.0771 0.02395      0.04196       0.1418
+##  22.2991      8       1   0.0675 0.02282      0.03479       0.1309
+##  23.9994      6       1   0.0562 0.02161      0.02648       0.1194
+##  25.8211      4       1   0.0422 0.02027      0.01644       0.1082
+##  26.9099      3       1   0.0281 0.01773      0.00817       0.0968
+##  38.4521      1       1   0.0000     NaN           NA           NA</code></pre>
+<p><strong>survfit()</strong> devuelve un objeto especial con muchos componentes.
+Para graficarlo con ggplot2, es útil transformarlo en un tibble con <em>broom::tidy()</em>.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="ggplot-continuación.html#cb38-1" tabindex="-1"></a>km_df <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(km_fit) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="ggplot-continuación.html#cb38-2" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb38-3"><a href="ggplot-continuación.html#cb38-3" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="ggplot-continuación.html#cb38-4" tabindex="-1"></a>km_df <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 8
+##     time n.risk n.event n.censor estimate std.error conf.high conf.low
+##    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 0.0165    300       0        1    1       0           1        1    
+## 2 0.0437    299       1        0    0.997   0.00335     1        0.990
+## 3 0.0460    298       1        0    0.993   0.00475     1        0.984
+## 4 0.0563    297       1        0    0.990   0.00582     1        0.979
+## 5 0.0790    296       1        0    0.987   0.00673     1.000    0.974
+## 6 0.0970    295       0        1    0.987   0.00673     1.000    0.974</code></pre>
+<p>Esto genera columnas clave como:</p>
+<ul>
+<li><p>time → tiempos en los que ocurre un evento</p></li>
+<li><p>estimate → estimación de la supervivencia S(t)</p></li>
+<li><p>conf.low, conf.high → intervalos de confianza</p></li>
+<li><p>n.risk → personas bajo riesgo justo antes del tiempo t</p></li>
+<li><p>n.event → número de eventos en ese tiempo</p></li>
+</ul>
+<p>Graficar Kaplan-Meier con <strong>ggplot2</strong></p>
+<p>Usamos un gráfico tipo step (escala escalonada):</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="ggplot-continuación.html#cb40-1" tabindex="-1"></a>km_df <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="ggplot-continuación.html#cb40-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> estimate)) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="ggplot-continuación.html#cb40-3" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">size =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="ggplot-continuación.html#cb40-4" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high),</span>
+<span id="cb40-5"><a href="ggplot-continuación.html#cb40-5" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="ggplot-continuación.html#cb40-6" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb40-7"><a href="ggplot-continuación.html#cb40-7" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Tiempo&quot;</span>,</span>
+<span id="cb40-8"><a href="ggplot-continuación.html#cb40-8" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Supervivencia estimada S(t)&quot;</span>,</span>
+<span id="cb40-9"><a href="ggplot-continuación.html#cb40-9" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Curva de supervivencia Kaplan–Meier&quot;</span></span>
+<span id="cb40-10"><a href="ggplot-continuación.html#cb40-10" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb40-11"><a href="ggplot-continuación.html#cb40-11" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb40-12"><a href="ggplot-continuación.html#cb40-12" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb40-13"><a href="ggplot-continuación.html#cb40-13" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb40-14"><a href="ggplot-continuación.html#cb40-14" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()           <span class="co"># más limpio</span></span>
+<span id="cb40-15"><a href="ggplot-continuación.html#cb40-15" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="talleR_files/figure-html/km7-1.png" width="672" /></p>
+<p><strong>Kaplan–Meier estratificado por una covariable</strong></p>
+<p>La fórmula ahora incluye un grupo: ~ sexo.
+Esto estima una curva por grupo, útil para comparar diferencias en supervivencia.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="ggplot-continuación.html#cb41-1" tabindex="-1"></a><span class="co">#estimación estratificada</span></span>
+<span id="cb41-2"><a href="ggplot-continuación.html#cb41-2" tabindex="-1"></a>km_fit_sexo <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(tiempo, evento) <span class="sc">~</span> sexo, <span class="at">data =</span> datos)</span>
+<span id="cb41-3"><a href="ggplot-continuación.html#cb41-3" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="ggplot-continuación.html#cb41-4" tabindex="-1"></a><span class="co">#Convertimos a tibble:</span></span>
+<span id="cb41-5"><a href="ggplot-continuación.html#cb41-5" tabindex="-1"></a>km_df_sexo <span class="ot">&lt;-</span> broom<span class="sc">::</span><span class="fu">tidy</span>(km_fit_sexo) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-6"><a href="ggplot-continuación.html#cb41-6" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span>
+<span id="cb41-7"><a href="ggplot-continuación.html#cb41-7" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="ggplot-continuación.html#cb41-8" tabindex="-1"></a><span class="co">#gráfico</span></span>
+<span id="cb41-9"><a href="ggplot-continuación.html#cb41-9" tabindex="-1"></a>km_df_sexo <span class="sc">%&gt;%</span> </span>
+<span id="cb41-10"><a href="ggplot-continuación.html#cb41-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> estimate, <span class="at">color =</span> sexo)) <span class="sc">+</span></span>
+<span id="cb41-11"><a href="ggplot-continuación.html#cb41-11" tabindex="-1"></a>  <span class="fu">geom_step</span>(<span class="at">size =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb41-12"><a href="ggplot-continuación.html#cb41-12" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high, <span class="at">fill =</span> sexo),</span>
+<span id="cb41-13"><a href="ggplot-continuación.html#cb41-13" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb41-14"><a href="ggplot-continuación.html#cb41-14" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb41-15"><a href="ggplot-continuación.html#cb41-15" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Tiempo&quot;</span>,</span>
+<span id="cb41-16"><a href="ggplot-continuación.html#cb41-16" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;S(t)&quot;</span>,</span>
+<span id="cb41-17"><a href="ggplot-continuación.html#cb41-17" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Kaplan–Meier por sexo&quot;</span></span>
+<span id="cb41-18"><a href="ggplot-continuación.html#cb41-18" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb41-19"><a href="ggplot-continuación.html#cb41-19" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb41-20"><a href="ggplot-continuación.html#cb41-20" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb41-21"><a href="ggplot-continuación.html#cb41-21" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb41-22"><a href="ggplot-continuación.html#cb41-22" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()           <span class="co"># más limpio</span></span>
+<span id="cb41-23"><a href="ggplot-continuación.html#cb41-23" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="talleR_files/figure-html/km8-1.png" width="672" /></p>
+<p>Comparación formal entre curvas: <strong>test log-rank</strong>
+El test de log-rank evalúa si las curvas de supervivencia de dos o más grupos provienen de la misma distribución.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="ggplot-continuación.html#cb42-1" tabindex="-1"></a>logRank<span class="ot">&lt;-</span><span class="fu">survdiff</span>(<span class="fu">Surv</span>(tiempo, evento) <span class="sc">~</span> sexo, <span class="at">data =</span> datos)</span>
+<span id="cb42-2"><a href="ggplot-continuación.html#cb42-2" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="ggplot-continuación.html#cb42-3" tabindex="-1"></a><span class="co">#se puede extraer el p-valor</span></span>
+<span id="cb42-4"><a href="ggplot-continuación.html#cb42-4" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(logRank<span class="sc">$</span>chisq, <span class="fu">length</span>(logRank<span class="sc">$</span>n) <span class="sc">-</span> <span class="dv">1</span>) </span></code></pre></div>
+<p>Interpretación básica:</p>
+<ul>
+<li><p>Si el p-valor es bajo, hay evidencia de diferencias entre grupos.</p></li>
+<li><p>Si es alto, no podemos descartar que las curvas sean iguales.</p></li>
+</ul>
+<p>Otra opción: gráfico rápido con <em>survminer</em>
+Este paquete simplifica todo el proceso y agrega tabla de riesgo debajo del gráfico.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="ggplot-continuación.html#cb43-1" tabindex="-1"></a><span class="fu">ggsurvplot</span>(</span>
+<span id="cb43-2"><a href="ggplot-continuación.html#cb43-2" tabindex="-1"></a>  km_fit_sexo,</span>
+<span id="cb43-3"><a href="ggplot-continuación.html#cb43-3" tabindex="-1"></a>  <span class="at">data =</span> datos,</span>
+<span id="cb43-4"><a href="ggplot-continuación.html#cb43-4" tabindex="-1"></a>  <span class="at">pval=</span><span class="fu">round</span>(pval,<span class="dv">4</span>),</span>
+<span id="cb43-5"><a href="ggplot-continuación.html#cb43-5" tabindex="-1"></a>  <span class="at">legend.title =</span> <span class="st">&quot;Sexo&quot;</span>,</span>
+<span id="cb43-6"><a href="ggplot-continuación.html#cb43-6" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Tiempo&quot;</span>,</span>
+<span id="cb43-7"><a href="ggplot-continuación.html#cb43-7" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;S(t)&quot;</span>,</span>
+<span id="cb43-8"><a href="ggplot-continuación.html#cb43-8" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Curvas de supervivencia por sexo&quot;</span>,</span>
+<span id="cb43-9"><a href="ggplot-continuación.html#cb43-9" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">&quot;Estimación de Kaplan–Meier&quot;</span></span>
+<span id="cb43-10"><a href="ggplot-continuación.html#cb43-10" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="talleR_files/figure-html/km_final-1.png" width="672" /></p>
 <!-- ## Reproduciendo -->
 <!-- El covid19 puso en primera plana el análisis demográfico, especialmente en el impacto que tuvo en $e_0$ ¿No te parece genial la figura 1 del paper [Quantifying impacts of the COVID-19 pandemic through life-expectancy losses: a population-level study of 29 countries](https://academic.oup.com/ije/advance-article/doi/10.1093/ije/dyab207/6375510) de Aburto y Otros (2021)? Podemos recrearlo gracias a que los autores lo permiten [aquí](https://github.com/OxfordDemSci/ex2020/blob/master/src/08-plots.R), haciendo su paper reproducible. De paso vamos viendo funciones nuevas. Iremos comentando los pasos: -->
 <!-- ```{r} -->
@@ -852,8 +1313,8 @@ abiertos</a></p></li>
           </div>
         </div>
       </div>
-<a href="repaso---dplyr-y-ggplot.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="repaso---dplyr-y-ggplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="funciones.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

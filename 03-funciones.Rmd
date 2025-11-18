@@ -363,17 +363,17 @@ c) Graficar la distribución de las defunciones por edad (colocando cada punto e
 
 > Estamos entrando en zona de utilización de funciones demográficas de paquetes.
 
-```{r, echo=F}
+```{r graf, echo=F}
 include_graphics("figs/atencion.jpg")
 ```
 
 Proyecto [DemoTools](https://timriffe.github.io/DemoTools/). Su instalación demora un poco:
 
-```{r, out.width="35%", echo=F}
+```{r graf2, out.width="35%", echo=F}
 include_graphics("figs/demotools.png")
 ```
 
-```{r, eval=F}
+```{r demotools, eval=F}
 
 library(devtools)
 install.packages("rstan", repos = c("https://mc-stan.org/r-packages/", getOption("repos")))
@@ -406,7 +406,7 @@ Repasemos sus argumentos, como `OAGNew`, `extrapLaw` y `a0rule`. También puede 
 
 Con el índice de **Myers** veamos si en Chaco mejoró la declaración por edad de varones entre los censos 2001 y 2010. Un valor del indicador que tienda a 0 indica una mejor declaración (bajo los supuesto del método).
 
-```{r}
+```{r evaluacion}
 pob_chaco <- readxl::read_xlsx("data/PoblCensal01y10.xlsx", sheet=1) %>% 
                 filter(PROV_NOMBRE == "CHACO")
 
