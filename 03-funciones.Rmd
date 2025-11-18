@@ -85,7 +85,7 @@ edad_en_t_anios(x = 35) #ahora t=5 por defecto
 
 ## Crecimiento
 
-Tenemos una población que en el año 2020 era de 50.000 personas y en 2020 era de 60.000. Nos preguntan cual sería la población a 2035. Existen distintas formas en que podemos modelar su crecimiento total a partir de dos puntos observados en el tiempo. En términos generales para un momento 0 y un momento t, debemos obtener primero el ritmo al que crece, es decir su tasa anual promedio $\overline{r}(0,t)$: 
+Tenemos una población que en el año 2020 era de 50.000 personas y en 2030 era de 60.000. Nos preguntan cual sería la población a 2035. Existen distintas formas en que podemos modelar su crecimiento total a partir de dos puntos observados en el tiempo. En términos generales para un momento 0 y un momento t, debemos obtener primero el ritmo al que crece, es decir su tasa anual promedio $\overline{r}(0,t)$: 
 
 |Supuesto | $N(t)$ | $\overline{r}(0,t)$|
 |---------|--------|-------|
