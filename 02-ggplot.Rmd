@@ -738,6 +738,209 @@ ggplot(hog_cloaca_geo) +
     caption = "Fuente: INDEC")
 ```
 
+## Curvas Kaplan-Meier
+
+En este ejemplo vamos a:
+
+- Simular tiempos de supervivencia con censura aleatoria.
+
+- Construir el objeto Surv() que indica tiempo observado + evento/censura.
+
+- Estimar la curva de supervivencia con Kaplan–Meier usando survfit().
+
+- Pasar los resultados a formato tidy para trabajar con ggplot2.
+
+- Graficar Kaplan–Meier con y sin estratos (ej. sexo).
+
+- Comparar curvas con el test log-rank
+
+```{r km, message=F, warning=F}
+library(tidyverse)
+library(survival)
+#install.packages("survminer")
+library(survminer)   # opcional (gráficos bonitos)
+
+set.seed(123) #garantiza la reproducibilidad en simulaciones
+
+n <- 300
+```
+
+Vamos a generar tres componentes fundamentales en un análisis de supervivencia:
+
+ -*Tiempo “verdadero” hasta el evento*: se simula a partir de una distribución exponencial.
+
+ -*Tiempo de censura independiente*: representa observaciones que no llegan a experimentar el evento durante el período de estudio.
+
+ -*Tiempo observado*: es el mínimo entre ambos, es decir, lo que realmente se puede observar en los datos.
+
+```{r km1, message=F, warning=F}
+
+# tiempo "verdadero"
+tiempo <- rexp(n, rate = 0.1) #genera números aleatorios en una distribución exponencial
+
+# censura independiente
+cens <- rexp(n, rate = 0.05)
+
+# tiempo observado
+t_obs <- pmin(tiempo, cens) #devuelve el mínimo elemento a elemento entre dos (o más) vectores
+```
+
+Una vez simulados los tiempos, necesitamos definir:
+
+ -*Un indicador de evento*: toma valor 1 si el evento ocurrió antes que la censura, y 0 en caso contrario.
+
+ -*Una covariable categórica* (en este caso, sexo) para ilustrar cómo se comparan curvas de supervivencia entre grupos.
+
+ -*El dataset final*, donde reunimos toda la información necesaria para ajustar el modelo de Kaplan–Meier.
+
+```{r km4, message=F, warning=F}
+# indicador de evento (1 = evento, 0 = censura)
+evento <- as.numeric(tiempo <= cens)
+
+# covariable categórica
+sexo <- sample(c("Hombre","Mujer"), size=n, replace=TRUE) #crea una muesta aleatoria
+
+#armamos dataset final
+datos <- tibble(
+  tiempo = t_obs,
+  evento = evento,
+  sexo = sexo
+)
+
+
+```
+
+
+
+::: {.take_note_box  .take_note data-latex="{take_note}"}
+<strong>Tibble!!!</strong><br>
+El paquete **tibble**, que forma parte del entorno **tidyverse**, permite crear, manipular y visualizar tablas de datos con comportamientos más consistentes y mejorados respecto a los data frames tradicionales.. Ver más [aquí](https://tibble.tidyverse.org/).<br>
+![TIBBLE](figs/tibble.svg){width=250px}
+:::
+
+
+### Estimación Kaplan–Meier
+
+El estimador KM se aplica con la función survfit(), pero antes hay que crear un objeto *Surv()* que contiene el tiempo observado y el estado (evento o censura).
+
+La fórmula ~ 1 indica que NO estamos estratificando por ninguna covariable.
+```{r km5, message=F, warning=F}
+km_fit <- survfit(Surv(tiempo, evento) ~ 1, data = datos)
+summary(km_fit)
+
+```
+
+
+**survfit()** devuelve un objeto especial con muchos componentes.
+Para graficarlo con ggplot2, es útil transformarlo en un tibble con *broom::tidy()*.
+
+```{r km6, message=F, warning=F}
+km_df <- broom::tidy(km_fit) %>% 
+  as_tibble()
+
+km_df %>% head()
+
+```
+Esto genera columnas clave como:
+
+- time → tiempos en los que ocurre un evento
+
+- estimate → estimación de la supervivencia S(t)
+
+- conf.low, conf.high → intervalos de confianza
+
+- n.risk → personas bajo riesgo justo antes del tiempo t
+
+- n.event → número de eventos en ese tiempo
+
+Graficar Kaplan-Meier con **ggplot2**
+
+Usamos un gráfico tipo step (escala escalonada):
+```{r km7, message=F, warning=F}
+km_df %>% 
+  ggplot(aes(x = time, y = estimate)) +
+  geom_step(size = 0.7) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high),
+              alpha = 0.15) +
+  labs(
+    x = "Tiempo",
+    y = "Supervivencia estimada S(t)",
+    title = "Curva de supervivencia Kaplan–Meier"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()           # más limpio
+  )
+
+```
+
+**Kaplan–Meier estratificado por una covariable**
+
+La fórmula ahora incluye un grupo: ~ sexo.
+Esto estima una curva por grupo, útil para comparar diferencias en supervivencia.
+```{r km8, message=F, warning=F}
+
+#estimación estratificada
+km_fit_sexo <- survfit(Surv(tiempo, evento) ~ sexo, data = datos)
+
+#Convertimos a tibble:
+km_df_sexo <- broom::tidy(km_fit_sexo) %>% 
+  as_tibble()
+
+#gráfico
+km_df_sexo %>% 
+  ggplot(aes(x = time, y = estimate, color = sexo)) +
+  geom_step(size = 0.7) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, fill = sexo),
+              alpha = 0.15, color = NA) +
+  labs(
+    x = "Tiempo",
+    y = "S(t)",
+    title = "Kaplan–Meier por sexo"
+  ) +
+  theme_minimal()+
+  theme(
+    plot.title = element_text(face = "bold"),
+    panel.grid.minor = element_blank()           # más limpio
+  )
+
+
+```
+
+Comparación formal entre curvas: **test log-rank**
+El test de log-rank evalúa si las curvas de supervivencia de dos o más grupos provienen de la misma distribución.
+```{r km9, message=F, warning=F}
+
+logRank<-survdiff(Surv(tiempo, evento) ~ sexo, data = datos)
+
+#se puede extraer el p-valor
+pval <- 1 - pchisq(logRank$chisq, length(logRank$n) - 1) 
+
+```
+
+Interpretación básica:
+
+- Si el p-valor es bajo, hay evidencia de diferencias entre grupos.
+
+- Si es alto, no podemos descartar que las curvas sean iguales.
+
+Otra opción: gráfico rápido con *survminer*
+Este paquete simplifica todo el proceso y agrega tabla de riesgo debajo del gráfico.
+
+```{r km_final, message=F, warning=F}
+ggsurvplot(
+  km_fit_sexo,
+  data = datos,
+  pval=round(pval,4),
+  legend.title = "Sexo",
+  xlab = "Tiempo",
+  ylab = "S(t)",
+  title = "Curvas de supervivencia por sexo",
+  subtitle = "Estimación de Kaplan–Meier"
+)
+
+```
 
 
 <!-- ## Reproduciendo -->
