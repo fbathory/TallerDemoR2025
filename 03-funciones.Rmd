@@ -272,7 +272,7 @@ $$
 Lo que permite comparar $TSM^A(t)$ con $TSM^B(t)$: $TSM^A(t) \lessgtr TSM^A(t)$. Pero vayamos al ejemplo!!!
 
 
-Obtengamos la población y defunciones de *Chile*, *Japón* y *Polonia* del año 2000 y 2010 leyendo la tabla "Chile_Japon_Polonia.csv" en la carpeta "data". 
+Obtengamos la población y defunciones de *Chile*, *Japón* y *Polonia* del año 2000, 2010 y 2015 leyendo la tabla "Chile_Japon_Polonia.csv" en la carpeta "data". 
 
 ```{r get hmd, include=T}
 db <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx")
@@ -281,7 +281,7 @@ db <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx")
 Enfoquémonos en el 2010 para comparar los tres países. Japón presenta una $TBM$ mayor pero atribuible a otro estadío en su envejecimiento según la porción de población de 65 años y más.
 
 ```{r hmd2010}
-db <- db %>% filter(Year == 2020)
+db <- db %>% filter(Year == 2015)
 
 db %>% 
   group_by(Country) %>% 
@@ -337,10 +337,10 @@ standarizarrr <- function(db){
                         TSM = sum(M * c_x)*1000)
   return(resultado)
 }
-standarizarrr(readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% filter(Year==2020))
+standarizarrr(readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% filter(Year==2015))
 ```
 
-b) Con los datos de la tabla "Chile_Japon_Polonia.csv": ¿qué se puede decir sobre la evolución de la mortalidad de Polonia en los años 1990, 2000 y 2010? ¿Bajó o creció?
+b) Con los datos de la tabla "Chile_Japon_Polonia.csv": ¿qué se puede decir sobre la evolución de la mortalidad de Polonia en los años 2000, 2010 y 2015? ¿Bajó o creció?
 
 ```{r mort pol, include=F}
 db_act <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% 
@@ -382,18 +382,18 @@ devtools::install_github("timriffe/DemoTools")
 
 ### Tablas de mortalidad
 
-Construir una función que produzca una **tabla de mortalidad** a partir de un set de tasas por edad de mortalidad es un lindo ejercicio de programación en R. Pero por suerte `DemoTools` tiene una muy buena implementación. Acá para Japón 2010:
+Construir una función que produzca una **tabla de mortalidad** a partir de un set de tasas por edad de mortalidad es un lindo ejercicio de programación en R. Pero por suerte `DemoTools` tiene una muy buena implementación. Acá para Japón 2015:
 
 ```{r mort, message=F, warning=F}
 
-jpn_2020 <- db %>% filter(Country == "Japon", Year == 2020)
+jpn_2015 <- db %>% filter(Country == "Japon", Year == 2015)
 
 # obtengo la tabla
 library(DemoTools)
-tm_jpn_2020 <- lt_abridged(nMx = jpn_2020$M, Age = jpn_2020$Age)
+tm_jpn_2015 <- lt_abridged(nMx = jpn_2015$M, Age = jpn_2015$Age)
 
 # veamos la función de sobrevivencia:
-tm_jpn_2020 %>% 
+tm_jpn_2015 %>% 
   ggplot(aes(Age, lx)) + 
   geom_point() +
   geom_line()+
