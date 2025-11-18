@@ -28,7 +28,8 @@ A lo largo del taller, veremos cómo las funciones en R nos permiten formalizar 
 
 ## Funciones
 
-Una función es un bloque de código reutilizable, diseñado para tomar uno o más argumentos y devolver un resultado. Permite **encapsular**  un procedimiento , que recibe argumentos y devuelve un resultado, para no repetir código y evitar errores. 
+Una función es un bloque de código reutilizable, diseñado para tomar uno o más argumentos y devolver un resultado. Permite **encapsular**  un procedimiento -que recibe argumentos y genera una respuesta- para evitar repetir código y reducir errores. 
+
 En general, si un bloque de código es copiado y pegado en más de una vez en un espacio de trabajo entonces merece su función. Las funciones en R contienen:
 
 - un **nombre**
