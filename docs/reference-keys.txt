@@ -65,3 +65,13 @@ ggplot-continuación
 de-barras-a-pirámides
 bonus
 mapas-temáticos
+bonus-otras-funciones-con-mapas
+curvas-kaplan-meier
+estimación-kaplanmeier
+funciones
+demografía
+funciones-1
+crecimiento
+estandarizando
+funciones-demográficas-en-paquetes-demográficos
+tablas-de-mortalidad

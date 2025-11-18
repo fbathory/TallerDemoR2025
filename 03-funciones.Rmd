@@ -405,59 +405,59 @@ tm_jpn_2015 %>%
 
 Repasemos sus argumentos, como `OAGNew`, `extrapLaw` y `a0rule`. También puede `graduar`, es decir pasar a edades simples.
 
-### Evaluación de declaración de edad
+<!-- ### Evaluación de declaración de edad -->
 
-Con el índice de **Myers** veamos si en Chaco mejoró la declaración por edad de varones entre los censos 2001 y 2010. Un valor del indicador que tienda a 0 indica una mejor declaración (bajo los supuesto del método).
+<!-- Con el índice de **Myers** veamos si en Chaco mejoró la declaración por edad de varones entre los censos 2001 y 2010. Un valor del indicador que tienda a 0 indica una mejor declaración (bajo los supuesto del método). -->
 
-```{r evaluacion}
-pob_chaco <- readxl::read_xlsx("data/PoblCensal01y10.xlsx", sheet=1) %>% 
-                filter(PROV_NOMBRE == "CHACO")
+<!-- ```{r evaluacion} -->
+<!-- pob_chaco <- readxl::read_xlsx("data/PoblCensal01y10.xlsx", sheet=1) %>%  -->
+<!--                 filter(PROV_NOMBRE == "CHACO") -->
 
-pob_chaco %>% 
-  ggplot(aes(EDAD, VARON, color=factor(CENSO))) + 
-  geom_point() + 
-  geom_line() + 
-  scale_x_continuous(breaks = seq(0,100,5), labels = seq(0,100,5)) +
-  theme_bw()
-  
-# obtengo Myers
-pob_chaco %>%
-  summarise(Myers_2001 = check_heaping_myers(VARON[CENSO==2001], EDAD[CENSO==2001], ageMin = 20, ageMax = 64),
-            Myers_2010 = check_heaping_myers(VARON[CENSO==2010], EDAD[CENSO==2010], ageMin = 20, ageMax = 64))
-```
+<!-- pob_chaco %>%  -->
+<!--   ggplot(aes(EDAD, VARON, color=factor(CENSO))) +  -->
+<!--   geom_point() +  -->
+<!--   geom_line() +  -->
+<!--   scale_x_continuous(breaks = seq(0,100,5), labels = seq(0,100,5)) + -->
+<!--   theme_bw() -->
 
-### Graduación de población por edad simple
+<!-- # obtengo Myers -->
+<!-- pob_chaco %>% -->
+<!--   summarise(Myers_2001 = check_heaping_myers(VARON[CENSO==2001], EDAD[CENSO==2001], ageMin = 20, ageMax = 64), -->
+<!--             Myers_2010 = check_heaping_myers(VARON[CENSO==2010], EDAD[CENSO==2010], ageMin = 20, ageMax = 64)) -->
+<!-- ``` -->
 
-El método de **Sprague** desagrega por edad simple conteos agrupados por edad quinquenal. Veamos como funciona para los varones de Chaco en el año 2010. Primero agregando, y luego aplicando el método.
+<!-- ### Graduación de población por edad simple -->
 
-```{r edad, warning=F, message=F}
-# me quedo con 2010
-pob_chaco_2010 <- pob_chaco %>% filter(CENSO == 2010)
+<!-- El método de **Sprague** desagrega por edad simple conteos agrupados por edad quinquenal. Veamos como funciona para los varones de Chaco en el año 2010. Primero agregando, y luego aplicando el método. -->
 
-# agrupo la población por grupos quinquenales
-pob_chaco_2010_quinquenal <- pob_chaco %>%
-  filter(CENSO == 2010) %>% 
-  mutate(EDAD_q = trunc(EDAD/5) * 5) %>% 
-  group_by(EDAD_q) %>% 
-  summarise(VARON = sum(VARON))
+<!-- ```{r edad, warning=F, message=F} -->
+<!-- # me quedo con 2010 -->
+<!-- pob_chaco_2010 <- pob_chaco %>% filter(CENSO == 2010) -->
 
-# aplico sprague
-pob_chaco_2010_sprague <- graduate(pob_chaco_2010_quinquenal$VARON, pob_chaco_2010_quinquenal$EDAD_q, method = "sprague")
+<!-- # agrupo la población por grupos quinquenales -->
+<!-- pob_chaco_2010_quinquenal <- pob_chaco %>% -->
+<!--   filter(CENSO == 2010) %>%  -->
+<!--   mutate(EDAD_q = trunc(EDAD/5) * 5) %>%  -->
+<!--   group_by(EDAD_q) %>%  -->
+<!--   summarise(VARON = sum(VARON)) -->
 
-# junto
-pob_chaco_2010_simple <- pob_chaco_2010 %>% 
-  full_join(tibble(EDAD = 0:110, VARON_sprague = pob_chaco_2010_sprague)) %>% 
-  select(EDAD, VARON, VARON_sprague) %>% 
-  pivot_longer(!EDAD, names_to="Tipo", values_to="Población")
+<!-- # aplico sprague -->
+<!-- pob_chaco_2010_sprague <- graduate(pob_chaco_2010_quinquenal$VARON, pob_chaco_2010_quinquenal$EDAD_q, method = "sprague") -->
 
-# visualizo
-pob_chaco_2010_simple %>% 
-  ggplot(aes(EDAD, Población, color=Tipo)) +
-  geom_line() + 
-  geom_point()
-```
+<!-- # junto -->
+<!-- pob_chaco_2010_simple <- pob_chaco_2010 %>%  -->
+<!--   full_join(tibble(EDAD = 0:110, VARON_sprague = pob_chaco_2010_sprague)) %>%  -->
+<!--   select(EDAD, VARON, VARON_sprague) %>%  -->
+<!--   pivot_longer(!EDAD, names_to="Tipo", values_to="Población") -->
 
-### Actividad
+<!-- # visualizo -->
+<!-- pob_chaco_2010_simple %>%  -->
+<!--   ggplot(aes(EDAD, Población, color=Tipo)) + -->
+<!--   geom_line() +  -->
+<!--   geom_point() -->
+<!-- ``` -->
 
-a) Evaluar la declaración en edades terminadas en 0 y 5 con el indicador *Whipple*, para la provincia que prefiera. ¿qué conclusión puede obtener?
+<!-- ### Actividad -->
+
+<!-- a) Evaluar la declaración en edades terminadas en 0 y 5 con el indicador *Whipple*, para la provincia que prefiera. ¿qué conclusión puede obtener? -->
 
