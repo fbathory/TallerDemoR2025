@@ -321,11 +321,13 @@ Llamaremos <code>h</code> a la distancia desde la primera observación para la q
 <span id="cb9-2"><a href="funciones.html#cb9-2" tabindex="-1"></a>N2035 <span class="ot">&lt;-</span> <span class="fu">crecim_lineal</span>(<span class="at">N0 =</span> <span class="dv">50000</span>, <span class="at">Nt =</span> <span class="dv">60000</span>, <span class="at">t =</span> <span class="dv">10</span>, <span class="at">h =</span> <span class="dv">15</span>)</span>
 <span id="cb9-3"><a href="funciones.html#cb9-3" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="funciones.html#cb9-4" tabindex="-1"></a><span class="co"># miremos un gráfico</span></span>
-<span id="cb9-5"><a href="funciones.html#cb9-5" tabindex="-1"></a><span class="fu">data.frame</span>(Año <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2020</span>,  <span class="dv">2030</span>,  <span class="dv">2035</span>),</span>
+<span id="cb9-5"><a href="funciones.html#cb9-5" tabindex="-1"></a>plot<span class="ot">&lt;-</span><span class="fu">data.frame</span>(Año <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">2020</span>,  <span class="dv">2030</span>,  <span class="dv">2035</span>),</span>
 <span id="cb9-6"><a href="funciones.html#cb9-6" tabindex="-1"></a>       <span class="at">N   =</span> <span class="fu">c</span>(<span class="dv">50000</span>, <span class="dv">60000</span>, N2035)) <span class="sc">%&gt;%</span> </span>
 <span id="cb9-7"><a href="funciones.html#cb9-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Año, N)) <span class="sc">+</span> </span>
 <span id="cb9-8"><a href="funciones.html#cb9-8" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
-<span id="cb9-9"><a href="funciones.html#cb9-9" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span></code></pre></div>
+<span id="cb9-9"><a href="funciones.html#cb9-9" tabindex="-1"></a>  <span class="fu">geom_point</span>() </span>
+<span id="cb9-10"><a href="funciones.html#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="funciones.html#cb9-11" tabindex="-1"></a>plot</span></code></pre></div>
 <p><img src="talleR_files/figure-html/crec%20lineal2-1.png" width="672" /></p>
 <p>¿Si quisiera tener opciones al momento de calcular el crecimiento? Por ejemplo, que sea de tipo lineal o exponencial. Incluyamos el argumento <code>tipo</code> y utilicemos el condicional <code>if</code> para posicionarnos en el modelo que se quiera.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="funciones.html#cb10-1" tabindex="-1"></a>crecim <span class="ot">&lt;-</span> <span class="cf">function</span>(N0, Nt, t, h, <span class="at">tipo =</span> <span class="st">&quot;lineal&quot;</span>){</span>

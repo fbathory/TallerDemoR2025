@@ -112,11 +112,13 @@ Nuestra respuesta a la pregunta inicial podría ser, siendo `h = 15`:
 N2035 <- crecim_lineal(N0 = 50000, Nt = 60000, t = 10, h = 15)
 
 # miremos un gráfico
-data.frame(Año = c(2020,  2030,  2035),
+plot<-data.frame(Año = c(2020,  2030,  2035),
        N   = c(50000, 60000, N2035)) %>% 
   ggplot(aes(Año, N)) + 
   geom_line() + 
   geom_point() 
+
+plot
 ```
 
 ¿Si quisiera tener opciones al momento de calcular el crecimiento? Por ejemplo, que sea de tipo lineal o exponencial. Incluyamos el argumento `tipo` y utilicemos el condicional `if` para posicionarnos en el modelo que se quiera.
