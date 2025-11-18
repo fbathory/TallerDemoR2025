@@ -41,7 +41,7 @@ En general, si un bloque de código es copiado y pegado en más de una vez en un
 
 Su estructura general es:
 
-```{r, eval = F}
+```{r funcion base, eval = F}
 
 nombre_de_función <- function(argumento1, argumento2) {
    # cuerpo de la función
@@ -56,7 +56,7 @@ R siempre devuelve el último valor evaluado, pero usar *return()* hace la funci
 
 Por ejemplo, si queremos tener una función que nos diga cuantos años cumplidos tendrá una persona de edad *x* en *t* años:
 
-```{r}
+```{r funcion1}
 edad_en_t_anios <- function(x, t){
   x_en_t_años <- x + t
   # este valor solo existirá en este contexto (scoping)
@@ -73,7 +73,7 @@ edad_en_t_anios(edades, 5)
 
 Las funciones pueden tener valores por defecto. Por ejemplo:
 
-```{r}
+```{r funcion2}
 edad_en_t_anios <- function(x, t = 5){
   x_en_t_años <- x + t
   return(x_en_t_años)
@@ -84,7 +84,7 @@ edad_en_t_anios(x = 35) #ahora t=5 por defecto
 
 ## Crecimiento
 
-Tenemos una población que en el año 2010 era de 50.000 personas y en 2020 era de 60.000. Nos preguntan cual sería la población a 2025. Existen distintas formas en que podemos modelar su crecimiento total a partir de dos puntos observados en el tiempo. En términos generales para un momento 0 y un momento t, debemos obtener primero el ritmo al que crece, es decir su tasa anual promedio $\overline{r}(0,t)$: 
+Tenemos una población que en el año 2020 era de 50.000 personas y en 2020 era de 60.000. Nos preguntan cual sería la población a 2035. Existen distintas formas en que podemos modelar su crecimiento total a partir de dos puntos observados en el tiempo. En términos generales para un momento 0 y un momento t, debemos obtener primero el ritmo al que crece, es decir su tasa anual promedio $\overline{r}(0,t)$: 
 
 |Supuesto | $N(t)$ | $\overline{r}(0,t)$|
 |---------|--------|-------|
@@ -94,7 +94,7 @@ Tenemos una población que en el año 2010 era de 50.000 personas y en 2020 era 
 Construyamos una función para modelar su crecimiento y poder interpolar/extrapolar según el modelo *lineal*. Una función debe ser diseñada para ser aplicable a muchos casos específicos.
 Llamaremos `h` a la distancia desde la primera observación para la que deseamos obtener la nueva población.
 
-```{r}
+```{r crec lineal}
 
 
 crecim_lineal <- function(N0, Nt, t, h){
@@ -106,13 +106,13 @@ crecim_lineal <- function(N0, Nt, t, h){
 
 Nuestra respuesta a la pregunta inicial podría ser, siendo `h = 15`:
 
-```{r}
+```{r crec lineal2}
 # ¿qué población habrá en 2025?
-N2025 <- crecim_lineal(N0 = 50000, Nt = 60000, t = 10, h = 15)
+N2035 <- crecim_lineal(N0 = 50000, Nt = 60000, t = 10, h = 15)
 
 # miremos un gráfico
-data.frame(Año = c(2010,  2020,  2025),
-       N   = c(50000, 60000, N2025)) %>% 
+data.frame(Año = c(2020,  2030,  2035),
+       N   = c(50000, 60000, N2035)) %>% 
   ggplot(aes(Año, N)) + 
   geom_line() + 
   geom_point() 
@@ -120,7 +120,7 @@ data.frame(Año = c(2010,  2020,  2025),
 
 ¿Si quisiera tener opciones al momento de calcular el crecimiento? Por ejemplo, que sea de tipo lineal o exponencial. Incluyamos el argumento `tipo` y utilicemos el condicional `if` para posicionarnos en el modelo que se quiera.
  
-```{r}
+```{r crecim exp}
 crecim <- function(N0, Nt, t, h, tipo = "lineal"){
   # si se quiere el modelo exponencial
   if(tipo == "exponencial"){
@@ -137,12 +137,12 @@ crecim <- function(N0, Nt, t, h, tipo = "lineal"){
 
 Veamos que obtuvimos con las dos opciones:
 
-```{r}
-N2025 <- data.frame(N2025_lineal = crecim(50000, 60000, 10, 15, tipo = "lineal"),
-                    N2025_exp    = crecim(50000, 60000, 10, 15, tipo = "exponencial"))
+```{r crecim plot}
+N2035 <- data.frame(N2035_lineal = crecim(50000, 60000, 10, 15, tipo = "lineal"),
+                    N2035_exp    = crecim(50000, 60000, 10, 15, tipo = "exponencial"))
 
-data.frame(Año = c(2010,  2020,  2025, 2025),
-           N   = c(50000, 60000, N2025$N2025_lineal, N2025$N2025_exp),
+data.frame(Año = c(2020,  2030,  2035, 2035),
+           N   = c(50000, 60000, N2035$N2035_lineal, N2035$N2035_exp),
            Tipo = c("Observado", "Observado", "lineal", "exponencial")) %>% 
   ggplot(aes(Año, N)) + 
   geom_point(aes(shape = Tipo, color=Tipo)) 
@@ -152,16 +152,16 @@ El condicional puede pensarse como `if` y `else` también, ¿cómo sería?
 
 ¿Y si tuviéramos un vector de población por edad? Podemos tener una tasa $\overline{r}(0,t)$ por cada edad.
 
-```{r}
+```{r crecim edad}
 # crecimiento por edad
-N2025_edad <- data.frame(Edad = c("0-14", "15-64", "65+"), 
-                         N2010   = c(20000, 20000, 10000),
-                         N2020   = c(25000, 30000, 5000)) %>% 
-              mutate(N2025_lineal = crecim(N2010, N2020, 10, 15, tipo = "lineal"),
-                     N2025_exp = crecim(N2010, N2020, 10, 15, tipo = "exponencial"))
+N2035_edad <- data.frame(Edad = c("0-14", "15-64", "65+"), 
+                         N2020   = c(20000, 20000, 10000),
+                         N2030   = c(25000, 30000, 5000)) %>% 
+              mutate(N2035_lineal = crecim(N2020, N2030, 10, 15, tipo = "lineal"),
+                     N2035_exp = crecim(N2020, N2030, 10, 15, tipo = "exponencial"))
 
 # hagamos tidy el data.frame primero
-N2025_edad %>% 
+N2035_edad %>% 
   pivot_longer(cols = !Edad, names_to = "Tipo", values_to = "N") %>% 
   ggplot(aes(Edad, N, fill = Tipo)) + 
   geom_bar(stat = "identity", # no trates de ser un histograma
@@ -170,7 +170,7 @@ N2025_edad %>%
 
 El poner a disposición de otros usuarios tus funciones requiere controlar los errores posibles, entre otras cosas por ingresar como argumentos objetos no esperados (por ejemplo, un objeto *character* en algunos de los primeros argumentos). Ejemplo: hagamos no aceptable el ingreso de un objeto `character` como argumento en `N0`, `Nt`, `t` ni `h`:
 
-```{r,eval=F}
+```{r crecim check,eval=F}
 crecim_lineal_check <- function(N0, Nt, t, h){
   # check argumentos
   if(is.character(N0) | is.character(Nt) | is.character(t) | is.character(h)){
@@ -206,17 +206,17 @@ Dejamos algunas mínimas recomendaciones para tener en cuenta al construir funci
 
 a) Crear una función que sume un vector de población y devuelva el resultado en miles.
 
-```{r}
+```{r suma miles, eval = F, include = F}
 sumar_en_miles <- function(x){
   round(sum(x)/1000)
 }
-sumar_en_miles(N2025_edad$N2010)
+sumar_en_miles(N2035_edad$N2020)
 ```
 
 
-b) Siguiendo el ejemplo trabajado: ¿cuál sería la población al 2017 bajo el supuesto de crecimiento exponencial? ¿Es equivalente interpolar cada edad y luego sumar? ¿Y para el tipo lineal?
+b) Siguiendo el ejemplo trabajado: ¿cuál sería la población al 2027 bajo el supuesto de crecimiento exponencial? ¿Es equivalente interpolar cada edad y luego sumar? ¿Y para el tipo lineal?
 
-```{r, eval = F, include = F}
+```{r crecim 2017, eval = F, include = F}
 crecim(50000, 60000, 10, 7, tipo = "exponencial")
 sum(
   crecim(c(20000, 20000, 10000), 
@@ -226,7 +226,7 @@ sum(
 
 c) Crear una función que informe la edad modal, por ejemplo para `data.frame(Edad = c(0,4,7,10), Casos = c(2, 6, 9, 0))` debería devolver la edad 7. 
 
-```{r, eval = F, include = F}
+```{r edad modal, eval = F, include = F}
 Edad = c(0,4,7,10)
 Casos = c(2, 6, 9, 125)
 get_edad_modal <- function(Edad, Casos){
@@ -237,7 +237,7 @@ get_edad_modal(Edad, Casos)
 
 d) Obtener una función que permita conocer en cuantos años (h) se duplicará la población respecto al primer valor observado, bajo el supuesto de crecimiento lineal y exponencial. (Ayuda: obtén $r$ y luego despeja $h$ para que $N_h=N_0*2$).
 
-```{r, eval = F, include = F}
+```{r duplica, eval = F, include = F}
 h_doblar <- function(N0, Nt, t, tipo = "lineal"){
   if(tipo == "exponencial"){
     r <- log(Nt/N0)/t
@@ -274,14 +274,14 @@ Lo que permite comparar $TSM^A(t)$ con $TSM^B(t)$: $TSM^A(t) \lessgtr TSM^A(t)$.
 
 Obtengamos la población y defunciones de *Chile*, *Japón* y *Polonia* del año 2000 y 2010 leyendo la tabla "Chile_Japon_Polonia.csv" en la carpeta "data". 
 
-```{r, include=T}
+```{r get hmd, include=T}
 db <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx")
 ```
 
 Enfoquémonos en el 2010 para comparar los tres países. Japón presenta una $TBM$ mayor pero atribuible a otro estadío en su envejecimiento según la porción de población de 65 años y más.
 
-```{r}
-db <- db %>% filter(Year == 2010)
+```{r hmd2010}
+db <- db %>% filter(Year == 2020)
 
 db %>% 
   group_by(Country) %>% 
@@ -291,7 +291,7 @@ db %>%
 
 Y esto es visible en la jerarquía de las tasas de mortalidad por edad:
 
-```{r}
+```{r plot TME}
 # creamos la varibale con las tasas de mortalidad específicas
 db <- db %>% mutate(M = D/N)
 
@@ -324,7 +324,7 @@ db %>%
 
 a) Responder la pregunta previa con los mismos datos utilizados arriba.
 
-```{r, include=F}
+```{r func estand, include=F}
 standarizarrr <- function(db){
   C_x_promedio <- db %>% 
               group_by(Age) %>% 
@@ -337,14 +337,14 @@ standarizarrr <- function(db){
                         TSM = sum(M * c_x)*1000)
   return(resultado)
 }
-standarizarrr(readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% filter(Year==2010))
+standarizarrr(readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% filter(Year==2020))
 ```
 
 b) Con los datos de la tabla "Chile_Japon_Polonia.csv": ¿qué se puede decir sobre la evolución de la mortalidad de Polonia en los años 1990, 2000 y 2010? ¿Bajó o creció?
 
-```{r, include=F}
+```{r mort pol, include=F}
 db_act <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx") %>% 
-  filter(Country == "Polonia", Year %in% c(1990, 2000, 2010))
+  filter(Country == "Polonia", Year %in% c(2000, 2010, 2020))
 C_x_promedio <- db_act %>% 
               group_by(Age) %>% 
               summarise(c_x = sum(N)/sum(db$N))
@@ -385,14 +385,15 @@ devtools::install_github("timriffe/DemoTools")
 Construir una función que produzca una **tabla de mortalidad** a partir de un set de tasas por edad de mortalidad es un lindo ejercicio de programación en R. Pero por suerte `DemoTools` tiene una muy buena implementación. Acá para Japón 2010:
 
 ```{r mort, message=F, warning=F}
-jpn_2010 <- db %>% filter(Country == "Japon", Year == 2010)
+
+jpn_2020 <- db %>% filter(Country == "Japon", Year == 2020)
 
 # obtengo la tabla
 library(DemoTools)
-tm_jpn_2010 <- lt_abridged(nMx = jpn_2010$M, Age = jpn_2010$Age)
+tm_jpn_2020 <- lt_abridged(nMx = jpn_2020$M, Age = jpn_2020$Age)
 
 # veamos la función de sobrevivencia:
-tm_jpn_2010 %>% 
+tm_jpn_2020 %>% 
   ggplot(aes(Age, lx)) + 
   geom_point() +
   geom_line()+
