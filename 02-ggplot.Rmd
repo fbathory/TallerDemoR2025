@@ -669,7 +669,7 @@ polígonos + puntos + texto.
 
 Además de definir una paleta de colores, podemos mejorar la estética general del mapa ajustando el tema, la leyenda y el nivel de detalle.
 
-```{r}
+```{r mapaa}
 #Mapa con estilo minimalista
 
 ggplot(hog_cloaca_geo) +
@@ -686,7 +686,7 @@ labs(title = "Porcentaje de hogares particulares \nsin acceso a la red de servic
 
 Ajustar la posición y el formato de la leyenda:
 
-```{r}
+```{r mapaa1}
 p_cloaca<-ggplot(hog_cloaca_geo) +
 geom_sf(aes(fill = Total), color = "grey80") +
 scale_fill_distiller("% hogares",
@@ -708,7 +708,7 @@ Por otro lado, en demografía se suele trabajar con indicadores agrupados por ra
 
 ¡Veamos como hacerlo!
 
-```{r}
+```{r mapaa2}
 
 # Categorizar la variable 'Total' en 4 grupos (cuartiles o rangos manuales)
 hog_cloaca_geo <- hog_cloaca_geo %>%
