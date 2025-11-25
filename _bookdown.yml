@@ -4,7 +4,7 @@ rmd_files:
 - 01-repaso.Rmd
 - 02-ggplot.Rmd
 - 03-funciones.Rmd
-- 05-reportes.Rmd
+- 04-reportes.Rmd
 language:
   ui:
     chapter_name: ""
