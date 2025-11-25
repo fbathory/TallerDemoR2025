@@ -75,3 +75,7 @@ crecimiento
 estandarizando
 funciones-demográficas-en-paquetes-demográficos
 tablas-de-mortalidad
+reportes
+comunicación-y-reproducibilidad
+actividad-guiada
+referencias
