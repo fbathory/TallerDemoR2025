@@ -281,7 +281,7 @@ Obtengamos la población y defunciones de *Chile*, *Japón* y *Polonia* del año
 db <- readxl::read_xlsx("data/Chile_Japon_Polonia.xlsx")
 ```
 
-Enfoquémonos en el 2010 para comparar los tres países. Japón presenta una $TBM$ mayor pero atribuible a otro estadío en su envejecimiento según la porción de población de 65 años y más.
+Enfoquémonos en el 2015 para comparar los tres países. Japón presenta una $TBM$ mayor pero atribuible a otro estadío en su envejecimiento según la porción de población de 65 años y más.
 
 ```{r hmd2010}
 db <- db %>% filter(Year == 2015)
@@ -319,7 +319,7 @@ db %>%
   summarise(TSM = sum(M * c_x)*1000)
 ```
 
-!Ahora sí! El indicador nos muestra un nivel de mortalidad para 2010 mayor en Polonia, seguido de Chile y Japón. Cabe aclarar que en este sentido el mejor indicador resumen es la esperanzada de vida ($e_x$), que se estima a partir de la construcción de una tabla de vida (Preston y otros, 2001).
+!Ahora sí! El indicador nos muestra un nivel de mortalidad para 2015 mayor en Polonia, seguido de Chile y Japón. Cabe aclarar que en este sentido el mejor indicador resumen es la esperanzada de vida ($e_x$), que se estima a partir de la construcción de una tabla de vida (Preston y otros, 2001).
 
 ¿Cómo sería una función que reciba una tabla con las variables `País`, `N` y `D` y devuelva las $TBM$ y las $TSM$?
 
@@ -405,59 +405,119 @@ tm_jpn_2015 %>%
 
 Repasemos sus argumentos, como `OAGNew`, `extrapLaw` y `a0rule`. También puede `graduar`, es decir pasar a edades simples.
 
-<!-- ### Evaluación de declaración de edad -->
+#### BONUS
+Aquí va el ejemplo de una función de tabla de vida acorde a las necesidades propias: con un grupo de edad 1-9 y que devolviera también Dx y Nx (para luego calcular intervalos de confianza)
+```{r f_tabla}
+lifetable <- function(deaths,pop,age, sex = "m"){
+  nmx <- deaths/pop
+  m0 <- nmx[1]
+  
+  # a0 de Coale & Demeny (1983) en Preston, Heuveline & Guillot (2001)
+  a0 <- if(sex == "m") {.0425+2.684*m0} else {0.053+2.8*m0}
+  
+  # 4.5 para el grupo 1-9
+  nax <- c(a0, 4.5, rep(2.5, times = 15))
+  n <- c(diff(age),NA)
+  nqx <- n*nmx / (1+(n-nax)*nmx)
+  nqx[length(age)] <- 1
+  npx <- 1 - nqx
+  
+  lx <- rep(NA,length(nqx))
+  lx[1] <- 100000
+  for(i in 1:length(n)){
+    lx[i+1] <- lx[i]*npx[i]
+  }
+  
+  lx <- lx[1:length(n)]
+  
+  ndx <- lx*nqx
+  ndx[length(age)] <- lx[length(age)]
+  
+  
+  nLx <- ndx/nmx
+  
+  nax[length(age)] <- nLx[length(age)]/lx[length(age)]
+  
+  # Tx
+  Tx = rev(cumsum(rev(nLx)))
+  
+  # ex
+  ex <- Tx/lx
+  ex[length(age)] <- nax[length(age)]
+  
+  lifetable <- data.frame(age=age,
+                          n=round(n,0),
+                          nmx=round(nmx,5),
+                          nqx=round(nqx,5),
+                          npx=round(npx,5),nax=round(nax,2),
+                          ndx=round(ndx,0),lx=round(lx,0),
+                          Lx=round(nLx,0),
+                          Tx=round(Tx,0),
+                          ex=round(ex,5),
+                          Dx=deaths,
+                          Nx=pop)
+  return(lifetable)
+}
+```
 
-<!-- Con el índice de **Myers** veamos si en Chaco mejoró la declaración por edad de varones entre los censos 2001 y 2010. Un valor del indicador que tienda a 0 indica una mejor declaración (bajo los supuesto del método). -->
 
-<!-- ```{r evaluacion} -->
-<!-- pob_chaco <- readxl::read_xlsx("data/PoblCensal01y10.xlsx", sheet=1) %>%  -->
-<!--                 filter(PROV_NOMBRE == "CHACO") -->
+### Evaluación de declaración de edad
 
-<!-- pob_chaco %>%  -->
-<!--   ggplot(aes(EDAD, VARON, color=factor(CENSO))) +  -->
-<!--   geom_point() +  -->
-<!--   geom_line() +  -->
-<!--   scale_x_continuous(breaks = seq(0,100,5), labels = seq(0,100,5)) + -->
-<!--   theme_bw() -->
+Con el índice de **Myers** veamos si en Chaco mejoró la declaración por edad de varones entre los censos 2010 y 2022. Un valor del indicador que tienda a 0 indica una mejor declaración (bajo los supuesto del método).
 
-<!-- # obtengo Myers -->
-<!-- pob_chaco %>% -->
-<!--   summarise(Myers_2001 = check_heaping_myers(VARON[CENSO==2001], EDAD[CENSO==2001], ageMin = 20, ageMax = 64), -->
-<!--             Myers_2010 = check_heaping_myers(VARON[CENSO==2010], EDAD[CENSO==2010], ageMin = 20, ageMax = 64)) -->
-<!-- ``` -->
+```{r evaluacion}
+pob_chaco <- readxl::read_xlsx("data/Pob2010y2022_prov.xlsx", sheet=1) %>%
+                filter(PROV_NOMBRE == "CHACO")
 
-<!-- ### Graduación de población por edad simple -->
+pob_chaco %>%
+  ggplot(aes(EDAD, VARON, color=factor(CENSO))) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(0,100,5), labels = seq(0,100,5)) +
+  theme_bw()
 
-<!-- El método de **Sprague** desagrega por edad simple conteos agrupados por edad quinquenal. Veamos como funciona para los varones de Chaco en el año 2010. Primero agregando, y luego aplicando el método. -->
+```
 
-<!-- ```{r edad, warning=F, message=F} -->
-<!-- # me quedo con 2010 -->
-<!-- pob_chaco_2010 <- pob_chaco %>% filter(CENSO == 2010) -->
+```{r Myers, eval = F}
 
-<!-- # agrupo la población por grupos quinquenales -->
-<!-- pob_chaco_2010_quinquenal <- pob_chaco %>% -->
-<!--   filter(CENSO == 2010) %>%  -->
-<!--   mutate(EDAD_q = trunc(EDAD/5) * 5) %>%  -->
-<!--   group_by(EDAD_q) %>%  -->
-<!--   summarise(VARON = sum(VARON)) -->
+# obtengo Myers
+pob_chaco %>%
+  summarise(Myers_2010 = check_heaping_myers(VARON[CENSO==2010], EDAD[CENSO==2010], ageMin = 20, ageMax = 64),
+            Myers_2022 = check_heaping_myers(VARON[CENSO==2022], EDAD[CENSO==2022], ageMin = 20, ageMax = 64))
+```
 
-<!-- # aplico sprague -->
-<!-- pob_chaco_2010_sprague <- graduate(pob_chaco_2010_quinquenal$VARON, pob_chaco_2010_quinquenal$EDAD_q, method = "sprague") -->
+### Graduación de población por edad simple
 
-<!-- # junto -->
-<!-- pob_chaco_2010_simple <- pob_chaco_2010 %>%  -->
-<!--   full_join(tibble(EDAD = 0:110, VARON_sprague = pob_chaco_2010_sprague)) %>%  -->
-<!--   select(EDAD, VARON, VARON_sprague) %>%  -->
-<!--   pivot_longer(!EDAD, names_to="Tipo", values_to="Población") -->
+El método de **Sprague** desagrega por edad simple conteos agrupados por edad quinquenal. Veamos como funciona para los varones de Chaco en el año 2022. Primero agregando, y luego aplicando el método.
 
-<!-- # visualizo -->
-<!-- pob_chaco_2010_simple %>%  -->
-<!--   ggplot(aes(EDAD, Población, color=Tipo)) + -->
-<!--   geom_line() +  -->
-<!--   geom_point() -->
-<!-- ``` -->
+```{r edad, warning=F, message=F}
+# me quedo con 2022
+pob_chaco_2022 <- pob_chaco %>% filter(CENSO == 2022)
 
-<!-- ### Actividad -->
+# agrupo la población por grupos quinquenales
+pob_chaco_2022_quinquenal <- pob_chaco %>%
+  filter(CENSO == 2022) %>%
+  mutate(EDAD_q = trunc(EDAD/5) * 5) %>%
+  group_by(EDAD_q) %>%
+  summarise(VARON = sum(VARON))
 
-<!-- a) Evaluar la declaración en edades terminadas en 0 y 5 con el indicador *Whipple*, para la provincia que prefiera. ¿qué conclusión puede obtener? -->
+# aplico sprague
+pob_chaco_2022_sprague <- graduate(pob_chaco_2022_quinquenal$VARON, pob_chaco_2022_quinquenal$EDAD_q, method = "sprague")
+
+# junto
+pob_chaco_2022_simple <- pob_chaco_2022 %>%
+  full_join(tibble(EDAD = 0:110, VARON_sprague = pob_chaco_2022_sprague)) %>%
+  select(EDAD, VARON, VARON_sprague) %>%
+  pivot_longer(!EDAD, names_to="Tipo", values_to="Población")
+
+# visualizo
+pob_chaco_2022_simple %>%
+  ggplot(aes(EDAD, Población, color=Tipo)) +
+  geom_line() +
+  geom_point()
+```
+
+### Actividad
+
+a) Evaluar la declaración en edades terminadas en 0 y 5 con el indicador *Whipple*, para la provincia que prefiera. ¿qué conclusión puede obtener?
 

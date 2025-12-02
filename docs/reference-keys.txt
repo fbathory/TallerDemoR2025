@@ -79,3 +79,7 @@ reportes
 comunicación-y-reproducibilidad
 actividad-guiada
 referencias
+bonus-1
+evaluación-de-declaración-de-edad
+graduación-de-población-por-edad-simple
+bonus-opcional
