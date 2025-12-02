@@ -17,7 +17,7 @@ Sys.setlocale("LC_ALL", "Spanish_Spain.UTF-8")
 
 El objetivo es producir un reporte reproducible, en **RMarkdown (.Rmd)** o **Quarto (.qmd)** (a elección), que describa las características demográficas de una provincia argentina que te interese, utilizando datos del Censo Nacional de Población 2022. El documento debe compilarse en formato *HTML*.
 
-Los datos los podés encontrar en [la web](https://censo.gob.ar/index.php/datos_definitivos/). 
+Los datos los podés encontrar en el archivo que usamos para Myers y Whipple o en [la web](https://censo.gob.ar/index.php/datos_definitivos/). 
 
 
 El reporte debe incluir
@@ -27,7 +27,7 @@ El reporte debe incluir
 
 * Contenidos **mínimos** del cuerpo del informe:
 
-En un primer chunk debes leer los datos censales directo desde R. En todos los casos utiliza el archivo xlsx referido al Cuadro 4, que contiene la población por sexo y edad.
+En un primer chunk debes leer los datos censales directo desde R. Si utilizás los datos de INDEC, en todos los casos usá el archivo xlsx referido al Cuadro 4, que contiene la población por sexo y edad.
 
 Va una ayuda para el caso de *Total País*, donde previamente ingresamos a la sección de [total país](https://censo.gob.ar/index.php/datos_definitivos_total_pais/), descargamos el archivo y lo colocamos en la carpeta data:
 ```{r, eval=F, message=F, warning=F}
@@ -46,13 +46,13 @@ Luego agregar:
 
   - Un párrafo inicial donde se explicite el objetivo del reporte y se mencione la cantidad de población total y su peso relativo respecto del total país, mediante *chunks inline*.
   - Mostrar la pirámide de población mediante el uso del paquete `ggplot2`. 
-  - Mostrar un mapa provincial con un indicador a elección según departamento (necesario cargar un shapefie con los límites de departamento o radios censales). Sugerimos seleccionar indicadores simples con la información disponible (Ej: porcentaje de mujeres, proporción de población 65+, índice de dependencia, razón de sexos, etc). Es necesario unir la capa geográfica con el indicador mediante *left_join* y lugeo visualizar el mapa.
+  - Mostrar un mapa provincial con un indicador a elección según departamento (necesario cargar un shapefile con los límites de departamento o radios censales). Sugerimos seleccionar indicadores simples con la información disponible (Ej: porcentaje de mujeres, proporción de población 65+, índice de dependencia, razón de sexos, etc). Es necesario unir la capa geográfica con el indicador mediante `left_join` y luego visualizar el mapa.
   - Crear una función que incluya: definición, un ejemplo de su uso y un breve comentario sobre qué hace. Compartimos algunos ejemplos: calcular el índice de dependencia, construir automáticamente la pirámide para cualquier provincia, calcular la razón de sexos por grupos quinquenales, entre otras. La elección es libre para cada estudiante.
   - En un párrafo final describir brevemente qué te llamó la atención de la estructura por edad, qué patrones espaciales identificaste en el mapa y conclusiones generales.
      
 ## BONUS (opcional)
 
-*Incluir un diagrama de lexis con datos simulados (cohortes ficticias) o con los datos de la EDER CABA 2019.*
+*Incluir un diagrama de Lexis con datos simulados (cohortes ficticias) o con los datos de la EDER CABA 2019.*
 
 
     
