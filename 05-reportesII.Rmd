@@ -1,0 +1,52 @@
+---
+title: "05-Quarto"
+output: html_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Reportes II
+
+## ¿Qué es QUARTO?
+
+Es una herramienta de publicación científica y técnica que permite crear:
+  - Documentos HTML, PDF, Word  
+  - Presentaciones  
+  - Sitios web  
+  - Dashboards  
+  - Informes reproducibles  
+
+Es el sucesor de **R Markdown**, y está diseñado para soportar no solo R, sino también Python, Julia y Observable.
+
+**Ventajas principales de Quarto:**
+  - Sintaxis más clara para configurar chunks (`#|`).
+  - Mejor manejo de proyectos.
+  - Salidas más limpias.
+  - Excelente para reproducibilidad.
+  - Permite múltiples lenguajes en un mismo documento.
+
+## Diferencias entre Quarto y R Markdown
+
+| R Markdown | Quarto |
+|-----------|--------|
+| Usa `{r, echo=FALSE}` | Usa `#| echo: false` |
+| Requiere `knitr + rmarkdown` | Requiere `quarto` |
+| Salida definida con YAML | Salida definida con YAML más flexible |
+| Principalmente para R | Multilenguaje nativo |
+
+Ejemplo de chunk equivalente:
+
+**R Markdown**
+
+```{r, eval=F}
+summary(cars)
+```
+
+**Quarto**
+
+#| echo: true
+summary(cars)
+

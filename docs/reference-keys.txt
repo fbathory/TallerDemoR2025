@@ -83,3 +83,10 @@ bonus-1
 evaluación-de-declaración-de-edad
 graduación-de-población-por-edad-simple
 bonus-opcional
+fig:grafico-edad
+reportes-ii
+qué-es-quarto
+diferencias-entre-quarto-y-r-markdown
+cómo-crear-un-archivo-quarto
+yalm
+quarto

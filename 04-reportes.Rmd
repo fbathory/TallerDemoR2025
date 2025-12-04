@@ -143,11 +143,78 @@ Si quisiéramos incluir el dato de cuántas personas en viviendas particulares h
 
 > Acordate de guardarlo como ejemplo para el TP.
 
+
+
+
+## Quarto
+
+
+En esta clase veremos cómo crear un archivo `.qmd`, cómo incorporar código R, cómo generar distintos formatos de salida y cómo preparar un informe reproducible aplicado a análisis demográfico.
+
+
+*Quarto* Es una herramienta para crear documentos reproducibles que combinan texto, código y resultados. Sus componentes principales son:
+
+**Autoría (Author):**  
+Permite escribir y combinar texto y código en archivos `.qmd` o en cuadernos Jupyter, utilizando una sintaxis Markdown ampliada que facilita la organización del contenido.
+
+**Renderizado (Render):**  
+A partir del mismo archivo fuente, es posible generar diferentes tipos de salidas: documentos HTML, PDF o Word, presentaciones (reveal.js, PowerPoint, Beamer), así como sitios web, blogs o libros.
+
+**Compartir (Share):**  
+Los documentos generados pueden publicarse o alojarse en diversas plataformas, como GitHub Pages, Netlify, Quarto Pub, Posit Cloud o Posit Connect, según las necesidades del proyecto.
+
+
+
+```{r, echo=F}
+include_graphics("figs/quarto.png")
+```
+
+
+Quarto permite crear:
+
+  - Documentos HTML, PDF, Word  
+  - Presentaciones  
+  - Sitios web  
+  - Dashboards  
+  - Informes reproducibles  
+
+Es el sucesor de **R Markdown**, y está diseñado para soportar no solo R, sino también Python, Julia y Observable.
+
+**Algunas ventajas de Quarto:**
+
+  - Sintaxis más clara para configurar chunks (`#|`).
+  - Mejor manejo de proyectos.
+  - Salidas más limpias.
+  - Excelente para reproducibilidad.
+  - Permite múltiples lenguajes en un mismo documento.
+
+### Diferencias entre Quarto y R Markdown
+
+| R Markdown | Quarto |
+|-----------|--------|
+| Usa `{r, echo=FALSE}` | Usa `#| echo: false` |
+| Requiere `knitr + rmarkdown` | Requiere `quarto` |
+| Salida definida con YAML | Salida definida con YAML más flexible |
+| Principalmente para R | Multilenguaje nativo |
+
+Ejemplo de chunk equivalente:
+
+**R Markdown**
+
+```{r, eval=F}
+summary(cars)
+```
+
+**Quarto**
+
+#| echo: true
+summary(cars)
+
+
 ## Referencias
 
-* [Hoja de Ayuda](https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/spanish/rmarkdown_es.pdf)
+* [Hoja de Ayuda R Markdown](https://raw.githubusercontent.com/rstudio/cheatsheets/main/translations/spanish/rmarkdown_es.pdf)
 
 * [De su creador](https://bookdown.org/yihui/rmarkdown/)
 
-
-
+* [Hoja de Ayuda Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
