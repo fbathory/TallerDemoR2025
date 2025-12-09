@@ -362,6 +362,145 @@ db_act %>%
 
 c) Graficar la distribución de las defunciones por edad (colocando cada punto en la edad media del intervalo, por ejemplo para el grupo 5-10, en 7.5).
 
+## Migración
+
+En esta oporunidad, vamos a crear una función que nos permita calcular la **Tasa Neta de Migración (TNM)**.
+
+La *TNM* mide la diferencia entre inmigrantes y emigrantes en relación con la población media del período. Se expresa por cada 1.000 habitantes.
+
+La fórmula es:
+
+\[
+TNM = \frac{I - E}{P} \times 1000
+\]
+
+donde:
+
+- **I** = inmigrantes  
+- **E** = emigrantes  
+- **P** = población media del período  
+
+Primero vamos a crear un data frame simple con datos ficticios
+de Argentina:
+
+```{r datos_mig, message=F, warning=F}
+datos_mig <- data.frame(
+  inmigrantes = 25000,
+  emigrantes = 40000,
+  poblacion_medio_periodo = 46000000
+)
+
+datos_mig
+```
+
+
+Creamos la función con sus validaciones:
+
+```{r tasa, message=F, warning=F}
+
+tasa_neta_migracion <- function(inmigrantes, emigrantes, poblacion_medio_periodo) {
+
+if (poblacion_medio_periodo <= 0) {
+stop("La población media debe ser mayor que cero.")
+}
+
+if (any(c(inmigrantes, emigrantes) < 0)) {
+stop("Los flujos migratorios no pueden ser negativos.")
+}
+
+tasa <- (inmigrantes - emigrantes) / poblacion_medio_periodo * 1000
+
+return(tasa)
+}
+
+
+```
+
+Aplicamos la función a nuestros datos:
+
+```{r funcion_mig, message=F, warning=F}
+
+tasa_neta_migracion(
+  datos_mig$inmigrantes,
+  datos_mig$emigrantes,
+  datos_mig$poblacion_medio_periodo
+)
+
+
+```
+
+## Fecundidad
+
+En esta sección vamos a trabajar con funciones para calcular:
+
+  - **Tasas Específicas de Fecundidad (TEF)**
+
+  - **Tasa Global de Fecundidad (TGF)**
+
+
+Las **Tasas Específicas de Fecundidad (TEF)** representan la intensidad reproductiva de las mujeres en grupos quinquenales de edad.
+
+La fórmula general es:
+
+$$
+TEF_x = \frac{Nacimientos \; en \; mujeres \; de \; edad \; x}{Mujeres \; de \; edad \; x} \times k
+$$
+```{r TEF, warning=F, message=F}
+
+tasa_especifica_fecundidad <- function(nacimientos, mujeres, k = 1000){
+  
+  # Validaciones
+  if(length(nacimientos) != length(mujeres)){
+    stop("Los vectores de nacimientos y mujeres deben tener la misma longitud.")
+  }
+  if(any(nacimientos < 0) | any(mujeres < 0)){
+    stop("Los valores deben ser positivos.")
+  }
+  
+  # Cálculo
+  tef <- (nacimientos / mujeres) * k
+  
+  return(tef)
+}
+
+```
+
+Si nosotros le damos información sobre nacimientos y cantidad de mujeres, podemos calcular la TEF de un momento específico. A continuación aplicamos la función con datos ficticios:
+
+```{r TEF_data, warning=F, message=F}
+
+nac <- c(42000, 60000, 58000, 45000, 30000, 15000, 5000)
+muj <- c(800000, 750000, 720000, 700000, 680000, 660000, 640000)
+
+tef <- tasa_especifica_fecundidad(nac, muj)
+tef
+
+
+```
+
+Si lo queremos graficar:
+
+```{r graf_TEF, warning=F, message=F}
+
+edades <- c("15–19", "20–24", "25–29", "30–34", "35–39", "40–44", "45–49")
+
+df_tef <- data.frame(
+  grupo_edad = factor(edades, levels = edades),
+  tef = tef
+)
+
+ggplot(df_tef, aes(x = grupo_edad, y = tef)) +
+  geom_line(group = 1) +
+  geom_point(size = 3) +
+  labs(
+    title = "Tasas Específicas de Fecundidad (TEF)",
+    x = "Grupo de edad",
+    y = "Tasa por 1.000 mujeres"
+  )
+
+```
+
+
 ## Funciones demográficas en paquetes demográficos
 
 > Estamos entrando en zona de utilización de funciones demográficas de paquetes.
@@ -517,7 +656,45 @@ pob_chaco_2022_simple %>%
   geom_point()
 ```
 
-### Actividad
 
-a) Evaluar la declaración en edades terminadas en 0 y 5 con el indicador *Whipple*, para la provincia que prefiera. ¿qué conclusión puede obtener?
+
+La **Tasa Global de Fecundidad (TGF)** estima el número promedio de hijos que tendría una mujer si se mantuvieran las TEF observadas.
+
+La fórmula general es:
+
+$$
+TGF = 5 \cdot \sum_{x} TEF_x
+$$
+```{r tgf, warning=F, message=F}
+tasa_global_fecundidad <- function(nacimientos, mujeres, k = 1){
+  
+  # Primero calculamos las TEF
+  tef <- tasa_especifica_fecundidad(nacimientos, mujeres, k)/1
+  
+  # Sumamos e incorporamos el ancho del intervalo (5 años)
+  tgf <- sum(tef) * 5
+  
+  return(tgf)
+}
+
+```
+
+Seguimos con el ejemplo anterior:
+
+```{r}
+tgf <- tasa_global_fecundidad(nac, muj)
+tgf
+
+#Resultados
+
+data.frame(
+  grupo_edad = edades,
+  nacimientos = nac,
+  mujeres = muj,
+  tef = round(tef, 2)
+)
+paste("TGF estimada:", round(tgf, 2))
+
+```
+
 
