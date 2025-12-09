@@ -219,4 +219,4 @@ summary(cars)
 
 * [Hoja de Ayuda Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
 
-* [Guía para utilizar Quarto (en inglés)](https://quarto.org/docs/guide/)
+* [Guía para utilizar Quarto](https://quarto.org/docs/guide/)
