@@ -501,6 +501,49 @@ ggplot(df_tef, aes(x = grupo_edad, y = tef)) +
 ```
 
 
+
+La **Tasa Global de Fecundidad (TGF)** estima el número promedio de hijos que tendría una mujer si se mantuvieran las TEF observadas.
+
+La fórmula general es:
+
+$$
+TGF = 5 \cdot \sum_{x} TEF_x
+$$
+```{r tgf, warning=F, message=F}
+tasa_global_fecundidad <- function(nacimientos, mujeres, k = 1){
+  
+  # Primero calculamos las TEF
+  tef <- tasa_especifica_fecundidad(nacimientos, mujeres, k)/1
+  
+  # Sumamos e incorporamos el ancho del intervalo (5 años)
+  tgf <- sum(tef) * 5
+  
+  return(tgf)
+}
+
+```
+
+Seguimos con el ejemplo anterior:
+
+```{r}
+tgf <- tasa_global_fecundidad(nac, muj)
+tgf
+
+#Resultados
+
+data.frame(
+  grupo_edad = edades,
+  nacimientos = nac,
+  mujeres = muj,
+  tef = round(tef, 2)
+)
+paste("TGF estimada:", round(tgf, 2))
+
+```
+
+
+
+
 ## Funciones demográficas en paquetes demográficos
 
 > Estamos entrando en zona de utilización de funciones demográficas de paquetes.
@@ -654,47 +697,6 @@ pob_chaco_2022_simple %>%
   ggplot(aes(EDAD, Población, color=Tipo)) +
   geom_line() +
   geom_point()
-```
-
-
-
-La **Tasa Global de Fecundidad (TGF)** estima el número promedio de hijos que tendría una mujer si se mantuvieran las TEF observadas.
-
-La fórmula general es:
-
-$$
-TGF = 5 \cdot \sum_{x} TEF_x
-$$
-```{r tgf, warning=F, message=F}
-tasa_global_fecundidad <- function(nacimientos, mujeres, k = 1){
-  
-  # Primero calculamos las TEF
-  tef <- tasa_especifica_fecundidad(nacimientos, mujeres, k)/1
-  
-  # Sumamos e incorporamos el ancho del intervalo (5 años)
-  tgf <- sum(tef) * 5
-  
-  return(tgf)
-}
-
-```
-
-Seguimos con el ejemplo anterior:
-
-```{r}
-tgf <- tasa_global_fecundidad(nac, muj)
-tgf
-
-#Resultados
-
-data.frame(
-  grupo_edad = edades,
-  nacimientos = nac,
-  mujeres = muj,
-  tef = round(tef, 2)
-)
-paste("TGF estimada:", round(tgf, 2))
-
 ```
 
 
