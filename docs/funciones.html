@@ -194,13 +194,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.4.1" data-path="funciones.html"><a href="funciones.html#actividad-3"><i class="fa fa-check"></i><b>4.4.1</b> Actividad</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="funciones.html"><a href="funciones.html#funciones-demográficas-en-paquetes-demográficos"><i class="fa fa-check"></i><b>4.5</b> Funciones demográficas en paquetes demográficos</a>
+<li class="chapter" data-level="4.5" data-path="funciones.html"><a href="funciones.html#migración"><i class="fa fa-check"></i><b>4.5</b> Migración</a></li>
+<li class="chapter" data-level="4.6" data-path="funciones.html"><a href="funciones.html#fecundidad"><i class="fa fa-check"></i><b>4.6</b> Fecundidad</a></li>
+<li class="chapter" data-level="4.7" data-path="funciones.html"><a href="funciones.html#funciones-demográficas-en-paquetes-demográficos"><i class="fa fa-check"></i><b>4.7</b> Funciones demográficas en paquetes demográficos</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="funciones.html"><a href="funciones.html#tablas-de-mortalidad"><i class="fa fa-check"></i><b>4.5.1</b> Tablas de mortalidad</a></li>
-<li class="chapter" data-level="4.5.2" data-path="funciones.html"><a href="funciones.html#evaluación-de-declaración-de-edad"><i class="fa fa-check"></i><b>4.5.2</b> Evaluación de declaración de edad</a></li>
-<li class="chapter" data-level="4.5.3" data-path="funciones.html"><a href="funciones.html#graduación-de-población-por-edad-simple"><i class="fa fa-check"></i><b>4.5.3</b> Graduación de población por edad simple</a></li>
-<li class="chapter" data-level="4.5.4" data-path="funciones.html"><a href="funciones.html#migración"><i class="fa fa-check"></i><b>4.5.4</b> Migración</a></li>
-<li class="chapter" data-level="4.5.5" data-path="funciones.html"><a href="funciones.html#fecundidad"><i class="fa fa-check"></i><b>4.5.5</b> Fecundidad</a></li>
+<li class="chapter" data-level="4.7.1" data-path="funciones.html"><a href="funciones.html#tablas-de-mortalidad"><i class="fa fa-check"></i><b>4.7.1</b> Tablas de mortalidad</a></li>
+<li class="chapter" data-level="4.7.2" data-path="funciones.html"><a href="funciones.html#evaluación-de-declaración-de-edad"><i class="fa fa-check"></i><b>4.7.2</b> Evaluación de declaración de edad</a></li>
+<li class="chapter" data-level="4.7.3" data-path="funciones.html"><a href="funciones.html#graduación-de-población-por-edad-simple"><i class="fa fa-check"></i><b>4.7.3</b> Graduación de población por edad simple</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="reportes.html"><a href="reportes.html"><i class="fa fa-check"></i><b>5</b> Reportes</a>
@@ -483,138 +483,8 @@ TSM^B(t) = \sum_{x&gt;=0}{M^B_x(t)\,C^S_x(t)}\\
 </ol>
 </div>
 </div>
-<div id="funciones-demográficas-en-paquetes-demográficos" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Funciones demográficas en paquetes demográficos<a href="funciones.html#funciones-demográficas-en-paquetes-demográficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<blockquote>
-<p>Estamos entrando en zona de utilización de funciones demográficas de paquetes.</p>
-</blockquote>
-<p><img src="figs/atencion.jpg" width="135" /></p>
-<p>Proyecto <a href="https://timriffe.github.io/DemoTools/">DemoTools</a>. Su instalación demora un poco:</p>
-<p><img src="figs/demotools.png" width="35%" /></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="funciones.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
-<span id="cb20-2"><a href="funciones.html#cb20-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rstan&quot;</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">&quot;https://mc-stan.org/r-packages/&quot;</span>, <span class="fu">getOption</span>(<span class="st">&quot;repos&quot;</span>)))</span>
-<span id="cb20-3"><a href="funciones.html#cb20-3" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;timriffe/DemoTools&quot;</span>)</span></code></pre></div>
-<div id="tablas-de-mortalidad" class="section level3 hasAnchor" number="4.5.1">
-<h3><span class="header-section-number">4.5.1</span> Tablas de mortalidad<a href="funciones.html#tablas-de-mortalidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Construir una función que produzca una <strong>tabla de mortalidad</strong> a partir de un set de tasas por edad de mortalidad es un lindo ejercicio de programación en R. Pero por suerte <code>DemoTools</code> tiene una muy buena implementación. Acá para Japón 2015:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="funciones.html#cb21-1" tabindex="-1"></a>jpn_2015 <span class="ot">&lt;-</span> db <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">&quot;Japon&quot;</span>, Year <span class="sc">==</span> <span class="dv">2015</span>)</span>
-<span id="cb21-2"><a href="funciones.html#cb21-2" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="funciones.html#cb21-3" tabindex="-1"></a><span class="co"># obtengo la tabla</span></span>
-<span id="cb21-4"><a href="funciones.html#cb21-4" tabindex="-1"></a><span class="fu">library</span>(DemoTools)</span>
-<span id="cb21-5"><a href="funciones.html#cb21-5" tabindex="-1"></a>tm_jpn_2015 <span class="ot">&lt;-</span> <span class="fu">lt_abridged</span>(<span class="at">nMx =</span> jpn_2015<span class="sc">$</span>M, <span class="at">Age =</span> jpn_2015<span class="sc">$</span>Age)</span>
-<span id="cb21-6"><a href="funciones.html#cb21-6" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="funciones.html#cb21-7" tabindex="-1"></a><span class="co"># veamos la función de sobrevivencia:</span></span>
-<span id="cb21-8"><a href="funciones.html#cb21-8" tabindex="-1"></a>tm_jpn_2015 <span class="sc">%&gt;%</span> </span>
-<span id="cb21-9"><a href="funciones.html#cb21-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Age, lx)) <span class="sc">+</span> </span>
-<span id="cb21-10"><a href="funciones.html#cb21-10" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb21-11"><a href="funciones.html#cb21-11" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb21-12"><a href="funciones.html#cb21-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="talleR_files/figure-html/mort-1.png" width="672" /></p>
-<p>Repasemos sus argumentos, como <code>OAGNew</code>, <code>extrapLaw</code> y <code>a0rule</code>. También puede <code>graduar</code>, es decir pasar a edades simples.</p>
-<div id="bonus-1" class="section level4 hasAnchor" number="4.5.1.1">
-<h4><span class="header-section-number">4.5.1.1</span> BONUS<a href="funciones.html#bonus-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Aquí va el ejemplo de una función de tabla de vida acorde a las necesidades propias: con un grupo de edad 1-9 y que devolviera también Dx y Nx (para luego calcular intervalos de confianza)</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="funciones.html#cb22-1" tabindex="-1"></a>lifetable <span class="ot">&lt;-</span> <span class="cf">function</span>(deaths,pop,age, <span class="at">sex =</span> <span class="st">&quot;m&quot;</span>){</span>
-<span id="cb22-2"><a href="funciones.html#cb22-2" tabindex="-1"></a>  nmx <span class="ot">&lt;-</span> deaths<span class="sc">/</span>pop</span>
-<span id="cb22-3"><a href="funciones.html#cb22-3" tabindex="-1"></a>  m0 <span class="ot">&lt;-</span> nmx[<span class="dv">1</span>]</span>
-<span id="cb22-4"><a href="funciones.html#cb22-4" tabindex="-1"></a>  </span>
-<span id="cb22-5"><a href="funciones.html#cb22-5" tabindex="-1"></a>  <span class="co"># a0 de Coale &amp; Demeny (1983) en Preston, Heuveline &amp; Guillot (2001)</span></span>
-<span id="cb22-6"><a href="funciones.html#cb22-6" tabindex="-1"></a>  a0 <span class="ot">&lt;-</span> <span class="cf">if</span>(sex <span class="sc">==</span> <span class="st">&quot;m&quot;</span>) {.<span class="dv">0425</span><span class="fl">+2.684</span><span class="sc">*</span>m0} <span class="cf">else</span> {<span class="fl">0.053+2.8</span><span class="sc">*</span>m0}</span>
-<span id="cb22-7"><a href="funciones.html#cb22-7" tabindex="-1"></a>  </span>
-<span id="cb22-8"><a href="funciones.html#cb22-8" tabindex="-1"></a>  <span class="co"># 4.5 para el grupo 1-9</span></span>
-<span id="cb22-9"><a href="funciones.html#cb22-9" tabindex="-1"></a>  nax <span class="ot">&lt;-</span> <span class="fu">c</span>(a0, <span class="fl">4.5</span>, <span class="fu">rep</span>(<span class="fl">2.5</span>, <span class="at">times =</span> <span class="dv">15</span>))</span>
-<span id="cb22-10"><a href="funciones.html#cb22-10" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">diff</span>(age),<span class="cn">NA</span>)</span>
-<span id="cb22-11"><a href="funciones.html#cb22-11" tabindex="-1"></a>  nqx <span class="ot">&lt;-</span> n<span class="sc">*</span>nmx <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span>(n<span class="sc">-</span>nax)<span class="sc">*</span>nmx)</span>
-<span id="cb22-12"><a href="funciones.html#cb22-12" tabindex="-1"></a>  nqx[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb22-13"><a href="funciones.html#cb22-13" tabindex="-1"></a>  npx <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> nqx</span>
-<span id="cb22-14"><a href="funciones.html#cb22-14" tabindex="-1"></a>  </span>
-<span id="cb22-15"><a href="funciones.html#cb22-15" tabindex="-1"></a>  lx <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">length</span>(nqx))</span>
-<span id="cb22-16"><a href="funciones.html#cb22-16" tabindex="-1"></a>  lx[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
-<span id="cb22-17"><a href="funciones.html#cb22-17" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(n)){</span>
-<span id="cb22-18"><a href="funciones.html#cb22-18" tabindex="-1"></a>    lx[i<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> lx[i]<span class="sc">*</span>npx[i]</span>
-<span id="cb22-19"><a href="funciones.html#cb22-19" tabindex="-1"></a>  }</span>
-<span id="cb22-20"><a href="funciones.html#cb22-20" tabindex="-1"></a>  </span>
-<span id="cb22-21"><a href="funciones.html#cb22-21" tabindex="-1"></a>  lx <span class="ot">&lt;-</span> lx[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(n)]</span>
-<span id="cb22-22"><a href="funciones.html#cb22-22" tabindex="-1"></a>  </span>
-<span id="cb22-23"><a href="funciones.html#cb22-23" tabindex="-1"></a>  ndx <span class="ot">&lt;-</span> lx<span class="sc">*</span>nqx</span>
-<span id="cb22-24"><a href="funciones.html#cb22-24" tabindex="-1"></a>  ndx[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> lx[<span class="fu">length</span>(age)]</span>
-<span id="cb22-25"><a href="funciones.html#cb22-25" tabindex="-1"></a>  </span>
-<span id="cb22-26"><a href="funciones.html#cb22-26" tabindex="-1"></a>  </span>
-<span id="cb22-27"><a href="funciones.html#cb22-27" tabindex="-1"></a>  nLx <span class="ot">&lt;-</span> ndx<span class="sc">/</span>nmx</span>
-<span id="cb22-28"><a href="funciones.html#cb22-28" tabindex="-1"></a>  </span>
-<span id="cb22-29"><a href="funciones.html#cb22-29" tabindex="-1"></a>  nax[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> nLx[<span class="fu">length</span>(age)]<span class="sc">/</span>lx[<span class="fu">length</span>(age)]</span>
-<span id="cb22-30"><a href="funciones.html#cb22-30" tabindex="-1"></a>  </span>
-<span id="cb22-31"><a href="funciones.html#cb22-31" tabindex="-1"></a>  <span class="co"># Tx</span></span>
-<span id="cb22-32"><a href="funciones.html#cb22-32" tabindex="-1"></a>  Tx <span class="ot">=</span> <span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(nLx)))</span>
-<span id="cb22-33"><a href="funciones.html#cb22-33" tabindex="-1"></a>  </span>
-<span id="cb22-34"><a href="funciones.html#cb22-34" tabindex="-1"></a>  <span class="co"># ex</span></span>
-<span id="cb22-35"><a href="funciones.html#cb22-35" tabindex="-1"></a>  ex <span class="ot">&lt;-</span> Tx<span class="sc">/</span>lx</span>
-<span id="cb22-36"><a href="funciones.html#cb22-36" tabindex="-1"></a>  ex[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> nax[<span class="fu">length</span>(age)]</span>
-<span id="cb22-37"><a href="funciones.html#cb22-37" tabindex="-1"></a>  </span>
-<span id="cb22-38"><a href="funciones.html#cb22-38" tabindex="-1"></a>  lifetable <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age=</span>age,</span>
-<span id="cb22-39"><a href="funciones.html#cb22-39" tabindex="-1"></a>                          <span class="at">n=</span><span class="fu">round</span>(n,<span class="dv">0</span>),</span>
-<span id="cb22-40"><a href="funciones.html#cb22-40" tabindex="-1"></a>                          <span class="at">nmx=</span><span class="fu">round</span>(nmx,<span class="dv">5</span>),</span>
-<span id="cb22-41"><a href="funciones.html#cb22-41" tabindex="-1"></a>                          <span class="at">nqx=</span><span class="fu">round</span>(nqx,<span class="dv">5</span>),</span>
-<span id="cb22-42"><a href="funciones.html#cb22-42" tabindex="-1"></a>                          <span class="at">npx=</span><span class="fu">round</span>(npx,<span class="dv">5</span>),<span class="at">nax=</span><span class="fu">round</span>(nax,<span class="dv">2</span>),</span>
-<span id="cb22-43"><a href="funciones.html#cb22-43" tabindex="-1"></a>                          <span class="at">ndx=</span><span class="fu">round</span>(ndx,<span class="dv">0</span>),<span class="at">lx=</span><span class="fu">round</span>(lx,<span class="dv">0</span>),</span>
-<span id="cb22-44"><a href="funciones.html#cb22-44" tabindex="-1"></a>                          <span class="at">Lx=</span><span class="fu">round</span>(nLx,<span class="dv">0</span>),</span>
-<span id="cb22-45"><a href="funciones.html#cb22-45" tabindex="-1"></a>                          <span class="at">Tx=</span><span class="fu">round</span>(Tx,<span class="dv">0</span>),</span>
-<span id="cb22-46"><a href="funciones.html#cb22-46" tabindex="-1"></a>                          <span class="at">ex=</span><span class="fu">round</span>(ex,<span class="dv">5</span>),</span>
-<span id="cb22-47"><a href="funciones.html#cb22-47" tabindex="-1"></a>                          <span class="at">Dx=</span>deaths,</span>
-<span id="cb22-48"><a href="funciones.html#cb22-48" tabindex="-1"></a>                          <span class="at">Nx=</span>pop)</span>
-<span id="cb22-49"><a href="funciones.html#cb22-49" tabindex="-1"></a>  <span class="fu">return</span>(lifetable)</span>
-<span id="cb22-50"><a href="funciones.html#cb22-50" tabindex="-1"></a>}</span></code></pre></div>
-</div>
-</div>
-<div id="evaluación-de-declaración-de-edad" class="section level3 hasAnchor" number="4.5.2">
-<h3><span class="header-section-number">4.5.2</span> Evaluación de declaración de edad<a href="funciones.html#evaluación-de-declaración-de-edad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Con el índice de <strong>Myers</strong> veamos si en Chaco mejoró la declaración por edad de varones entre los censos 2010 y 2022. Un valor del indicador que tienda a 0 indica una mejor declaración (bajo los supuesto del método).</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="funciones.html#cb23-1" tabindex="-1"></a>pob_chaco <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/Pob2010y2022_prov.xlsx&quot;</span>, <span class="at">sheet=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="funciones.html#cb23-2" tabindex="-1"></a>                <span class="fu">filter</span>(PROV_NOMBRE <span class="sc">==</span> <span class="st">&quot;CHACO&quot;</span>)</span>
-<span id="cb23-3"><a href="funciones.html#cb23-3" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="funciones.html#cb23-4" tabindex="-1"></a>pob_chaco <span class="sc">%&gt;%</span></span>
-<span id="cb23-5"><a href="funciones.html#cb23-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(EDAD, VARON, <span class="at">color=</span><span class="fu">factor</span>(CENSO))) <span class="sc">+</span></span>
-<span id="cb23-6"><a href="funciones.html#cb23-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-7"><a href="funciones.html#cb23-7" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb23-8"><a href="funciones.html#cb23-8" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">5</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb23-9"><a href="funciones.html#cb23-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="talleR_files/figure-html/evaluacion-1.png" width="672" /></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="funciones.html#cb24-1" tabindex="-1"></a><span class="co"># obtengo Myers</span></span>
-<span id="cb24-2"><a href="funciones.html#cb24-2" tabindex="-1"></a>pob_chaco <span class="sc">%&gt;%</span></span>
-<span id="cb24-3"><a href="funciones.html#cb24-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Myers_2010 =</span> <span class="fu">check_heaping_myers</span>(VARON[CENSO<span class="sc">==</span><span class="dv">2010</span>], EDAD[CENSO<span class="sc">==</span><span class="dv">2010</span>], <span class="at">ageMin =</span> <span class="dv">20</span>, <span class="at">ageMax =</span> <span class="dv">64</span>),</span>
-<span id="cb24-4"><a href="funciones.html#cb24-4" tabindex="-1"></a>            <span class="at">Myers_2022 =</span> <span class="fu">check_heaping_myers</span>(VARON[CENSO<span class="sc">==</span><span class="dv">2022</span>], EDAD[CENSO<span class="sc">==</span><span class="dv">2022</span>], <span class="at">ageMin =</span> <span class="dv">20</span>, <span class="at">ageMax =</span> <span class="dv">64</span>))</span></code></pre></div>
-</div>
-<div id="graduación-de-población-por-edad-simple" class="section level3 hasAnchor" number="4.5.3">
-<h3><span class="header-section-number">4.5.3</span> Graduación de población por edad simple<a href="funciones.html#graduación-de-población-por-edad-simple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>El método de <strong>Sprague</strong> desagrega por edad simple conteos agrupados por edad quinquenal. Veamos como funciona para los varones de Chaco en el año 2022. Primero agregando, y luego aplicando el método.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="funciones.html#cb25-1" tabindex="-1"></a><span class="co"># me quedo con 2022</span></span>
-<span id="cb25-2"><a href="funciones.html#cb25-2" tabindex="-1"></a>pob_chaco_2022 <span class="ot">&lt;-</span> pob_chaco <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CENSO <span class="sc">==</span> <span class="dv">2022</span>)</span>
-<span id="cb25-3"><a href="funciones.html#cb25-3" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="funciones.html#cb25-4" tabindex="-1"></a><span class="co"># agrupo la población por grupos quinquenales</span></span>
-<span id="cb25-5"><a href="funciones.html#cb25-5" tabindex="-1"></a>pob_chaco_2022_quinquenal <span class="ot">&lt;-</span> pob_chaco <span class="sc">%&gt;%</span></span>
-<span id="cb25-6"><a href="funciones.html#cb25-6" tabindex="-1"></a>  <span class="fu">filter</span>(CENSO <span class="sc">==</span> <span class="dv">2022</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-7"><a href="funciones.html#cb25-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EDAD_q =</span> <span class="fu">trunc</span>(EDAD<span class="sc">/</span><span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-8"><a href="funciones.html#cb25-8" tabindex="-1"></a>  <span class="fu">group_by</span>(EDAD_q) <span class="sc">%&gt;%</span></span>
-<span id="cb25-9"><a href="funciones.html#cb25-9" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">VARON =</span> <span class="fu">sum</span>(VARON))</span>
-<span id="cb25-10"><a href="funciones.html#cb25-10" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="funciones.html#cb25-11" tabindex="-1"></a><span class="co"># aplico sprague</span></span>
-<span id="cb25-12"><a href="funciones.html#cb25-12" tabindex="-1"></a>pob_chaco_2022_sprague <span class="ot">&lt;-</span> <span class="fu">graduate</span>(pob_chaco_2022_quinquenal<span class="sc">$</span>VARON, pob_chaco_2022_quinquenal<span class="sc">$</span>EDAD_q, <span class="at">method =</span> <span class="st">&quot;sprague&quot;</span>)</span>
-<span id="cb25-13"><a href="funciones.html#cb25-13" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="funciones.html#cb25-14" tabindex="-1"></a><span class="co"># junto</span></span>
-<span id="cb25-15"><a href="funciones.html#cb25-15" tabindex="-1"></a>pob_chaco_2022_simple <span class="ot">&lt;-</span> pob_chaco_2022 <span class="sc">%&gt;%</span></span>
-<span id="cb25-16"><a href="funciones.html#cb25-16" tabindex="-1"></a>  <span class="fu">full_join</span>(<span class="fu">tibble</span>(<span class="at">EDAD =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">110</span>, <span class="at">VARON_sprague =</span> pob_chaco_2022_sprague)) <span class="sc">%&gt;%</span></span>
-<span id="cb25-17"><a href="funciones.html#cb25-17" tabindex="-1"></a>  <span class="fu">select</span>(EDAD, VARON, VARON_sprague) <span class="sc">%&gt;%</span></span>
-<span id="cb25-18"><a href="funciones.html#cb25-18" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>EDAD, <span class="at">names_to=</span><span class="st">&quot;Tipo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Población&quot;</span>)</span>
-<span id="cb25-19"><a href="funciones.html#cb25-19" tabindex="-1"></a></span>
-<span id="cb25-20"><a href="funciones.html#cb25-20" tabindex="-1"></a><span class="co"># visualizo</span></span>
-<span id="cb25-21"><a href="funciones.html#cb25-21" tabindex="-1"></a>pob_chaco_2022_simple <span class="sc">%&gt;%</span></span>
-<span id="cb25-22"><a href="funciones.html#cb25-22" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(EDAD, Población, <span class="at">color=</span>Tipo)) <span class="sc">+</span></span>
-<span id="cb25-23"><a href="funciones.html#cb25-23" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb25-24"><a href="funciones.html#cb25-24" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="talleR_files/figure-html/edad-1.png" width="672" /></p>
-</div>
-<div id="migración" class="section level3 hasAnchor" number="4.5.4">
-<h3><span class="header-section-number">4.5.4</span> Migración<a href="funciones.html#migración" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="migración" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Migración<a href="funciones.html#migración" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En esta oporunidad, vamos a crear una función que nos permita calcular la <strong>Tasa Neta de Migración (TNM)</strong>.</p>
 <p>La <em>TNM</em> mide la diferencia entre inmigrantes y emigrantes en relación con la población media del período. Se expresa por cada 1.000 habitantes.</p>
 <p>La fórmula es:</p>
@@ -631,40 +501,40 @@ TNM = \frac{I - E}{P} \times 1000
 </ul>
 <p>Primero vamos a crear un data frame simple con datos ficticios
 de Argentina:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="funciones.html#cb26-1" tabindex="-1"></a>datos_mig <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb26-2"><a href="funciones.html#cb26-2" tabindex="-1"></a>  <span class="at">inmigrantes =</span> <span class="dv">25000</span>,</span>
-<span id="cb26-3"><a href="funciones.html#cb26-3" tabindex="-1"></a>  <span class="at">emigrantes =</span> <span class="dv">40000</span>,</span>
-<span id="cb26-4"><a href="funciones.html#cb26-4" tabindex="-1"></a>  <span class="at">poblacion_medio_periodo =</span> <span class="dv">46000000</span></span>
-<span id="cb26-5"><a href="funciones.html#cb26-5" tabindex="-1"></a>)</span>
-<span id="cb26-6"><a href="funciones.html#cb26-6" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="funciones.html#cb26-7" tabindex="-1"></a>datos_mig</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="funciones.html#cb20-1" tabindex="-1"></a>datos_mig <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-2"><a href="funciones.html#cb20-2" tabindex="-1"></a>  <span class="at">inmigrantes =</span> <span class="dv">25000</span>,</span>
+<span id="cb20-3"><a href="funciones.html#cb20-3" tabindex="-1"></a>  <span class="at">emigrantes =</span> <span class="dv">40000</span>,</span>
+<span id="cb20-4"><a href="funciones.html#cb20-4" tabindex="-1"></a>  <span class="at">poblacion_medio_periodo =</span> <span class="dv">46000000</span></span>
+<span id="cb20-5"><a href="funciones.html#cb20-5" tabindex="-1"></a>)</span>
+<span id="cb20-6"><a href="funciones.html#cb20-6" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="funciones.html#cb20-7" tabindex="-1"></a>datos_mig</span></code></pre></div>
 <pre><code>##   inmigrantes emigrantes poblacion_medio_periodo
 ## 1       25000      40000                 4.6e+07</code></pre>
 <p>Creamos la función con sus validaciones:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="funciones.html#cb28-1" tabindex="-1"></a>tasa_neta_migracion <span class="ot">&lt;-</span> <span class="cf">function</span>(inmigrantes, emigrantes, poblacion_medio_periodo) {</span>
-<span id="cb28-2"><a href="funciones.html#cb28-2" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="funciones.html#cb28-3" tabindex="-1"></a><span class="cf">if</span> (poblacion_medio_periodo <span class="sc">&lt;=</span> <span class="dv">0</span>) {</span>
-<span id="cb28-4"><a href="funciones.html#cb28-4" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">&quot;La población media debe ser mayor que cero.&quot;</span>)</span>
-<span id="cb28-5"><a href="funciones.html#cb28-5" tabindex="-1"></a>}</span>
-<span id="cb28-6"><a href="funciones.html#cb28-6" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="funciones.html#cb28-7" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">c</span>(inmigrantes, emigrantes) <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
-<span id="cb28-8"><a href="funciones.html#cb28-8" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">&quot;Los flujos migratorios no pueden ser negativos.&quot;</span>)</span>
-<span id="cb28-9"><a href="funciones.html#cb28-9" tabindex="-1"></a>}</span>
-<span id="cb28-10"><a href="funciones.html#cb28-10" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="funciones.html#cb28-11" tabindex="-1"></a>tasa <span class="ot">&lt;-</span> (inmigrantes <span class="sc">-</span> emigrantes) <span class="sc">/</span> poblacion_medio_periodo <span class="sc">*</span> <span class="dv">1000</span></span>
-<span id="cb28-12"><a href="funciones.html#cb28-12" tabindex="-1"></a></span>
-<span id="cb28-13"><a href="funciones.html#cb28-13" tabindex="-1"></a><span class="fu">return</span>(tasa)</span>
-<span id="cb28-14"><a href="funciones.html#cb28-14" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="funciones.html#cb22-1" tabindex="-1"></a>tasa_neta_migracion <span class="ot">&lt;-</span> <span class="cf">function</span>(inmigrantes, emigrantes, poblacion_medio_periodo) {</span>
+<span id="cb22-2"><a href="funciones.html#cb22-2" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="funciones.html#cb22-3" tabindex="-1"></a><span class="cf">if</span> (poblacion_medio_periodo <span class="sc">&lt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb22-4"><a href="funciones.html#cb22-4" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">&quot;La población media debe ser mayor que cero.&quot;</span>)</span>
+<span id="cb22-5"><a href="funciones.html#cb22-5" tabindex="-1"></a>}</span>
+<span id="cb22-6"><a href="funciones.html#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="funciones.html#cb22-7" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">c</span>(inmigrantes, emigrantes) <span class="sc">&lt;</span> <span class="dv">0</span>)) {</span>
+<span id="cb22-8"><a href="funciones.html#cb22-8" tabindex="-1"></a><span class="fu">stop</span>(<span class="st">&quot;Los flujos migratorios no pueden ser negativos.&quot;</span>)</span>
+<span id="cb22-9"><a href="funciones.html#cb22-9" tabindex="-1"></a>}</span>
+<span id="cb22-10"><a href="funciones.html#cb22-10" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="funciones.html#cb22-11" tabindex="-1"></a>tasa <span class="ot">&lt;-</span> (inmigrantes <span class="sc">-</span> emigrantes) <span class="sc">/</span> poblacion_medio_periodo <span class="sc">*</span> <span class="dv">1000</span></span>
+<span id="cb22-12"><a href="funciones.html#cb22-12" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="funciones.html#cb22-13" tabindex="-1"></a><span class="fu">return</span>(tasa)</span>
+<span id="cb22-14"><a href="funciones.html#cb22-14" tabindex="-1"></a>}</span></code></pre></div>
 <p>Aplicamos la función a nuestros datos:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="funciones.html#cb29-1" tabindex="-1"></a><span class="fu">tasa_neta_migracion</span>(</span>
-<span id="cb29-2"><a href="funciones.html#cb29-2" tabindex="-1"></a>  datos_mig<span class="sc">$</span>inmigrantes,</span>
-<span id="cb29-3"><a href="funciones.html#cb29-3" tabindex="-1"></a>  datos_mig<span class="sc">$</span>emigrantes,</span>
-<span id="cb29-4"><a href="funciones.html#cb29-4" tabindex="-1"></a>  datos_mig<span class="sc">$</span>poblacion_medio_periodo</span>
-<span id="cb29-5"><a href="funciones.html#cb29-5" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="funciones.html#cb23-1" tabindex="-1"></a><span class="fu">tasa_neta_migracion</span>(</span>
+<span id="cb23-2"><a href="funciones.html#cb23-2" tabindex="-1"></a>  datos_mig<span class="sc">$</span>inmigrantes,</span>
+<span id="cb23-3"><a href="funciones.html#cb23-3" tabindex="-1"></a>  datos_mig<span class="sc">$</span>emigrantes,</span>
+<span id="cb23-4"><a href="funciones.html#cb23-4" tabindex="-1"></a>  datos_mig<span class="sc">$</span>poblacion_medio_periodo</span>
+<span id="cb23-5"><a href="funciones.html#cb23-5" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## [1] -0.326087</code></pre>
 </div>
-<div id="fecundidad" class="section level3 hasAnchor" number="4.5.5">
-<h3><span class="header-section-number">4.5.5</span> Fecundidad<a href="funciones.html#fecundidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fecundidad" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Fecundidad<a href="funciones.html#fecundidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En esta sección vamos a trabajar con funciones para calcular:</p>
 <ul>
 <li><p><strong>Tasas Específicas de Fecundidad (TEF)</strong></p></li>
@@ -675,54 +545,184 @@ de Argentina:</p>
 <p><span class="math display">\[
 TEF_x = \frac{Nacimientos \; en \; mujeres \; de \; edad \; x}{Mujeres \; de \; edad \; x} \times k
 \]</span></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="funciones.html#cb31-1" tabindex="-1"></a>tasa_especifica_fecundidad <span class="ot">&lt;-</span> <span class="cf">function</span>(nacimientos, mujeres, <span class="at">k =</span> <span class="dv">1000</span>){</span>
-<span id="cb31-2"><a href="funciones.html#cb31-2" tabindex="-1"></a>  </span>
-<span id="cb31-3"><a href="funciones.html#cb31-3" tabindex="-1"></a>  <span class="co"># Validaciones</span></span>
-<span id="cb31-4"><a href="funciones.html#cb31-4" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(nacimientos) <span class="sc">!=</span> <span class="fu">length</span>(mujeres)){</span>
-<span id="cb31-5"><a href="funciones.html#cb31-5" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Los vectores de nacimientos y mujeres deben tener la misma longitud.&quot;</span>)</span>
-<span id="cb31-6"><a href="funciones.html#cb31-6" tabindex="-1"></a>  }</span>
-<span id="cb31-7"><a href="funciones.html#cb31-7" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(nacimientos <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">|</span> <span class="fu">any</span>(mujeres <span class="sc">&lt;</span> <span class="dv">0</span>)){</span>
-<span id="cb31-8"><a href="funciones.html#cb31-8" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Los valores deben ser positivos.&quot;</span>)</span>
-<span id="cb31-9"><a href="funciones.html#cb31-9" tabindex="-1"></a>  }</span>
-<span id="cb31-10"><a href="funciones.html#cb31-10" tabindex="-1"></a>  </span>
-<span id="cb31-11"><a href="funciones.html#cb31-11" tabindex="-1"></a>  <span class="co"># Cálculo</span></span>
-<span id="cb31-12"><a href="funciones.html#cb31-12" tabindex="-1"></a>  tef <span class="ot">&lt;-</span> (nacimientos <span class="sc">/</span> mujeres) <span class="sc">*</span> k</span>
-<span id="cb31-13"><a href="funciones.html#cb31-13" tabindex="-1"></a>  </span>
-<span id="cb31-14"><a href="funciones.html#cb31-14" tabindex="-1"></a>  <span class="fu">return</span>(tef)</span>
-<span id="cb31-15"><a href="funciones.html#cb31-15" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="funciones.html#cb25-1" tabindex="-1"></a>tasa_especifica_fecundidad <span class="ot">&lt;-</span> <span class="cf">function</span>(nacimientos, mujeres, <span class="at">k =</span> <span class="dv">1000</span>){</span>
+<span id="cb25-2"><a href="funciones.html#cb25-2" tabindex="-1"></a>  </span>
+<span id="cb25-3"><a href="funciones.html#cb25-3" tabindex="-1"></a>  <span class="co"># Validaciones</span></span>
+<span id="cb25-4"><a href="funciones.html#cb25-4" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(nacimientos) <span class="sc">!=</span> <span class="fu">length</span>(mujeres)){</span>
+<span id="cb25-5"><a href="funciones.html#cb25-5" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Los vectores de nacimientos y mujeres deben tener la misma longitud.&quot;</span>)</span>
+<span id="cb25-6"><a href="funciones.html#cb25-6" tabindex="-1"></a>  }</span>
+<span id="cb25-7"><a href="funciones.html#cb25-7" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">any</span>(nacimientos <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">|</span> <span class="fu">any</span>(mujeres <span class="sc">&lt;</span> <span class="dv">0</span>)){</span>
+<span id="cb25-8"><a href="funciones.html#cb25-8" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Los valores deben ser positivos.&quot;</span>)</span>
+<span id="cb25-9"><a href="funciones.html#cb25-9" tabindex="-1"></a>  }</span>
+<span id="cb25-10"><a href="funciones.html#cb25-10" tabindex="-1"></a>  </span>
+<span id="cb25-11"><a href="funciones.html#cb25-11" tabindex="-1"></a>  <span class="co"># Cálculo</span></span>
+<span id="cb25-12"><a href="funciones.html#cb25-12" tabindex="-1"></a>  tef <span class="ot">&lt;-</span> (nacimientos <span class="sc">/</span> mujeres) <span class="sc">*</span> k</span>
+<span id="cb25-13"><a href="funciones.html#cb25-13" tabindex="-1"></a>  </span>
+<span id="cb25-14"><a href="funciones.html#cb25-14" tabindex="-1"></a>  <span class="fu">return</span>(tef)</span>
+<span id="cb25-15"><a href="funciones.html#cb25-15" tabindex="-1"></a>}</span></code></pre></div>
 <p>Si nosotros le damos información sobre nacimientos y cantidad de mujeres, podemos calcular la TEF de un momento específico. A continuación aplicamos la función con datos ficticios:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="funciones.html#cb32-1" tabindex="-1"></a>nac <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">42000</span>, <span class="dv">60000</span>, <span class="dv">58000</span>, <span class="dv">45000</span>, <span class="dv">30000</span>, <span class="dv">15000</span>, <span class="dv">5000</span>)</span>
-<span id="cb32-2"><a href="funciones.html#cb32-2" tabindex="-1"></a>muj <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">800000</span>, <span class="dv">750000</span>, <span class="dv">720000</span>, <span class="dv">700000</span>, <span class="dv">680000</span>, <span class="dv">660000</span>, <span class="dv">640000</span>)</span>
-<span id="cb32-3"><a href="funciones.html#cb32-3" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="funciones.html#cb32-4" tabindex="-1"></a>tef <span class="ot">&lt;-</span> <span class="fu">tasa_especifica_fecundidad</span>(nac, muj)</span>
-<span id="cb32-5"><a href="funciones.html#cb32-5" tabindex="-1"></a>tef</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="funciones.html#cb26-1" tabindex="-1"></a>nac <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">42000</span>, <span class="dv">60000</span>, <span class="dv">58000</span>, <span class="dv">45000</span>, <span class="dv">30000</span>, <span class="dv">15000</span>, <span class="dv">5000</span>)</span>
+<span id="cb26-2"><a href="funciones.html#cb26-2" tabindex="-1"></a>muj <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">800000</span>, <span class="dv">750000</span>, <span class="dv">720000</span>, <span class="dv">700000</span>, <span class="dv">680000</span>, <span class="dv">660000</span>, <span class="dv">640000</span>)</span>
+<span id="cb26-3"><a href="funciones.html#cb26-3" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="funciones.html#cb26-4" tabindex="-1"></a>tef <span class="ot">&lt;-</span> <span class="fu">tasa_especifica_fecundidad</span>(nac, muj)</span>
+<span id="cb26-5"><a href="funciones.html#cb26-5" tabindex="-1"></a>tef</span></code></pre></div>
 <pre><code>## [1] 52.50000 80.00000 80.55556 64.28571 44.11765 22.72727  7.81250</code></pre>
 <p>Si lo queremos graficar:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="funciones.html#cb34-1" tabindex="-1"></a>edades <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;15–19&quot;</span>, <span class="st">&quot;20–24&quot;</span>, <span class="st">&quot;25–29&quot;</span>, <span class="st">&quot;30–34&quot;</span>, <span class="st">&quot;35–39&quot;</span>, <span class="st">&quot;40–44&quot;</span>, <span class="st">&quot;45–49&quot;</span>)</span>
-<span id="cb34-2"><a href="funciones.html#cb34-2" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="funciones.html#cb34-3" tabindex="-1"></a>df_tef <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb34-4"><a href="funciones.html#cb34-4" tabindex="-1"></a>  <span class="at">grupo_edad =</span> <span class="fu">factor</span>(edades, <span class="at">levels =</span> edades),</span>
-<span id="cb34-5"><a href="funciones.html#cb34-5" tabindex="-1"></a>  <span class="at">tef =</span> tef</span>
-<span id="cb34-6"><a href="funciones.html#cb34-6" tabindex="-1"></a>)</span>
-<span id="cb34-7"><a href="funciones.html#cb34-7" tabindex="-1"></a></span>
-<span id="cb34-8"><a href="funciones.html#cb34-8" tabindex="-1"></a><span class="fu">ggplot</span>(df_tef, <span class="fu">aes</span>(<span class="at">x =</span> grupo_edad, <span class="at">y =</span> tef)) <span class="sc">+</span></span>
-<span id="cb34-9"><a href="funciones.html#cb34-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb34-10"><a href="funciones.html#cb34-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb34-11"><a href="funciones.html#cb34-11" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb34-12"><a href="funciones.html#cb34-12" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Tasas Específicas de Fecundidad (TEF)&quot;</span>,</span>
-<span id="cb34-13"><a href="funciones.html#cb34-13" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo de edad&quot;</span>,</span>
-<span id="cb34-14"><a href="funciones.html#cb34-14" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Tasa por 1.000 mujeres&quot;</span></span>
-<span id="cb34-15"><a href="funciones.html#cb34-15" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="funciones.html#cb28-1" tabindex="-1"></a>edades <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;15–19&quot;</span>, <span class="st">&quot;20–24&quot;</span>, <span class="st">&quot;25–29&quot;</span>, <span class="st">&quot;30–34&quot;</span>, <span class="st">&quot;35–39&quot;</span>, <span class="st">&quot;40–44&quot;</span>, <span class="st">&quot;45–49&quot;</span>)</span>
+<span id="cb28-2"><a href="funciones.html#cb28-2" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="funciones.html#cb28-3" tabindex="-1"></a>df_tef <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb28-4"><a href="funciones.html#cb28-4" tabindex="-1"></a>  <span class="at">grupo_edad =</span> <span class="fu">factor</span>(edades, <span class="at">levels =</span> edades),</span>
+<span id="cb28-5"><a href="funciones.html#cb28-5" tabindex="-1"></a>  <span class="at">tef =</span> tef</span>
+<span id="cb28-6"><a href="funciones.html#cb28-6" tabindex="-1"></a>)</span>
+<span id="cb28-7"><a href="funciones.html#cb28-7" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="funciones.html#cb28-8" tabindex="-1"></a><span class="fu">ggplot</span>(df_tef, <span class="fu">aes</span>(<span class="at">x =</span> grupo_edad, <span class="at">y =</span> tef)) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="funciones.html#cb28-9" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="funciones.html#cb28-10" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb28-11"><a href="funciones.html#cb28-11" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-12"><a href="funciones.html#cb28-12" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Tasas Específicas de Fecundidad (TEF)&quot;</span>,</span>
+<span id="cb28-13"><a href="funciones.html#cb28-13" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Grupo de edad&quot;</span>,</span>
+<span id="cb28-14"><a href="funciones.html#cb28-14" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Tasa por 1.000 mujeres&quot;</span></span>
+<span id="cb28-15"><a href="funciones.html#cb28-15" tabindex="-1"></a>  )</span></code></pre></div>
 <p><img src="talleR_files/figure-html/graf_TEF-1.png" width="672" /></p>
+</div>
+<div id="funciones-demográficas-en-paquetes-demográficos" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Funciones demográficas en paquetes demográficos<a href="funciones.html#funciones-demográficas-en-paquetes-demográficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<blockquote>
+<p>Estamos entrando en zona de utilización de funciones demográficas de paquetes.</p>
+</blockquote>
+<p><img src="figs/atencion.jpg" width="135" /></p>
+<p>Proyecto <a href="https://timriffe.github.io/DemoTools/">DemoTools</a>. Su instalación demora un poco:</p>
+<p><img src="figs/demotools.png" width="35%" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="funciones.html#cb29-1" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb29-2"><a href="funciones.html#cb29-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;rstan&quot;</span>, <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">&quot;https://mc-stan.org/r-packages/&quot;</span>, <span class="fu">getOption</span>(<span class="st">&quot;repos&quot;</span>)))</span>
+<span id="cb29-3"><a href="funciones.html#cb29-3" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;timriffe/DemoTools&quot;</span>)</span></code></pre></div>
+<div id="tablas-de-mortalidad" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Tablas de mortalidad<a href="funciones.html#tablas-de-mortalidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Construir una función que produzca una <strong>tabla de mortalidad</strong> a partir de un set de tasas por edad de mortalidad es un lindo ejercicio de programación en R. Pero por suerte <code>DemoTools</code> tiene una muy buena implementación. Acá para Japón 2015:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="funciones.html#cb30-1" tabindex="-1"></a>jpn_2015 <span class="ot">&lt;-</span> db <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Country <span class="sc">==</span> <span class="st">&quot;Japon&quot;</span>, Year <span class="sc">==</span> <span class="dv">2015</span>)</span>
+<span id="cb30-2"><a href="funciones.html#cb30-2" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="funciones.html#cb30-3" tabindex="-1"></a><span class="co"># obtengo la tabla</span></span>
+<span id="cb30-4"><a href="funciones.html#cb30-4" tabindex="-1"></a><span class="fu">library</span>(DemoTools)</span>
+<span id="cb30-5"><a href="funciones.html#cb30-5" tabindex="-1"></a>tm_jpn_2015 <span class="ot">&lt;-</span> <span class="fu">lt_abridged</span>(<span class="at">nMx =</span> jpn_2015<span class="sc">$</span>M, <span class="at">Age =</span> jpn_2015<span class="sc">$</span>Age)</span>
+<span id="cb30-6"><a href="funciones.html#cb30-6" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="funciones.html#cb30-7" tabindex="-1"></a><span class="co"># veamos la función de sobrevivencia:</span></span>
+<span id="cb30-8"><a href="funciones.html#cb30-8" tabindex="-1"></a>tm_jpn_2015 <span class="sc">%&gt;%</span> </span>
+<span id="cb30-9"><a href="funciones.html#cb30-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Age, lx)) <span class="sc">+</span> </span>
+<span id="cb30-10"><a href="funciones.html#cb30-10" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb30-11"><a href="funciones.html#cb30-11" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb30-12"><a href="funciones.html#cb30-12" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="talleR_files/figure-html/mort-1.png" width="672" /></p>
+<p>Repasemos sus argumentos, como <code>OAGNew</code>, <code>extrapLaw</code> y <code>a0rule</code>. También puede <code>graduar</code>, es decir pasar a edades simples.</p>
+<div id="bonus-1" class="section level4 hasAnchor" number="4.7.1.1">
+<h4><span class="header-section-number">4.7.1.1</span> BONUS<a href="funciones.html#bonus-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Aquí va el ejemplo de una función de tabla de vida acorde a las necesidades propias: con un grupo de edad 1-9 y que devolviera también Dx y Nx (para luego calcular intervalos de confianza)</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="funciones.html#cb31-1" tabindex="-1"></a>lifetable <span class="ot">&lt;-</span> <span class="cf">function</span>(deaths,pop,age, <span class="at">sex =</span> <span class="st">&quot;m&quot;</span>){</span>
+<span id="cb31-2"><a href="funciones.html#cb31-2" tabindex="-1"></a>  nmx <span class="ot">&lt;-</span> deaths<span class="sc">/</span>pop</span>
+<span id="cb31-3"><a href="funciones.html#cb31-3" tabindex="-1"></a>  m0 <span class="ot">&lt;-</span> nmx[<span class="dv">1</span>]</span>
+<span id="cb31-4"><a href="funciones.html#cb31-4" tabindex="-1"></a>  </span>
+<span id="cb31-5"><a href="funciones.html#cb31-5" tabindex="-1"></a>  <span class="co"># a0 de Coale &amp; Demeny (1983) en Preston, Heuveline &amp; Guillot (2001)</span></span>
+<span id="cb31-6"><a href="funciones.html#cb31-6" tabindex="-1"></a>  a0 <span class="ot">&lt;-</span> <span class="cf">if</span>(sex <span class="sc">==</span> <span class="st">&quot;m&quot;</span>) {.<span class="dv">0425</span><span class="fl">+2.684</span><span class="sc">*</span>m0} <span class="cf">else</span> {<span class="fl">0.053+2.8</span><span class="sc">*</span>m0}</span>
+<span id="cb31-7"><a href="funciones.html#cb31-7" tabindex="-1"></a>  </span>
+<span id="cb31-8"><a href="funciones.html#cb31-8" tabindex="-1"></a>  <span class="co"># 4.5 para el grupo 1-9</span></span>
+<span id="cb31-9"><a href="funciones.html#cb31-9" tabindex="-1"></a>  nax <span class="ot">&lt;-</span> <span class="fu">c</span>(a0, <span class="fl">4.5</span>, <span class="fu">rep</span>(<span class="fl">2.5</span>, <span class="at">times =</span> <span class="dv">15</span>))</span>
+<span id="cb31-10"><a href="funciones.html#cb31-10" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">diff</span>(age),<span class="cn">NA</span>)</span>
+<span id="cb31-11"><a href="funciones.html#cb31-11" tabindex="-1"></a>  nqx <span class="ot">&lt;-</span> n<span class="sc">*</span>nmx <span class="sc">/</span> (<span class="dv">1</span><span class="sc">+</span>(n<span class="sc">-</span>nax)<span class="sc">*</span>nmx)</span>
+<span id="cb31-12"><a href="funciones.html#cb31-12" tabindex="-1"></a>  nqx[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb31-13"><a href="funciones.html#cb31-13" tabindex="-1"></a>  npx <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> nqx</span>
+<span id="cb31-14"><a href="funciones.html#cb31-14" tabindex="-1"></a>  </span>
+<span id="cb31-15"><a href="funciones.html#cb31-15" tabindex="-1"></a>  lx <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>,<span class="fu">length</span>(nqx))</span>
+<span id="cb31-16"><a href="funciones.html#cb31-16" tabindex="-1"></a>  lx[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb31-17"><a href="funciones.html#cb31-17" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(n)){</span>
+<span id="cb31-18"><a href="funciones.html#cb31-18" tabindex="-1"></a>    lx[i<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> lx[i]<span class="sc">*</span>npx[i]</span>
+<span id="cb31-19"><a href="funciones.html#cb31-19" tabindex="-1"></a>  }</span>
+<span id="cb31-20"><a href="funciones.html#cb31-20" tabindex="-1"></a>  </span>
+<span id="cb31-21"><a href="funciones.html#cb31-21" tabindex="-1"></a>  lx <span class="ot">&lt;-</span> lx[<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(n)]</span>
+<span id="cb31-22"><a href="funciones.html#cb31-22" tabindex="-1"></a>  </span>
+<span id="cb31-23"><a href="funciones.html#cb31-23" tabindex="-1"></a>  ndx <span class="ot">&lt;-</span> lx<span class="sc">*</span>nqx</span>
+<span id="cb31-24"><a href="funciones.html#cb31-24" tabindex="-1"></a>  ndx[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> lx[<span class="fu">length</span>(age)]</span>
+<span id="cb31-25"><a href="funciones.html#cb31-25" tabindex="-1"></a>  </span>
+<span id="cb31-26"><a href="funciones.html#cb31-26" tabindex="-1"></a>  </span>
+<span id="cb31-27"><a href="funciones.html#cb31-27" tabindex="-1"></a>  nLx <span class="ot">&lt;-</span> ndx<span class="sc">/</span>nmx</span>
+<span id="cb31-28"><a href="funciones.html#cb31-28" tabindex="-1"></a>  </span>
+<span id="cb31-29"><a href="funciones.html#cb31-29" tabindex="-1"></a>  nax[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> nLx[<span class="fu">length</span>(age)]<span class="sc">/</span>lx[<span class="fu">length</span>(age)]</span>
+<span id="cb31-30"><a href="funciones.html#cb31-30" tabindex="-1"></a>  </span>
+<span id="cb31-31"><a href="funciones.html#cb31-31" tabindex="-1"></a>  <span class="co"># Tx</span></span>
+<span id="cb31-32"><a href="funciones.html#cb31-32" tabindex="-1"></a>  Tx <span class="ot">=</span> <span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(nLx)))</span>
+<span id="cb31-33"><a href="funciones.html#cb31-33" tabindex="-1"></a>  </span>
+<span id="cb31-34"><a href="funciones.html#cb31-34" tabindex="-1"></a>  <span class="co"># ex</span></span>
+<span id="cb31-35"><a href="funciones.html#cb31-35" tabindex="-1"></a>  ex <span class="ot">&lt;-</span> Tx<span class="sc">/</span>lx</span>
+<span id="cb31-36"><a href="funciones.html#cb31-36" tabindex="-1"></a>  ex[<span class="fu">length</span>(age)] <span class="ot">&lt;-</span> nax[<span class="fu">length</span>(age)]</span>
+<span id="cb31-37"><a href="funciones.html#cb31-37" tabindex="-1"></a>  </span>
+<span id="cb31-38"><a href="funciones.html#cb31-38" tabindex="-1"></a>  lifetable <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age=</span>age,</span>
+<span id="cb31-39"><a href="funciones.html#cb31-39" tabindex="-1"></a>                          <span class="at">n=</span><span class="fu">round</span>(n,<span class="dv">0</span>),</span>
+<span id="cb31-40"><a href="funciones.html#cb31-40" tabindex="-1"></a>                          <span class="at">nmx=</span><span class="fu">round</span>(nmx,<span class="dv">5</span>),</span>
+<span id="cb31-41"><a href="funciones.html#cb31-41" tabindex="-1"></a>                          <span class="at">nqx=</span><span class="fu">round</span>(nqx,<span class="dv">5</span>),</span>
+<span id="cb31-42"><a href="funciones.html#cb31-42" tabindex="-1"></a>                          <span class="at">npx=</span><span class="fu">round</span>(npx,<span class="dv">5</span>),<span class="at">nax=</span><span class="fu">round</span>(nax,<span class="dv">2</span>),</span>
+<span id="cb31-43"><a href="funciones.html#cb31-43" tabindex="-1"></a>                          <span class="at">ndx=</span><span class="fu">round</span>(ndx,<span class="dv">0</span>),<span class="at">lx=</span><span class="fu">round</span>(lx,<span class="dv">0</span>),</span>
+<span id="cb31-44"><a href="funciones.html#cb31-44" tabindex="-1"></a>                          <span class="at">Lx=</span><span class="fu">round</span>(nLx,<span class="dv">0</span>),</span>
+<span id="cb31-45"><a href="funciones.html#cb31-45" tabindex="-1"></a>                          <span class="at">Tx=</span><span class="fu">round</span>(Tx,<span class="dv">0</span>),</span>
+<span id="cb31-46"><a href="funciones.html#cb31-46" tabindex="-1"></a>                          <span class="at">ex=</span><span class="fu">round</span>(ex,<span class="dv">5</span>),</span>
+<span id="cb31-47"><a href="funciones.html#cb31-47" tabindex="-1"></a>                          <span class="at">Dx=</span>deaths,</span>
+<span id="cb31-48"><a href="funciones.html#cb31-48" tabindex="-1"></a>                          <span class="at">Nx=</span>pop)</span>
+<span id="cb31-49"><a href="funciones.html#cb31-49" tabindex="-1"></a>  <span class="fu">return</span>(lifetable)</span>
+<span id="cb31-50"><a href="funciones.html#cb31-50" tabindex="-1"></a>}</span></code></pre></div>
+</div>
+</div>
+<div id="evaluación-de-declaración-de-edad" class="section level3 hasAnchor" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Evaluación de declaración de edad<a href="funciones.html#evaluación-de-declaración-de-edad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Con el índice de <strong>Myers</strong> veamos si en Chaco mejoró la declaración por edad de varones entre los censos 2010 y 2022. Un valor del indicador que tienda a 0 indica una mejor declaración (bajo los supuesto del método).</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="funciones.html#cb32-1" tabindex="-1"></a>pob_chaco <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">&quot;data/Pob2010y2022_prov.xlsx&quot;</span>, <span class="at">sheet=</span><span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="funciones.html#cb32-2" tabindex="-1"></a>                <span class="fu">filter</span>(PROV_NOMBRE <span class="sc">==</span> <span class="st">&quot;CHACO&quot;</span>)</span>
+<span id="cb32-3"><a href="funciones.html#cb32-3" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="funciones.html#cb32-4" tabindex="-1"></a>pob_chaco <span class="sc">%&gt;%</span></span>
+<span id="cb32-5"><a href="funciones.html#cb32-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(EDAD, VARON, <span class="at">color=</span><span class="fu">factor</span>(CENSO))) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="funciones.html#cb32-6" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-7"><a href="funciones.html#cb32-7" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb32-8"><a href="funciones.html#cb32-8" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">5</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100</span>,<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="funciones.html#cb32-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="talleR_files/figure-html/evaluacion-1.png" width="672" /></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="funciones.html#cb33-1" tabindex="-1"></a><span class="co"># obtengo Myers</span></span>
+<span id="cb33-2"><a href="funciones.html#cb33-2" tabindex="-1"></a>pob_chaco <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href="funciones.html#cb33-3" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Myers_2010 =</span> <span class="fu">check_heaping_myers</span>(VARON[CENSO<span class="sc">==</span><span class="dv">2010</span>], EDAD[CENSO<span class="sc">==</span><span class="dv">2010</span>], <span class="at">ageMin =</span> <span class="dv">20</span>, <span class="at">ageMax =</span> <span class="dv">64</span>),</span>
+<span id="cb33-4"><a href="funciones.html#cb33-4" tabindex="-1"></a>            <span class="at">Myers_2022 =</span> <span class="fu">check_heaping_myers</span>(VARON[CENSO<span class="sc">==</span><span class="dv">2022</span>], EDAD[CENSO<span class="sc">==</span><span class="dv">2022</span>], <span class="at">ageMin =</span> <span class="dv">20</span>, <span class="at">ageMax =</span> <span class="dv">64</span>))</span></code></pre></div>
+</div>
+<div id="graduación-de-población-por-edad-simple" class="section level3 hasAnchor" number="4.7.3">
+<h3><span class="header-section-number">4.7.3</span> Graduación de población por edad simple<a href="funciones.html#graduación-de-población-por-edad-simple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El método de <strong>Sprague</strong> desagrega por edad simple conteos agrupados por edad quinquenal. Veamos como funciona para los varones de Chaco en el año 2022. Primero agregando, y luego aplicando el método.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="funciones.html#cb34-1" tabindex="-1"></a><span class="co"># me quedo con 2022</span></span>
+<span id="cb34-2"><a href="funciones.html#cb34-2" tabindex="-1"></a>pob_chaco_2022 <span class="ot">&lt;-</span> pob_chaco <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CENSO <span class="sc">==</span> <span class="dv">2022</span>)</span>
+<span id="cb34-3"><a href="funciones.html#cb34-3" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="funciones.html#cb34-4" tabindex="-1"></a><span class="co"># agrupo la población por grupos quinquenales</span></span>
+<span id="cb34-5"><a href="funciones.html#cb34-5" tabindex="-1"></a>pob_chaco_2022_quinquenal <span class="ot">&lt;-</span> pob_chaco <span class="sc">%&gt;%</span></span>
+<span id="cb34-6"><a href="funciones.html#cb34-6" tabindex="-1"></a>  <span class="fu">filter</span>(CENSO <span class="sc">==</span> <span class="dv">2022</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-7"><a href="funciones.html#cb34-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EDAD_q =</span> <span class="fu">trunc</span>(EDAD<span class="sc">/</span><span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-8"><a href="funciones.html#cb34-8" tabindex="-1"></a>  <span class="fu">group_by</span>(EDAD_q) <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="funciones.html#cb34-9" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">VARON =</span> <span class="fu">sum</span>(VARON))</span>
+<span id="cb34-10"><a href="funciones.html#cb34-10" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="funciones.html#cb34-11" tabindex="-1"></a><span class="co"># aplico sprague</span></span>
+<span id="cb34-12"><a href="funciones.html#cb34-12" tabindex="-1"></a>pob_chaco_2022_sprague <span class="ot">&lt;-</span> <span class="fu">graduate</span>(pob_chaco_2022_quinquenal<span class="sc">$</span>VARON, pob_chaco_2022_quinquenal<span class="sc">$</span>EDAD_q, <span class="at">method =</span> <span class="st">&quot;sprague&quot;</span>)</span>
+<span id="cb34-13"><a href="funciones.html#cb34-13" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="funciones.html#cb34-14" tabindex="-1"></a><span class="co"># junto</span></span>
+<span id="cb34-15"><a href="funciones.html#cb34-15" tabindex="-1"></a>pob_chaco_2022_simple <span class="ot">&lt;-</span> pob_chaco_2022 <span class="sc">%&gt;%</span></span>
+<span id="cb34-16"><a href="funciones.html#cb34-16" tabindex="-1"></a>  <span class="fu">full_join</span>(<span class="fu">tibble</span>(<span class="at">EDAD =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">110</span>, <span class="at">VARON_sprague =</span> pob_chaco_2022_sprague)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-17"><a href="funciones.html#cb34-17" tabindex="-1"></a>  <span class="fu">select</span>(EDAD, VARON, VARON_sprague) <span class="sc">%&gt;%</span></span>
+<span id="cb34-18"><a href="funciones.html#cb34-18" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>EDAD, <span class="at">names_to=</span><span class="st">&quot;Tipo&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Población&quot;</span>)</span>
+<span id="cb34-19"><a href="funciones.html#cb34-19" tabindex="-1"></a></span>
+<span id="cb34-20"><a href="funciones.html#cb34-20" tabindex="-1"></a><span class="co"># visualizo</span></span>
+<span id="cb34-21"><a href="funciones.html#cb34-21" tabindex="-1"></a>pob_chaco_2022_simple <span class="sc">%&gt;%</span></span>
+<span id="cb34-22"><a href="funciones.html#cb34-22" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(EDAD, Población, <span class="at">color=</span>Tipo)) <span class="sc">+</span></span>
+<span id="cb34-23"><a href="funciones.html#cb34-23" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb34-24"><a href="funciones.html#cb34-24" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="talleR_files/figure-html/edad-1.png" width="672" /></p>
 <p>La <strong>Tasa Global de Fecundidad (TGF)</strong> estima el número promedio de hijos que tendría una mujer si se mantuvieran las TEF observadas.</p>
 <p>La fórmula general es:</p>
 <p><span class="math display">\[
 TGF = 5 \cdot \sum_{x} TEF_x
 \]</span></p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="funciones.html#cb35-1" tabindex="-1"></a>tasa_global_fecundidad <span class="ot">&lt;-</span> <span class="cf">function</span>(nacimientos, mujeres, <span class="at">k =</span> <span class="dv">1000</span>){</span>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="funciones.html#cb35-1" tabindex="-1"></a>tasa_global_fecundidad <span class="ot">&lt;-</span> <span class="cf">function</span>(nacimientos, mujeres, <span class="at">k =</span> <span class="dv">1</span>){</span>
 <span id="cb35-2"><a href="funciones.html#cb35-2" tabindex="-1"></a>  </span>
 <span id="cb35-3"><a href="funciones.html#cb35-3" tabindex="-1"></a>  <span class="co"># Primero calculamos las TEF</span></span>
-<span id="cb35-4"><a href="funciones.html#cb35-4" tabindex="-1"></a>  tef <span class="ot">&lt;-</span> <span class="fu">tasa_especifica_fecundidad</span>(nacimientos, mujeres, k)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb35-4"><a href="funciones.html#cb35-4" tabindex="-1"></a>  tef <span class="ot">&lt;-</span> <span class="fu">tasa_especifica_fecundidad</span>(nacimientos, mujeres, k)<span class="sc">/</span><span class="dv">1</span></span>
 <span id="cb35-5"><a href="funciones.html#cb35-5" tabindex="-1"></a>  </span>
 <span id="cb35-6"><a href="funciones.html#cb35-6" tabindex="-1"></a>  <span class="co"># Sumamos e incorporamos el ancho del intervalo (5 años)</span></span>
 <span id="cb35-7"><a href="funciones.html#cb35-7" tabindex="-1"></a>  tgf <span class="ot">&lt;-</span> <span class="fu">sum</span>(tef) <span class="sc">*</span> <span class="dv">5</span></span>
