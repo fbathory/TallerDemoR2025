@@ -152,7 +152,7 @@ Si quisiéramos incluir el dato de cuántas personas en viviendas particulares h
 En esta clase veremos cómo crear un archivo `.qmd`, cómo incorporar código R, cómo generar distintos formatos de salida y cómo preparar un informe reproducible aplicado a análisis demográfico.
 
 
-*Quarto* Es una herramienta para crear documentos reproducibles que combinan texto, código y resultados. Sus componentes principales son:
+*Quarto* es una herramienta para crear documentos reproducibles que combinan texto, código y resultados. Sus componentes principales son:
 
 **Autoría (Author):**  
 Permite escribir y combinar texto y código en archivos `.qmd` o en cuadernos Jupyter, utilizando una sintaxis Markdown ampliada que facilita la organización del contenido.
