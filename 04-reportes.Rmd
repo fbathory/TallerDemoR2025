@@ -207,7 +207,7 @@ summary(cars)
 
 **Quarto**
 
-#| echo: true
+#| echo: true  
 summary(cars)
 
 
@@ -218,3 +218,5 @@ summary(cars)
 * [De su creador](https://bookdown.org/yihui/rmarkdown/)
 
 * [Hoja de Ayuda Quarto](https://rstudio.github.io/cheatsheets/quarto.pdf)
+
+* [Guía para utilizar Quarto (en inglés)](https://quarto.org/docs/guide/)
